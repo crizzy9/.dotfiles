@@ -1,0 +1,7 @@
+.DS_Store
+!bin
+vim/vim.symlink/plugged
+vim/vim.symlink/undo
+
+# temp
+oh-my-zsh
