@@ -27,6 +27,7 @@ fail () {
 }
 
 setup_gitconfig () {
+    # ask if git config needs to be installed
     # file not exists because existing settings will be set in .example copied over to original symlink which will later be symlinked
     if ! [ -f ${ROOT_DIR}/git/gitconfig.symlink ]; then
         info 'setting up git config'

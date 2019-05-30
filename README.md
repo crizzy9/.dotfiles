@@ -3,11 +3,11 @@ This repository contains dotfile configurations for the following applications
 TODO: Link to sections on readme
 - Vim
 - Zsh
-- ctags
 - git
 - Homebrew
-- Ranger
 - iterm
+- ctags
+- Ranger
 - fzf
 - zathura
 - entr/cron
