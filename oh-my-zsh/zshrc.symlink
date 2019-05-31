@@ -20,7 +20,7 @@ bindkey "[C" forward-word # option + right
 
 ############
 # conda stuff
-export PATH="/Users/exmachina/anaconda3/bin:$PATH"
+export PATH="~/anaconda3/bin:$PATH"
 
 #sh /Users/exmachina/anaconda3/etc/profile.d/conda.sh
 #conda activate
@@ -33,7 +33,7 @@ export PATH="/Users/exmachina/anaconda3/bin:$PATH"
 
 ############
 #NeoVim stuff
-export XDG_CONFIG_HOME="/Users/exmachina/.config"
+export XDG_CONFIG_HOME="~/.config"
 
 ############
 # ZSH Stuff
@@ -42,7 +42,7 @@ export XDG_CONFIG_HOME="/Users/exmachina/.config"
 
 # Path to your oh-my-zsh installation.
 # export ZSH="/Users/exmachina/.dotfiles/oh-my-zsh"
-export ZSH="/Users/exmachina/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Rifle conf env variable
 
