@@ -1,12 +1,8 @@
 # add taps and cask
 brew 'jupyter'
 brew 'neovim'
-brew 'zsh'
-brew 'zathura'
 brew 'nmap'
 brew 'node'
-brew 'zathura-pdf-poppler'
 brew 'nvm'
 brew 'wget'
 brew 'ranger'
-brew 'poppler'

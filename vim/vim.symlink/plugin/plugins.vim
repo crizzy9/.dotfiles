@@ -33,7 +33,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 " Vim Jupyter
-Plug 'szymonmaszke/vimpyter'  " External dependency notedown (install using pip)
+" Plug 'szymonmaszke/vimpyter'  " External dependency notedown (install using pip)
 
 " Fast Controls
 Plug 'tpope/vim-surround'

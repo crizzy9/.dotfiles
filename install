@@ -66,7 +66,7 @@ link_file()  {
 
     # -f if a file -d if if a direactory -L if a symbolic link, -o or
     # More operators at https://blog.100tb.com/scripting-if-comparison-operators-in-bash
-    if [ -f "$dst" -o -d "$dst" -o -L "$dst"]; then
+    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
         if  [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
             local currentSrc="$(readlink $dst)" # reads destination symlink if it exists and checks if symlink already established with source
             if [ "$currentSrc" == "$src" ]; then
@@ -136,7 +136,12 @@ install_dotfiles() {
     done
 }
 
-setup_gitconfig
+
+user "Do you want to setup git? [y]es, [n]o"
+read -n 1 gc
+if [ "$gc" == "y" ]; then
+    setup_gitconfig
+fi
 install_dotfiles
 
 # EXAMPLE RUN ON VM

@@ -2,6 +2,5 @@
 !bin
 vim/vim.symlink/plugged
 vim/vim.symlink/undo
-
-# temp
-oh-my-zsh
+vim/vim.symlink/view
+vim/vim.symlink/.netrwhist
