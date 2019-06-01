@@ -26,3 +26,5 @@ chmod +x ./install #to resolve permission denied error and give execute permissi
 firstly install homebrew, zsh and iterm seperately not working on their own
 zsh will link to pre oh my zsh
 Also neovim plugins will need to be installed externally
+Will need to install zsh plugins externally as well
+along with nerd fonts and maybe something else as well
