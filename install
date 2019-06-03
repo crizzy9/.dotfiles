@@ -33,6 +33,27 @@ setup_gitconfig () {
         # user ' - What is your GPG signing key? (Run `gpg --list-keys`)'
         # read -e gpg_signing_key
 
+        user 'Do you want to setup ssh for git? [y]es, [n]o'
+        read -n 1 shon
+        if [ -f "~/.ssh/config" && -f "~/.ssh/id_rsa" ]; then
+            info "SSH for git already set up."
+            user "Copying the key into clipboard..."
+            pbcopy < ~/.ssh/id_rsa.pub
+            info "Copy the key onto github (https://help.github.com/en/enterprise/2.15/user/articles/adding-a-new-ssh-key-to-your-github-account)"
+        elif [ $shon == "y" ]; then
+            info 'Generating ssh-key'
+            ssh-keygen -t rsa -b 4096 -C "$git_authoremail"
+            info 'Starting SSH agent'
+            eval "$(ssh-agent -s)"
+            info 'Modifying ~/.ssh/config'
+            echo "Host *\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile ~/.ssh/id_rsa" > ~/.ssh/config
+            info "Adding SSH key"
+            ssh-add -K ~/.ssh/id_rsa
+            user "Copying the key into clipboard..."
+            pbcopy < ~/.ssh/id_rsa.pub
+            info "Copy the key onto github (https://help.github.com/en/enterprise/2.15/user/articles/adding-a-new-ssh-key-to-your-github-account)"
+        fi
+
         sed -e "s/AUTHOR_NAME/$git_authorname/g" -e "s/AUTHOR_EMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credentials/g" -e "s/AUTHOR_HANDLE/$github_username/g" git/gitconfig.symlink.example > git/gitconfig.symlink
 
         success 'git config'
@@ -127,10 +148,14 @@ if [ "$gc" == "y" ]; then
 fi
 install_dotfiles
 
-# EXAMPLE RUN ON VM
+# give brew preference to install packages first. maybe sort it?
+# dependencies should be installed first if becomes too complicated
+# a package.json equivalent can be made
+# finds and run installer scripts iteratively
 
-# find and run installer scripts iteratively
-for installer in $(find . -name "*install.sh"); do
+# Fix pre oh my zsh rc creation for that symlink needs to be created after installation or resymlink it?
+
+for installer in $(find . -name "*install.sh" | sort); do
     sh -c "${installer}"
 done
 
