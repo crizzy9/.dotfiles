@@ -1,8 +1,8 @@
 ############
 # Alias
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias ..='cd ..'
-alias .='cd .'
+# alias ..='cd ..'
+# alias .='cd .'
 alias pip3='pip3.7'
 alias connect-gc='gcloud compute ssh padia_shyam9@magenta-instance-1'
 ############
