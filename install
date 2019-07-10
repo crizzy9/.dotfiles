@@ -128,11 +128,13 @@ link_file()  {
     fi
 }
 
+# symlinks dotfiles/config files to their appropriate location
 install_dotfiles() {
     info 'installing dotfiles'
 
     local overwrite_all=false backup_all=false skip_all=false
 
+    # should ignore files from vim/vim.symlink/undo because of maxdepth
     for src in $(find -H "$ROOT_DIR" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
         # getting the filename from path without the extension
         dst="$HOME/.$(basename "${src%.*}")"
@@ -146,18 +148,16 @@ read -n 1 gc
 if [ "$gc" == "y" ]; then
     setup_gitconfig
 fi
-install_dotfiles
 
-# give brew preference to install packages first. maybe sort it?
-# dependencies should be installed first if becomes too complicated
-# a package.json equivalent can be made
-# finds and run installer scripts iteratively
+# could install nvim-typescript from here to resolve problem
 
-# Fix pre oh my zsh rc creation for that symlink needs to be created after installation or resymlink it?
-
-for installer in $(find . -name "*install.sh" | sort); do
+# Running install scripts in alphabetical order
+for installer in $(find . -name "*install.sh" -not -path '*.symlink*' | sort); do
+    chmod +x "${installer}"
     sh -c "${installer}"
 done
+
+install_dotfiles
 
 echo ''
 success 'All installed!'

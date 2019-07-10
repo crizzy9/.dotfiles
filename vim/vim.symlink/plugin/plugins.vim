@@ -72,7 +72,7 @@ Plug 'vim-syntastic/syntastic'
 " Typescript plugins
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}    " Needs npm install -g neovim and a :UpdateRemotePlugins
+Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}    " Needs npm install -g neovim and a :UpdateRemotePlugins
 
 " Themes
 Plug 'altercation/vim-colors-solarized'
