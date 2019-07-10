@@ -16,9 +16,10 @@ fail () {
   exit
 }
 
-
 # Usage: if exists bash;
 exists()
 {
   command -v "$1" >/dev/null 2>&1
 }
+
+# Function to retrieve the operating system (uname) (in form Mac, Linux, Windows)

@@ -1,13 +1,4 @@
 ############
-# Alias
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-# alias ..='cd ..'
-# alias .='cd .'
-alias pip3='pip3.7'
-alias connect-gc='gcloud compute ssh padia_shyam9@magenta-instance-1'
-############
-
-############
 #Key Bindings
 bindkey "[D" backward-word # option + left
 bindkey "[C" forward-word # option + right
@@ -17,6 +8,9 @@ bindkey "[C" forward-word # option + right
 # OTHERS
 # INVENV=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 ############
+
+# HOME BREW STUFF
+export PATH="/usr/local/sbin:$PATH"
 
 ############
 # conda stuff
@@ -60,7 +54,8 @@ export EDITOR='nvim'
 # POWERLEVEL, POWERLINE Options
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_MODE="awesome-fontconfig"
+# POWERLEVEL9K_MODE="awesome-fontconfig"
+POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda virtualenv dir rbenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs)
 POWERLEVEL9K_DISABLE_RPROMPT=true
@@ -125,21 +120,35 @@ ZSH_CUSTOM="$ZSH/custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  	git
-	cp
-	bundler
-	osx
-	rake
-	python
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-	zsh-apple-touchbar
-	virtualenv
-	virtualenv-wrapper
+    git
+    cp
+    osx
+    python
+    virtualenv
+    # virtualenv-wrapper
+    iterm2
+    ripgrep
+    nmap
+    npm
+    nvm
+    spring
+    # ssh-agent
+    sudo
+    ng
+    pylint
+    pyenv
+    docker
+    vi-mode
+    fzf
+    # Custom Plugins
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-apple-touchbar
+    zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.fonts/*.sh
+# source ~/.fonts/*.sh
 
 # User configuration
 
@@ -177,10 +186,24 @@ source ~/.fonts/*.sh
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/path.zsh.inc'; fi
-source '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/path.zsh.inc'
+# source '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/completion.zsh.inc'; fi
-source '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/completion.zsh.inc'
+# source '/Users/exmachina/Northeastern/projects/STAI_Project/google-cloud-sdk/completion.zsh.inc'
 
-export GOOGLE_APPLICATION_CREDENTIALS="~/Northeastern/projects/STAI_Project/Magenta Transformer-adb81ed3f7bf.json"
+# export GOOGLE_APPLICATION_CREDENTIALS="~/Northeastern/projects/STAI_Project/Magenta Transformer-adb81ed3f7bf.json"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+
+
+############
+# Alias
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias resrc='source ~/.zshrc'
+# alias pip3='pip3.7'
+# alias connect-gc='gcloud compute ssh padia_shyam9@magenta-instance-1'
+############
