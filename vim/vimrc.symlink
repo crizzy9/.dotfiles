@@ -81,6 +81,9 @@ set foldmethod=manual
 " Opening an already open buffer while opening a tag
 set swb+=useopen,usetab " doesnt work
 
+" Using mouse to scroll (not select)
+set mouse=nicr
+
 " for autosuggestions
 " filetype plugin on
 " set omnifunc=syntaxcomplete#Complete
@@ -134,3 +137,5 @@ endif
 
 source ~/.vim/plugin/custom-functions.vim
 source ~/.vim/plugin/custom-mappings.vim
+
+" Also install neovim for npm and pip (pip install neovim, npm install -g neovim)
