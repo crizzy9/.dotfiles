@@ -125,11 +125,13 @@ if has('nvim')
   let g:one_allow_italics=1
 
   " Fix vim-tmux-navigator <C-h> https://git.io/viGRU
-  nmap <BS> <C-W>h
+  " nmap <BS> <C-W>h
 
   " Fix vim-tmux-navigator <C-h> https://git.io/vS5QH
-  nmap <BS> :<C-u>TmuxNavigateLeft<CR>
+  " nmap <BS> :<C-u>TmuxNavigateLeft<CR>
 
+else
+    colorscheme gruvbox
 endif
 
 
