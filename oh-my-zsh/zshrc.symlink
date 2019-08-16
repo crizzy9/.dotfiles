@@ -1,10 +1,4 @@
 ############
-#Key Bindings
-bindkey "[D" backward-word # option + left
-bindkey "[C" forward-word # option + right
-#############
-
-############
 # OTHERS
 # INVENV=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 ############
@@ -208,3 +202,10 @@ alias resrc='source ~/.zshrc'
 # alias pip3='pip3.7'
 # alias connect-gc='gcloud compute ssh padia_shyam9@magenta-instance-1'
 ############
+
+############
+#Key Bindings
+bindkey "[D" backward-word # option + left
+bindkey "[C" forward-word # option + right
+bindkey -s '^v' 'nvim $(rg --files | fzf --reverse)\n'
+#############

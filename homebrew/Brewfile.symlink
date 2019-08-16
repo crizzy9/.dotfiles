@@ -29,6 +29,7 @@ brew 'mplayer'
 brew 'tmux'
 brew 'ripgrep'
 brew 'fzf'
+brew 'htop'
 
 # To install useful key bindings and fuzzy completion:
 # $(brew --prefix)/opt/fzf/install
