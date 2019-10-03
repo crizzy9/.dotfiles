@@ -171,3 +171,6 @@ au FileType tex nmap <leader>e ysiW}i\emph<Esc>
 " REMOVE ADDITIONAL SPACES IN A LINE
 nnoremap <leader><leader>s :s/\s\+/ /g<CR>
 " SAME CAN BE DONE FOR MULTIPLE LINES DONT KNOW HOW
+
+" mapping to add __init__ == '__main__' in python
+au FileType python nnoremap <leader>m Go<CR><CR><BS>if __init__ == '__main__':<CR>

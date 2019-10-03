@@ -30,6 +30,7 @@ brew 'tmux'
 brew 'ripgrep'
 brew 'fzf'
 brew 'htop'
+brew 'mosh'
 
 # To install useful key bindings and fuzzy completion:
 # $(brew --prefix)/opt/fzf/install

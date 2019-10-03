@@ -10,6 +10,9 @@ export PATH="/usr/local/sbin:$PATH"
 # conda stuff
 export PATH="$HOME/anaconda3/bin:$PATH"
 
+# Mosh stuff
+export PATH="$PATH:/usr/local/bin"
+
 #sh /Users/exmachina/anaconda3/etc/profile.d/conda.sh
 #conda activate
 
@@ -199,6 +202,8 @@ export NVM_DIR="$HOME/.nvm"
 # Alias
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias resrc='source ~/.zshrc'
+alias jupyter-bg='jupyter notebook > /dev/null 2>&1 &'
+alias jupyter-lab-bg='jupyter-lab > /dev/null 2>&1 &'
 # alias pip3='pip3.7'
 # alias connect-gc='gcloud compute ssh padia_shyam9@magenta-instance-1'
 ############

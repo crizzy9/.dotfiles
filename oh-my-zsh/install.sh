@@ -41,8 +41,8 @@ if [ ! -d "${INSTALL_DIR}/plugins/zsh-autosuggestions" ]; then
 fi
 
 # Make zsh default shell
-# chsh -s $(which zsh)
+chsh -s $(which zsh)
 
 # change git aliases
-# sed -i.backup 's/ggpush/gopush/;s/ggpull/gopull/;s/gst/gs/' ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+sed -i.backup 's/ggpush/gopush/;s/ggpull/gopull/;s/gst/gs/' ~/.oh-my-zsh/plugins/git/git.plugin.zsh
 

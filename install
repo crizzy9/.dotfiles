@@ -143,21 +143,26 @@ install_dotfiles() {
 }
 
 
-user "Do you want to setup git? [y]es, [n]o"
-read -n 1 gc
-if [ "$gc" == "y" ]; then
-    setup_gitconfig
+if [ !$DOT_FILES_INSTALLED ]; then
+    user "Do you want to setup git? [y]es, [n]o"
+    read -n 1 gc
+    if [ "$gc" == "y" ]; then
+	setup_gitconfig
+    fi
+
+    # could install nvim-typescript from here to resolve problem
+
+    # Running install scripts in alphabetical order
+    for installer in $(find . -name "*install.sh" -not -path '*.symlink*' | sort); do
+	chmod +x "${installer}"
+	sh -c "${installer}"
+    done
+
+    install_dotfiles
+
+    echo ''
+    export DOT_FILES_INSTALLED=$true
+    success 'All installed!'
+else
+    fail "Dotfiles already installed"
 fi
-
-# could install nvim-typescript from here to resolve problem
-
-# Running install scripts in alphabetical order
-for installer in $(find . -name "*install.sh" -not -path '*.symlink*' | sort); do
-    chmod +x "${installer}"
-    sh -c "${installer}"
-done
-
-install_dotfiles
-
-echo ''
-success 'All installed!'
