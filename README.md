@@ -87,7 +87,9 @@ Install neovim plugins
 ##### kickstart nvim
 
 ```sh
-nvim
+nvim # say yes to install plugins
+:wq
+nvim # should start installing lsp servers now
 ```
 
 ##### custom nvim
@@ -104,6 +106,18 @@ nvim
 
 ## Custom Keybindings
 
+Custom keybindings for zsh, nvim and ranger
+
+### zsh shortcuts
+
 ```text
 Ctrl + V - fzf open nvim
+```
+
+### nvim shortcuts
+
+leader key is mapped to `Space`
+
+```text
+Space + s + f - telescope open
 ```
