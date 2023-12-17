@@ -11,7 +11,7 @@ Author: @crizzy9
   - zsh
   - git
   - homebrew/apt
-  // todo:
+- TODO:
   - iterm/termintor/tmux
   - btop
   - ripgrep/fzf
@@ -19,24 +19,42 @@ Author: @crizzy9
   - zathura
   - entr/cron
   - ~~ctags~~
-
-// Add a Custom Keyboard shortcut guide
+- Custom Keybidings
 
 ## Installation
 
-// Insert image for the interface and usage instructions
+The installation is done via the installation script `install`
+This will install all the required plugins and configurations based on user input as shown below
 
-Install git and xcode first (`$ xcode-select --install`) if on macos
-Install terminator/kitty and tmux
-firstly install homebrew, zsh and iterm seperately not working on their own
-zsh will link to pre oh my zsh
-Also neovim plugins will need to be installed externally
-Will need to install zsh plugins externally as well
-along with nerd fonts and maybe something else as well
+![installer](./installer.png)
+
+Perform the following steps as per your operating system then install via the script
+
+### MacOs
+
+- Installing **git**
+- Install **xcode** by running `$ xcode-select --install`
+- Install **homebrew**
+- install **unicode fonts**
+
+### Linux
+
+- Install **terminator/kitty** and **tmux**
+- Install **unicode fonts**
+
+### Windows
+
+- Install your **favorite terminal**
+- TODO
+
+>***Start installation*** with the following commands and follow the prompts
+>Note: Refer to plugin instructions for additional customization
+>Note: If you dont have experience with symlinks use the test folder to check
 
 ```sh
-# chmod not required anymore
-chmod +x ./install #to resolve permission denied error and give execute permission
+# give execute permissions
+chmod +x ./install
+# start installer
 ./install
 ```
 
@@ -57,6 +75,35 @@ Also check `echo $ZDOTDIR`
 After installation is done
 iTerm > Preferences > Profile > Text > Font > Hack Nerd Font
 
+TODO: fix hanging on up arrow key in macos
+
 #### Neovim
 
-Use [Neovim kickstart](https://github.com/nvim-lua/kickstart.nvim)
+You can either setup [Neovim kickstart](https://github.com/nvim-lua/kickstart.nvim) or do a custom setup for nvim
+
+Install neovim plugins
+>Note: Make sure you have `ripgrep` and `fzf` installed for telescope to work. Plugins are installed with `mason` and `packer`
+
+##### kickstart nvim
+
+```sh
+nvim
+```
+
+##### custom nvim
+
+```sh
+nvim
+```
+
+##### minimal vim
+
+```sh
+# TODO
+```
+
+## Custom Keybindings
+
+```text
+Ctrl + V - fzf open nvim
+```

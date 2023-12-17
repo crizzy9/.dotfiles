@@ -27,7 +27,26 @@ exists()
 }
 
 # Function to retrieve the operating system (uname) (in form Mac, Linux, Windows)
-
+get_os() {
+  if [ "$(uname)" == "Darwin" ]; then
+      # Do something under Mac OS X platform
+      OS="Mac"
+      info "Mac OS detected"
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+      # Do something under GNU/Linux platform
+      OS="Linux"
+      info "Linux OS detected"
+  elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+      # Do something under 32 bits Windows NT platform
+      OS="Windows"
+      info "Windows 32-bit OS detected"
+  elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+      # Do something under 64 bits Windows NT platform
+      OS="Windows"
+      info "Windows 64-bit OS detected"
+  fi
+  eval "$1=$OS"
+}
 
 # TODO: modify setup to use ssh
 # Setup git using ssh
@@ -91,7 +110,7 @@ link_file()  {
     local overwrite= backup= skip=
     local action=
 
-    user "Do you want to sym link $(basename "${src%.*}")? [y]es, [n]o"
+    user "Do you want to symlink $(basename "${src%.*}")? [y]es, [n]o"
     read -n 1 action
     if [ $action == "y" ]; then
       info "attempting to symlink: $1 ---> $2"
@@ -160,32 +179,49 @@ link_file()  {
 # apply symlink based on old/new configuration
 # TODO: add a file with all symlinks as datastore
 # TODO: make it a bit more smart to gracefully apply symlinks for harder cases
+# TODO: update to work globally with just skip, backup, overwrite options
 apply_symlink() {
     ROOT_DIR=$(pwd -P)
 
-    local dir=$1
-    local type=$2
-
-    local files=
-    local current_dir="${ROOT_DIR}/${dir}"
+    local src_dir=$1
+    local src_file=$2
+    local exclude=${3:-nan}
+    local dst_suffix=${4:-""}
+    local dst_file=${5:-""}
+    local src_ext=".symlink"
+    local curr_dir="${ROOT_DIR}/${src_dir}"
+    local dst_dir="${HOME}/${dst_suffix}"
     
-    info "applying symlink on\n\t type: \n\t\t ${type}\n\t directory: \n\t\t ${current_dir}"
+    re='.*/$'
+    [[ $dst_dir =~ $re ]] || dst_dir+="/"
+    
+    info "applying symlink on\n\t src_file: ${src_file}${src_ext}\n\t exclude: ${exclude}\n\t curr_dir: ${curr_dir}\n\t dst_dir: ${dst_dir}"
 
     # getting the filename from path without the extension, should ignore other files due to maxdepth
-    if [ "$type" == "old" ]; then
-      files=$(find -H "$current_dir" -maxdepth 1 -name "*old*.symlink" -not -path '*.git*')
-    elif [ "$type" == "new" ]; then
-      files=$(find -H "$current_dir" -maxdepth 1 -name "*.symlink" -not -name "*old*" -not -path '*.git*')
-    else
-      fail "Invalid symlink type"
-    fi
+    local files=$(find -H "$curr_dir" -maxdepth 1 -name "${src_file}${src_ext}" -not -name "*${exclude}*" -not -path '*.git*')
 
     if [[ $files ]]; then
+      success "found symlink files: $files"
       for src in $files; do
-          dst="$HOME/.$(basename "${src%.*}")"
+
+          local dst=
+          if [[ $dst_file ]]; then
+            dst="${dst_dir}${dst_file}"
+          else
+            dst="${dst_dir}.$(basename "${src%.*}")"
+          fi
+
+          # create dest_dir if doesnt exist
+          if [ ! -d "$dst_dir" ]; then
+              mkdir -p "$dst_dir"
+              success "created directory: $dst_dir"
+          else
+              skip "directory already exists: $dst_dir"
+          fi
+
           link_file "$src" "$dst"
       done
     else
-      info "No files found to symlink"
+      info "No symlink files found in ${curr_dir}"
     fi
 }

@@ -13,7 +13,7 @@ install_dotfiles() {
     # Running install scripts in alphabetical order
     for installer in $(find . -name "install.sh" -not -path '*.symlink*' | sort); do
         program=$(basename $(dirname "${installer}"))
-        user "Do you want to run ${installer}? [y]es, [n]o"
+        user "Do you want to install ${program}? [y]es, [n]o"
         read -n 1 action
         if [ $action == "y" ]; then
             chmod +x "${installer}"
@@ -25,6 +25,7 @@ install_dotfiles() {
     done
 }
 
+# TODO: update installers to pull in config from common file
 install_all() {
     # user "Do you want to setup git? [y]es, [n]o"
     # read -n 1 gc
@@ -54,7 +55,9 @@ install_all() {
 }
 
 # Install everything
-# take additional user input as required here
+# TODO: take additional user input as required here
+# TODO: add option for minimal vim only setup on remote desktops
+# TODO: save all logs to a file
 user "Do you want to start the installation for dotfiles for zsh, nvim, brew? [y]es, [n]o"
 read -n 1 start
 if [ "$start" == "y" ]; then
