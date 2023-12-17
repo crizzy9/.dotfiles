@@ -82,7 +82,7 @@ install_zsh_plugins() {
             skip 'ZSH plugins already installed...'
         fi
 
-        apply_symlink "oh-my-zsh" "oldzshrc" "" ".zshrc"
+        apply_symlink "oh-my-zsh" "oldzshrc" "" "" ".zshrc"
     else
         skip 'Installing with Znap directly from zshrc'
         apply_symlink "oh-my-zsh" "zshrc" "old"

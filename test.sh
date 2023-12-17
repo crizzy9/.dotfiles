@@ -9,6 +9,7 @@ info "Current OS: $os"
 # src_file is without extension - default is .symlink
 # dest_file is with extension, if empty - it will be the same as src_symlink_file
 apply_symlink "test" "lala" "" ".config/test" "abc.lua"
+apply_symlink "test" "lala" "" ".config/test" "def.lua"
 
 lala() {
     local a=$1
