@@ -76,9 +76,11 @@ if [ $znapon == "n" ]; then
         skip 'ZSH plugins already installed...'
     fi
 
-
+    apply_symlink "oh-my-zsh" "old"
 else
     skip 'Installing with Znap directly from zshrc'
+    apply_symlink "oh-my-zsh" "new"
+fi
 
 # Make zsh default shell
 if [ $SHELL != $(which zsh) ]; then
@@ -93,6 +95,5 @@ else
 fi
 
 # change git aliases to better ones gopull, gopush, gs
-skip 'Git aliases change currently not supported!'
+skip 'Git aliases change currently not supported...'
 # sed -i.backup 's/ggpush/gopush/;s/ggpull/gopull/;s/gst/gs/' ~/.oh-my-zsh/plugins/git/git.plugin.zsh
-

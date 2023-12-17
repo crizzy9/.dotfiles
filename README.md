@@ -1,24 +1,30 @@
-This repository contains dotfile configurations for the following applications
+# Dotfiles
 
-TODO: Link to sections on readme
-- Vim
-- Zsh
-- git
-- Homebrew
-- iterm
-- ctags
-- Ranger
-- fzf
-- zathura
-- entr/cron
+This repository contains dotfile configurations for several different terminal based applications
+Author: @crizzy9
 
-It also contains a Custom Keyboard shortcut guide
+## Table of Contents
 
-# Installation
+- Installation
+- Supported Plugins
+  - nvim/vim
+  - zsh
+  - git
+  - homebrew/apt
+  // todo:
+  - iterm/termintor/tmux
+  - btop
+  - ripgrep/fzf
+  - ranger
+  - zathura
+  - entr/cron
+  - ~~ctags~~
 
---------------
+// Add a Custom Keyboard shortcut guide
 
-## General
+## Installation
+
+// Insert image for the interface and usage instructions
 
 Install git and xcode first (`$ xcode-select --install`) if on macos
 Install terminator/kitty and tmux
@@ -34,7 +40,11 @@ chmod +x ./install #to resolve permission denied error and give execute permissi
 ./install
 ```
 
-## ZSH
+### Supported Plugins
+
+Below is a list of all the plugins supported by this repository, more to come...
+
+#### ZSH
 
 After installation run the following to get the latest znap dependencies
 
@@ -47,4 +57,6 @@ Also check `echo $ZDOTDIR`
 After installation is done
 iTerm > Preferences > Profile > Text > Font > Hack Nerd Font
 
-## Neovim
+#### Neovim
+
+Use [Neovim kickstart](https://github.com/nvim-lua/kickstart.nvim)
