@@ -62,6 +62,10 @@ chmod +x ./install
 
 Below is a list of all the plugins supported by this repository, more to come...
 
+### Git
+
+TODO
+
 #### ZSH
 
 After installation run the following to get the latest znap dependencies

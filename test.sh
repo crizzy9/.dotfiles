@@ -6,7 +6,8 @@ get_os os
 info "Current OS: $os"
 
 # syntax: apply_symlink <src_dir> <src_symlink_file> <exclude> <dest_suffix> <dest_file>
-# if dest_file is empty, it will be the same as src_symlink_file
+# src_file is without extension - default is .symlink
+# dest_file is with extension, if empty - it will be the same as src_symlink_file
 apply_symlink "test" "lala" "" ".config/test" "abc.lua"
 
 lala() {
