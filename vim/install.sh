@@ -17,6 +17,11 @@ install_nvim() {
             if [ "$os" == "Mac" ]; then
                 brew install neovim
             elif [ "$os" == "Linux" ]; then
+                # TODO: update to use wget to get latest version - debian doesnt have latest
+                # https://stackoverflow.com/questions/75906887/file-init-lua-script-in-neovim-not-working
+                # https://stackoverflow.com/questions/64463233/how-to-use-nvim-command-if-neovim-is-installed-using-appimage
+                # https://www.youtube.com/watch?v=aOUwtTspALk
+                # Refer README
                 sudo apt install neovim
             fi
             success 'Neovim installation complete'

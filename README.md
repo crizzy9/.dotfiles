@@ -88,6 +88,23 @@ You can either setup [Neovim kickstart](https://github.com/nvim-lua/kickstart.nv
 Install neovim plugins
 >Note: Make sure you have `ripgrep` and `fzf` installed for telescope to work. Plugins are installed with `mason` and `packer`
 
+##### installing neovim on linux - raspberry pi
+
+```sh
+sudo apt install binutils
+sudo apt install build-essential
+sudo apt install cmake ninja-build
+git config --global init.defaultBranch main
+mkdir neovym
+cd neovym
+git clone https://github.com/neovim/neovim.git
+cd neovim
+mkdir build
+mkdir .deps
+cd .deps
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ../cmake.deps/
+```
+
 ##### kickstart nvim
 
 ```sh
