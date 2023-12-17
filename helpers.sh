@@ -16,6 +16,10 @@ fail () {
   exit
 }
 
+skip () {
+  printf "\r  [ \033[0;35mSKIP\033[0m ] $1\n"
+}
+
 # Usage: if exists bash;
 exists()
 {
