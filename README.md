@@ -107,13 +107,41 @@ ninja
 which curl
 # install rust compilers
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+-----
 cd ../..
 # git clone git@pi-storage.local:/srv/tosh1/git/pi-cargo-bin
 source "$HOME/.cargo/env"
  # where to run?
 cargo build
 cargo install
+
+# once cargo installs binaries in folder ~/neovym/pi-cargo-bin
+cd pi-cargo-bin
+ls
+# should show fd rg rustdoc sccache starship tree-sitter
+# copy all libraries to ~/.cargo/bin
+# cp ./* ~/.cargo/bin/*
+cp ./fd ~/.cargo/bin
+cp ./rg ~/.cargo/bin
+cp ./rustdoc ~/.cargo/bin
+cp ./sccache ~/.cargo/bin
+cp ./starship ~/.cargo/bin
+cp ./tree-sitter ~/.cargo/bin
+
+cd ~
+vim .profile
+# add --- . "$HOME/.cargo.env"
+# add to .zshrc as well
+vim ~/.zshrc
+# eval "$(starship init bash)"
+eval "$(starship init zsh)"
+source ~/.zshrc
+
+#Video: 11:08
 ```
+
+> Note: Try these in docker first if you want to test - details found on github
 
 ##### kickstart nvim
 
@@ -121,6 +149,12 @@ cargo install
 nvim # say yes to install plugins
 :wq
 nvim # should start installing lsp servers now
+```
+
+##### lunar nvim
+
+```sh
+TODO
 ```
 
 ##### custom nvim
@@ -163,6 +197,11 @@ leader key is mapped to `Space`
 # telescope
 Space + s + f - telescope file search
 Space + s + g - telescope in file grep
+
 # within telescope
 Ctrl + p & Ctrl + n - Cycle through suggestions
+
+# others
+# TODO: setup keybinding and save setting
+:set filetype=lua - to manually set a filetype
 ```

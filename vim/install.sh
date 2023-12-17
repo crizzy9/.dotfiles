@@ -31,6 +31,7 @@ install_nvim() {
     fi
 }
 
+# Install ripgrep and fzf - required for telescope
 install_ripgrep_fzf() {
     user 'Do you want to install ripgrep and fzf? [y]es, [n]o'
     read -n 1 rgfzf
@@ -47,12 +48,15 @@ install_ripgrep_fzf() {
     fi
 }
 
+# download and symlink kickstart init.lua
 install_kickstart() {
     info 'Downloading kickstart'
     curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart.lua.symlink
     success 'kickstart config downloaded'
     apply_symlink "vim" "kickstart.lua" "" ".config/nvim" "init.lua"
 }
+
+# TODO: add support for lunarvim?
 
 install_custom_nvim() {
     skip "Custom nvim is not supported yet"

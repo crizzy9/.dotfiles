@@ -9,25 +9,26 @@ get_os os
 
 # TODO: Enable unicode fonts
 
-# Download and install zsh
-if ! exists zsh; then
-    user 'Do you want to install ZSH? [y]es, [n]o'
-    read -n 1 zshon
-    if [ $zshon == "y" ]; then
-        info 'Installing ZSH'
-        if [ "$os" == "Mac" ]; then
-            brew install zsh
-        elif [ "$os" == "Linux" ]; then
-            sudo apt install zsh
-        fi
-        success 'ZSH installation complete'
-    fi
-else
-    skip 'ZSH already installed...'
-fi
-
-# Install oh-my-zsh
+# Install zsh
 install_zsh() {
+    # Download and install zsh
+    if ! exists zsh; then
+        user 'Do you want to install ZSH? [y]es, [n]o'
+        read -n 1 zshon
+        if [ $zshon == "y" ]; then
+            info 'Installing ZSH'
+            if [ "$os" == "Mac" ]; then
+                brew install zsh
+            elif [ "$os" == "Linux" ]; then
+                sudo apt install zsh
+            fi
+            success 'ZSH installation complete'
+        fi
+    else
+        skip 'ZSH already installed...'
+    fi
+
+    # Install oh-my-zsh
     if [ ! -d ~/.oh-my-zsh ]; then
         user 'Do you want to install Oh My Zsh? [y]es, [n]o'
         read -n 1 ozshon
