@@ -1,6 +1,7 @@
 .DS_Store
 !bin
 .intuitgithookrc
+*.backup
 vim/vim.symlink/plugged
 vim/vim.symlink/undo
 vim/vim.symlink/view

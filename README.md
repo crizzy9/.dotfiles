@@ -36,7 +36,11 @@ chmod +x ./install #to resolve permission denied error and give execute permissi
 
 ## ZSH
 
+After installation run the following to get the latest znap dependencies
 
+```sh
+znap pull
+```
 
 Remove old `~/.zshrc.zwc` file if changes not taking effect
 Also check `echo $ZDOTDIR`

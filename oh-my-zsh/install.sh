@@ -39,31 +39,46 @@ fi
 
 INSTALL_DIR="${ZSH_CUSTOM:=/Users/${USER}/.oh-my-zsh/custom}"
 
-# if [ ! -d "${INSTALL_DIR}/themes/powerlevel9k" ]; then
-#     user 'Do you want to install Powerlevel9k? [y]es, [n]o'
-#     read -n 1 pl9
-#     if [ $pl9 == "y" ]; then
-#         # Install powerlevel9k
-#         info 'Installing Powerlevel9k'
-#         git clone https://github.com/bhilburn/powerlevel9k.git ${INSTALL_DIR}/themes/powerlevel9k
-#         success 'Powelevel9k has ben setup'
-#     fi
-# fi
+# Check if user wants to try install with znap (not supported on raspberry pi)
+user 'Do you want to install znap? [y]es, [n]o'
+read -n 1 znapon
+if [ $znapon == "n" ]; then
 
-# Install powerlevel10k
+    # Install powerelvel10k
+    if [ ! -L "${HOME}/.p10k.zsh" ]; then
+        user 'Do you want to install Powerlevel10k? [y]es, [n]o'
+        read -n 1 pl10k
+        if [ $pl10k == "y" ]; then
+            info 'Installing Powerlevel10k'
+            git clone --depth=1
+        else
+            skip 'Powerlevel10k'
+        fi
+    else
+        skip 'Powerlevel10k already installed...'
+    fi
 
-# if [ ! -d "${INSTALL_DIR}/plugins/zsh-autosuggestions" ]; then
-#     user 'Do you want to install (fish like) ZSH Plugins? [y]es, [n]o'
-#     read -n 1 plugins
-#     if [ $plugins == "y" ]; then
-#         # Install zsh plugins
-#         info 'Installing Zsh Plugins'
-#         git clone https://github.com/zsh-users/zsh-autosuggestions ${INSTALL_DIR}/plugins/zsh-autosuggestions
-#         git clone https://github.com/zsh-users/zsh-syntax-highlighting ${INSTALL_DIR}/plugins/zsh-syntax-highlighting
-#         git clone https://github.com/marlonrichert/zsh-autocomplete.git ${INSTALL_DIR}/plugins/zsh-autocomplete
-#         success 'ZSH plugins have been installed'
-#     fi
-# fi
+    # Install zsh plugins
+    if [ ! -d "${INSTALL_DIR}/plugins/zsh-autosuggestions" ]; then
+        user 'Do you want to install (fish like) ZSH Plugins? [y]es, [n]o'
+        read -n 1 plugins
+        if [ $plugins == "y" ]; then
+            # Install zsh plugins
+            info 'Installing Zsh Plugins'
+            git clone https://github.com/zsh-users/zsh-autosuggestions ${INSTALL_DIR}/plugins/zsh-autosuggestions
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting ${INSTALL_DIR}/plugins/zsh-syntax-highlighting
+            git clone https://github.com/marlonrichert/zsh-autocomplete.git ${INSTALL_DIR}/plugins/zsh-autocomplete
+            success 'ZSH plugins have been installed'
+        else
+            skip 'ZSH plugins'
+        fi
+    else
+        skip 'ZSH plugins already installed...'
+    fi
+
+
+else
+    skip 'Installing with Znap directly from zshrc'
 
 # Make zsh default shell
 if [ $SHELL != $(which zsh) ]; then

@@ -150,6 +150,7 @@ install_dotfiles() {
     done
 
     # TODO: add check for if everything installed
+    # add this in individual dot files
     # Symlink dotfiles
     for src in $(find -H "$ROOT_DIR" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
         # should ignore files from vim/vim.symlink/undo because of maxdepth
