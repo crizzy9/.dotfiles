@@ -44,7 +44,7 @@ install_ripgrep_fzf() {
 
 install_kickstart() {
     info 'Downloading kickstart'
-    curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart.lua
+    curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart.lua.symlink
     success 'kickstart config downloaded'
     apply_symlink "vim" "kickstart.lua" "" ".config/nvim" "init.lua"
 }
