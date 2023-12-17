@@ -114,6 +114,7 @@ link_file()  {
     read -n 1 action
     if [ $action == "y" ]; then
       info "attempting to symlink: $1 ---> $2"
+      # TODO: does not work right now if file already exists. remove to use directly src and not basename
       # -f if a file -d if if a direactory -L if a symbolic link, -o or
       if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
           if  [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
@@ -168,7 +169,7 @@ link_file()  {
       fi
 
       if [ "$skip" != "true" ]; then # link src to dst
-          ln -sv "$1" "$2" # establish a softlink
+          ln -s "$1" "$2" # establish a softlink
           success "symlink established: $1 ---> $2"
       fi
     else
