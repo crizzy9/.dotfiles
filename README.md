@@ -112,10 +112,20 @@ nvim
 
 Custom keybindings for zsh, nvim and ranger
 
+### terminator shortcuts
+
+```text
+Ctrl + Shift + e ( o ) - Vertical pane
+Ctrl + Shift + n - cycle through panes
+Ctrl + Shift + x - maximize active pane
+Ctrl + Shift + f - search in terminal backlog
+```
+
 ### zsh shortcuts
 
 ```text
-Ctrl + V - fzf open nvim
+# TODO: doesnt work in linux
+Ctrl + f - fzf open nvim
 ```
 
 ### nvim shortcuts
