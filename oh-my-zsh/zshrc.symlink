@@ -125,6 +125,7 @@ unset __conda_setup
 ##########################
 #### Additional Setup ####
 ##########################
+## TODO: Convert to common keybindings file
 
 # additional path setup - modify per user
 export PATH="/Users/spadia/.local/bin:$PATH"
@@ -133,40 +134,27 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Conten
 # additional exports
 export LANG=en_US.UTF-8
 
-# defaults
-# Preferred editor for local and remote sessions and ranger
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+# set defaults
+nvim_exists=$(command -v "nvim" >/dev/null 2>&1)
+if [[ $nvim_exists ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
 
-# custom aliases
-
-# custom mappings
-
-# ripgrep and fzf
-# https://sidneyliebrand.medium.com/how-fzf-and-ripgrep-improved-my-workflow-61c7ca212861
-# variables
-# alias rg='rg --hidden --follow --glob "!.git/*"'
+## custom exports
 # export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_ALT_C_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 # export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
-# zsh keybindings
-bindkey '^[q' push-line-or-edit
-bindkey -r '^Q' '^[Q'
-bindkey '^ ' autosuggest-accept
+## custom aliases
+# alias rg='rg --hidden --follow --glob "!.git/*"'
 
-# nvim keybindings
-# bindkey -s '^v' 'nvim $(rg --files | fzf --reverse)\n'
-# nvim history bindings?
+## custom mappings
 
-# zsh history bindings
-
-# # fzf keybindings
+### ripgrep / fzf keybindings ###
 # bindkey '^P' fzf-history-widget
 # bindkey '^R' fzf-history-widget
 # bindkey '^T' fzf-cd-widget
@@ -174,3 +162,13 @@ bindkey '^ ' autosuggest-accept
 # bindkey '^G' fzf-file-widget
 # bindkey '^B' fzf-cd-widget
 
+### zsh keybindings ###
+bindkey '^[q' push-line-or-edit
+bindkey -r '^Q' '^[Q'
+bindkey '^ ' autosuggest-accept
+
+### nvim keybindings ###
+bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
+
+### history keybindings ###
+### ranger keybindings ###

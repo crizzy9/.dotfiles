@@ -119,5 +119,9 @@ Ctrl + V - fzf open nvim
 leader key is mapped to `Space`
 
 ```text
-Space + s + f - telescope open
+# telescope
+Space + s + f - telescope file search
+Space + s + g - telescope in file grep
+# within telescope
+Ctrl + p & Ctrl + n - Cycle through suggestions
 ```

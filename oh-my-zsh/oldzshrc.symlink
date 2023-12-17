@@ -40,9 +40,21 @@ source $ZSH/oh-my-zsh.sh
 # additional exports
 export LANG=en_US.UTF-8
 
-# aliases
+# set defaults
+nvim_exists=$(command -v "nvim" >/dev/null 2>&1)
+if [[ $nvim_exists ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
+
+## custom exports
+
+## custom aliases
 
 ## custom mappings
-# ripgrep / fzf mappings
-# ranger mappings
-# nvim mappings
+### ripgrep / fzf keybindings ###
+### zsh keybindings ###
+### nvim keybindings ###
+### history keybindings ###
+### ranger keybindings ###
