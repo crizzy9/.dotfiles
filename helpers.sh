@@ -168,7 +168,7 @@ link_file()  {
       fi
 
       if [ "$skip" != "true" ]; then # link src to dst
-          ln -s "$1" "$2" # establish a softlink
+          ln -sv "$1" "$2" # establish a softlink
           success "symlink established: $1 ---> $2"
       fi
     else
@@ -195,13 +195,14 @@ apply_symlink() {
     re='.*/$'
     [[ $dst_dir =~ $re ]] || dst_dir+="/"
     
-    info "applying symlink on\n\t src_file: ${src_file}${src_ext}\n\t exclude: ${exclude}\n\t curr_dir: ${curr_dir}\n\t dst_dir: ${dst_dir}"
+    info "applying symlink on\n\t src_file: ${src_file}${src_ext}\n\t exclude: ${exclude}\n\t curr_dir: ${curr_dir}\n\t dst_dir: ${dst_dir}\n\t dst_file: ${dst_file}"
 
     # getting the filename from path without the extension, should ignore other files due to maxdepth
     local files=$(find -H "$curr_dir" -maxdepth 1 -name "${src_file}${src_ext}" -not -name "*${exclude}*" -not -path '*.git*')
 
     if [[ $files ]]; then
       success "found symlink files: $files"
+      # TODO: remove for loop if only 1 file for destination
       for src in $files; do
 
           local dst=
