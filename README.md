@@ -103,6 +103,16 @@ mkdir build
 mkdir .deps
 cd .deps
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ../cmake.deps/
+ninja
+which curl
+# install rust compilers
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cd ../..
+# git clone git@pi-storage.local:/srv/tosh1/git/pi-cargo-bin
+source "$HOME/.cargo/env"
+ # where to run?
+cargo build
+cargo install
 ```
 
 ##### kickstart nvim
