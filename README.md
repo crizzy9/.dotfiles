@@ -108,13 +108,18 @@ which curl
 # install rust compilers
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
------
+----- Download rust binaries -----
+# TODO: not working
+
 cd ../..
 # git clone git@pi-storage.local:/srv/tosh1/git/pi-cargo-bin
 source "$HOME/.cargo/env"
- # where to run?
-cargo build
+# where to run?
+#cargo init
+#cargo build
 cargo install
+
+----------------------------------
 
 # once cargo installs binaries in folder ~/neovym/pi-cargo-bin
 cd pi-cargo-bin
@@ -152,6 +157,12 @@ nvim # should start installing lsp servers now
 ```
 
 ##### lunar nvim
+
+```sh
+TODO
+```
+
+##### lazy nvim
 
 ```sh
 TODO

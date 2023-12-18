@@ -58,6 +58,9 @@ install_all() {
 # TODO: take additional user input as required here
 # TODO: add option for minimal vim only setup on remote desktops
 # TODO: save all logs to a file
+# TODO: Set global configuration file for variable and path values
+# TODO: Allow setting custom config directory and config file paths such XDG_CONFIG_HOME
+# TODO: Add uninstall script
 user "Do you want to start the installation for dotfiles for zsh, nvim, brew? [y]es, [n]o"
 read -n 1 start
 if [ "$start" == "y" ]; then

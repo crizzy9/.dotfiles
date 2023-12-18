@@ -204,6 +204,7 @@ apply_symlink() {
     if [[ $files ]]; then
       success "found symlink files: $files"
       # TODO: remove for loop if only 1 file for destination
+      # TODO: Fail if more than 1 file. handle multiple files from installer
       for src in $files; do
 
           local dst=
