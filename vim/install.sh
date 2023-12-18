@@ -64,15 +64,16 @@ install_custom_nvim() {
 
 install_minimal_vim() {
     info "Installing basic neovim with minimal plugins"
+
     set -eo pipefail
-    sudo apt install gem
     curl -fLo \
         ~/.config/nvim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     pip3 install --user --upgrade neovim
+
+    sudo apt install ruby-dev
     gem install --user-install neovim
 
-    # cp ./init.vim ~/.config/nvim/init.vim
     apply_symlink "vim" "minimal-init.vim" "" ".config/nvim" "init.vim"
 
     nvim --headless +PlugUpgrade +PlugClean! +PlugUpdate +qall
