@@ -56,5 +56,6 @@ fi
 ### ripgrep / fzf keybindings ###
 ### zsh keybindings ###
 ### nvim keybindings ###
+bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
 ### history keybindings ###
 ### ranger keybindings ###

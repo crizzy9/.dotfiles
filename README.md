@@ -339,9 +339,9 @@ Space + ? - Search recently opened files
 Ctrl + p & Ctrl + n - Cycle through suggestions
 Ctrl + t - Open file in new tab
 - Open in vertical window pane
-- Open in horizontal window pane
-- Open search in quickfix menu
-- Add/Remove folders and files within telescope
+Ctrl + x - Open in horizontal window pane
+Ctrl + q - Open search in quickfix menu
+- Add/Remove folders and files within telescope ? or use something else
 
 # others
 # TODO: setup keybinding and save setting for setting filetype
