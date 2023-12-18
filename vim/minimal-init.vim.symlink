@@ -26,8 +26,9 @@ Plug 'junegunn/fzf.vim'
 
 "" language
 
-Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"" buggy avoid for now
+"" Plug 'sheerun/vim-polyglot'
+"" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 "" color
 
@@ -103,10 +104,10 @@ nnoremap Y y$
 
 "" deoplete
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+"" let g:deoplete#enable_at_startup = 1
+"" let g:deoplete#auto_complete_start_length = 1
+"" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"" inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
 
 "" auto-pairs
