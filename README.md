@@ -90,6 +90,30 @@ Install neovim plugins
 
 ###### installing neovim on linux - raspberry pi
 
+Check raspberry pi os version
+
+```sh
+hostnamectl
+# arm64 means 32 bit
+
+# check bit with
+getconf LONG_BIT
+```
+
+For 64 bit raspberry pi raspian
+
+```sh
+# download latest appimage from neovim github
+wget https://github.com/neovim/neovim/releases/download/v0.9.4/nvim.appimage
+
+chmod u+x nvim.appimage && ./nvim.appimage
+```
+
+For 32 bit raspberry pi raspian
+
+[Video Guide](https://www.youtube.com/watch?v=aOUwtTspALk)
+> Note: Incomplete guide
+
 ```sh
 sudo apt install binutils
 sudo apt install build-essential
@@ -115,6 +139,8 @@ cd ../..
 # git clone git@pi-storage.local:/srv/tosh1/git/pi-cargo-bin
 source "$HOME/.cargo/env"
 # where to run?
+
+# rustup component add tree-sitter # errors out since i was trying on 32bit raspbian aarch64
 #cargo init
 #cargo build
 cargo install
