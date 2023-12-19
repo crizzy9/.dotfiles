@@ -247,6 +247,8 @@ Ctrl + Shift + f - search in terminal backlog
 ```text
 # TODO: doesnt work in linux
 Ctrl + f - fzf open nvim in directory
+Ctrl + Space - Accept suggestion from auto suggest
+Tab - Accept first suggestion from auto complete
 ```
 
 ### nvim shortcuts
@@ -257,11 +259,19 @@ leader key is mapped to `Space`
 # vim keybindings
 u - undo
 Ctrl+r - redo
+vt - select till - f for inclusive
+vT - select back
+q <register: a-z> {do stuff} q - record macro
+@<register> - use macro
+@@ - run last ran macro
+. - repeat previous action (does not repeat motion keys)
+
 
 # general keybindings
 - Move to right window pane
 - Move to left window pane
 - Switch between tabs
+Ctrl + Tab - Exit to Terminal an Return to currnt buffer
 - Open Git console
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
@@ -334,6 +344,8 @@ Space + / - To search within current file
 Space + s + / - To search within all open files
 Space + ? - Search recently opened files
 - Open file explorer
+- Rename files in directory
+- Add/Remove folders and files within telescope ? or use something else
 
 ## within telescope
 Ctrl + p & Ctrl + n - Cycle through suggestions
@@ -341,7 +353,6 @@ Ctrl + t - Open file in new tab
 - Open in vertical window pane
 Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open search in quickfix menu
-- Add/Remove folders and files within telescope ? or use something else
 
 # others
 # TODO: setup keybinding and save setting for setting filetype
