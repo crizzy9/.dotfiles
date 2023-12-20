@@ -113,67 +113,75 @@ link_file()  {
     user "Do you want to symlink $(basename "${src%.*}")? [y]es, [n]o"
     read -n 1 action
     if [ $action == "y" ]; then
-      info "attempting to symlink: $1 ---> $2"
-      # TODO: does not work right now if file already exists. remove to use directly src and not basename
-      # -f if a file -d if if a direactory -L if a symbolic link, -o or
-      if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
-          if  [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
-              local currentSrc="$(readlink $dst)" # reads destination symlink if it exists and checks if symlink already established with source
-              if [ "$currentSrc" == "$src" ]; then
-                  skip=true;
-              else
-                  # basename gets the actual name from the path
-                  user "File already exists: $dst ($(basename "$src")), What do you want to do?\n\
+        info "Attempting to symlink: $1 ---> $2"
+        # -f if a file -d if if a directory -L if a symbolic link, -o or
+        if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
+            info "file found"
+            if  [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
+                local currentSrc="$(readlink $dst)" # reads destination symlink if it exists and checks if symlink already established with source
+                info "this is currSrc = $currentSrc"
+                info "overwrite=$overwrite, backup=$backup, skip=$skip"
+                if [ "$currentSrc" == "$src" ]; then
+                    # handle both scenarios linked with a different file and unlinking if linked correctly
+                    skip=true;
+                else
+                    # basename gets the actual name from the path
+                    user "File already exists: $dst ($(basename "$src")), What do you want to do?\n\
                       [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-                  # reads only 1 character using -n 1
-                  read -n 1 action
+                    # reads only 1 character using -n 1
+                    read -n 1 action
 
-                  case "$action" in
-                      o )
+                    case "$action" in
+                        o )
                           overwrite=true;;
-                      O )
+                        O )
                           overwrite_all=true;;
-                      s )
+                        s )
                           skip=true;;
-                      S )
+                        S )
                           skip_all=true;;
-                      b )
+                        b )
                           backup=true;;
-                      B )
+                        B )
                           backup_all=true;;
-                      * )
+                        * )
                           ;;
-                  esac
-              fi
-          fi
+                    esac
+                fi
+            fi
 
 
-          # set overwrite as the value of all
-          overwrite=${overwrite:-$overwrite_all}
-          skip=${skip:-$skip_all}
-          backup=${backup:-$backup_all}
+            # set overwrite as the value of all
+            overwrite=${overwrite:-$overwrite_all}
+            skip=${skip:-$skip_all}
+            backup=${backup:-$backup_all}
 
-          if [ "$overwrite" == "true" ]; then
-              rm -rf "$dst"
-              success "removed $dst"
-          fi
+            if [ "$overwrite" == "true" ]; then
+                rm -rf "$dst"
+                success "removed $dst"
+            fi
 
-          if [ "$backup" == "true" ]; then
-              mv "$dst" "${dst}.backup"
-              success "moved $dst to ${dst}.backup"
-          fi
+            if [ "$backup" == "true" ]; then
+                mv "$dst" "${dst}.backup"
+                success "moved $dst to ${dst}.backup"
+            fi
 
-          if [ "$skip" == "true" ]; then
-              skip "$src"
-          fi
-      fi
+            if [ "$skip" == "true" ]; then
+                # TODO: add option to unlink
+                skip "Symlink already applied: $src, you can remove the link with unlink"
+            fi
+        fi
 
-      if [ "$skip" != "true" ]; then # link src to dst
-          ln -s "$1" "$2" # establish a softlink
-          success "symlink established: $1 ---> $2"
-      fi
+        if [ "$skip" != "true" ]; then # link src to dst
+            ln -s "$1" "$2" # establish a softlink
+            if [ $? -eq 0 ]; then
+                success "Symlink established: $1 ---> $2"
+            else
+                fail "Unable to establish Symlink: $1 ---> $2"
+            fi
+        fi
     else
-      skip "symlink $(basename "${src%.*}")"
+        skip "symlink $(basename "${src%.*}")"
     fi
 }
 
@@ -192,6 +200,7 @@ apply_symlink() {
     local src_ext=".symlink"
     local curr_dir="${ROOT_DIR}/${src_dir}"
     local dst_dir="${HOME}/${dst_suffix}"
+    local overwrite_all=false backup_all=false skip_all=false
     
     re='.*/$'
     [[ $dst_dir =~ $re ]] || dst_dir+="/"
@@ -202,29 +211,29 @@ apply_symlink() {
     local files=$(find -H "$curr_dir" -maxdepth 1 -name "${src_file}${src_ext}" -not -name "*${exclude}*" -not -path '*.git*')
 
     if [[ $files ]]; then
-      success "found symlink files: $files"
-      # TODO: remove for loop if only 1 file for destination
-      # TODO: Fail if more than 1 file. handle multiple files from installer
-      for src in $files; do
+        success "found symlink files: $files"
+        # TODO: remove for loop if only 1 file for destination
+        # TODO: Fail if more than 1 file. handle multiple files from installer
+        for src in $files; do
 
-          local dst=
-          if [[ $dst_file ]]; then
-            dst="${dst_dir}${dst_file}"
-          else
-            dst="${dst_dir}.$(basename "${src%.*}")"
-          fi
+            local dst=
+            if [[ $dst_file ]]; then
+                dst="${dst_dir}${dst_file}"
+            else
+                dst="${dst_dir}.$(basename "${src%.*}")"
+            fi
 
-          # create dest_dir if doesnt exist
-          if [ ! -d "$dst_dir" ]; then
-              mkdir -p "$dst_dir"
-              success "created directory: $dst_dir"
-          else
-              skip "directory already exists: $dst_dir"
-          fi
+            # create dest_dir if doesnt exist
+            if [ ! -d "$dst_dir" ]; then
+                mkdir -p "$dst_dir"
+                success "created directory: $dst_dir"
+            else
+                skip "directory already exists: $dst_dir"
+            fi
 
-          link_file "$src" "$dst"
-      done
+            link_file "$src" "$dst"
+        done
     else
-      info "No symlink files found in ${curr_dir}"
+        info "No symlink files found in ${curr_dir}"
     fi
 }

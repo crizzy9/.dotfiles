@@ -90,6 +90,9 @@ Install neovim plugins
 
 ###### installing neovim on linux - raspberry pi
 
+TODO: Make it work with raspi 2 ?
+Raspi 1 working with minimal vim
+
 Check raspberry pi os version
 
 ```sh
@@ -246,9 +249,16 @@ Ctrl + Shift + f - search in terminal backlog
 
 ```text
 # TODO: doesnt work in linux
-Ctrl + f - fzf open nvim in directory
-Ctrl + Space - Accept suggestion from auto suggest
-Tab - Accept first suggestion from auto complete
+
+# keybindings
+Ctrl + f      - fzf open nvim in directory
+Ctrl + Space  - Accept suggestion from auto suggest
+Tab           - Accept first suggestion from auto complete
+- Search history with fzf
+- cd to a folder with fzf
+
+# aliases
+exa - better ls - rename to ls
 ```
 
 ### nvim shortcuts
@@ -256,36 +266,76 @@ Tab - Accept first suggestion from auto complete
 leader key is mapped to `Space`
 
 ```text
-# vim keybindings
+# vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
 u - undo
 Ctrl+r - redo
+Ctrl + o - move backwards through the jump list
+Ctrl + i - move forward to the next jump in the jumplist
+:jumps - view all jumps
+:e - update file to latest version when updated from elsewhere
+
 vt - select till - f for inclusive
-vT - select back
+vT - select back - F for inclusive
+ZZ (:wq) (:x) - while in normal mode. Save and Exit
+ZQ (:q!) - while in normal mode. Exit without saving
+
+# macros
 q <register: a-z> {do stuff} q - record macro
 @<register> - use macro
 @@ - run last ran macro
 . - repeat previous action (does not repeat motion keys)
+- Check existing registers
 
+# marks (used for quick movement) - use harpoon?
+g' or (:marks) - view all marks
+g' <mark> - to go back to a specific mark
+g' " - go back to last edited line
+- Set a mark
+- go back to mark
 
 # general keybindings
-- Move to right window pane
-- Move to left window pane
-- Switch between tabs
-Ctrl + Tab - Exit to Terminal an Return to currnt buffer
+Ctrl + w - Opens menu for other keybindings
+g - Open all g related shortcuts
+
+Ctrl + w + l - Move to right window pane
+Ctrl + w + h - Move to left window pane
+Ctrl + w + x - Switch splits
+Ctrl + w + w - Cycle through window panes
+gt - Next tab
+gT - Previous tab
+<num> gt - numbered tab
+
+- Exit to Terminal an Return to currnt buffer
+
+# git
 - Open Git console
 
-# LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
+# nvim-tree
+- open file explorer
+- open terminal
 
-## info
+# lua basics
+print("print something") - execute and print something in lua script
+:messages - to view the output of the print statements in neovim
+
+# Other useful info and commands
 `:Telescope keymaps` - search LSP keymaps
 `:Mason` + i - To install a new LSP server for a language
 - Update lsp servers? Automatic?
+- Open command pallete?
+
+# LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
+
+## commands
+:Mason - open mason
 
 ## goto mappings
 gr - Go to reference / Open lsp references
 gd - Go to definition
 gD - Go to declaration
 gI - Go to implementation
+gF - ?
+gf - Go to file under cursor?
 Space + D - Type Definition
 Space + d s - Search Document Symbols
 Space + w s - Search Workspace Symbols - TODO: Not displaying anything
@@ -303,7 +353,7 @@ ctrl + k - signature documentation
 
 # tree-sitter
 
-## info
+## commands
 `:TSUpdate` - update added languages
 - install new language support?
 
@@ -320,8 +370,9 @@ v ac - move visual selection to next class
 v ic - move visual selection to previous class
 v ab - visual selection around brackets including brackets
 v ib - visual selection inside brackets excluding brackets
-
 ## move entire visual selection? does that work?
+
+## vim surround a block of text with braces / quotes etc
 
 ## move to keymapings. might work to extend visual selection
 ]m - move to next function
@@ -337,20 +388,21 @@ v ib - visual selection inside brackets excluding brackets
 
 ## telescope finder
 ## Just hit SPACE to show some suggestions on what to do
+## Just hit Space + ' to simliarly view other options
 Space + s + f - telescope file search
 Space + s + g - telescope in file grep
 Space + Space - Open list of active buffers
 Space + / - To search within current file
 Space + s + / - To search within all open files
 Space + ? - Search recently opened files
-- Open file explorer
+- Open file explorer - use nvim tree
 - Rename files in directory
 - Add/Remove folders and files within telescope ? or use something else
 
 ## within telescope
 Ctrl + p & Ctrl + n - Cycle through suggestions
 Ctrl + t - Open file in new tab
-- Open in vertical window pane
+Ctrl + v - Open in vertical window pane
 Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open search in quickfix menu
 

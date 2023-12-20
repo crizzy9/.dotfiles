@@ -91,6 +91,7 @@ install_zsh_plugins() {
 }
 
 # Make zsh default shell
+# TODO: update to not restart the shell
 default_zsh() {
     if [ $SHELL != $(which zsh) ]; then
         user 'Do you want to make zsh your default shell? [y]es, [n]o'

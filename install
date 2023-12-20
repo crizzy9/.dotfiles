@@ -8,7 +8,6 @@ source ./helpers.sh
 # Install dotfiles and symlink config files to their appropriate location
 install_dotfiles() {
     info 'installing dotfiles'
-    local overwrite_all=false backup_all=false skip_all=false
     
     # Running install scripts in alphabetical order
     for installer in $(find . -name "install.sh" -not -path '*.symlink*' | sort); do
