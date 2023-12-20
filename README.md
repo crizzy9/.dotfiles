@@ -259,6 +259,12 @@ Tab           - Accept first suggestion from auto complete
 
 # aliases
 exa - better ls - rename to ls
+
+# working with foreground and background tasks
+Ctrl + z - puts any current task in background
+bg - list background tasks
+fg %<num> - bring task to foreground
+- using /dev/null 2>&1
 ```
 
 ### nvim shortcuts
@@ -278,6 +284,7 @@ vt - select till - f for inclusive
 vT - select back - F for inclusive
 ZZ (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
+Ctrl + w + q - to quit a window (telescope)
 
 # macros
 q <register: a-z> {do stuff} q - record macro
@@ -293,9 +300,10 @@ g' " - go back to last edited line
 - Set a mark
 - go back to mark
 
-# general keybindings
+# which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings
 g - Open all g related shortcuts
+g? - To open keymaps within certain things like nvim tree and mason
 
 Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
@@ -305,14 +313,42 @@ gt - Next tab
 gT - Previous tab
 <num> gt - numbered tab
 
-- Exit to Terminal an Return to currnt buffer
+Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
 
 # git
 - Open Git console
 
-# nvim-tree
-- open file explorer
-- open terminal
+# nvim-tree (Working with folder structure and opened files)
+## TODO: follow instructions in nvim-tree readme to turn off netrw
+## TODO: Update to open the split next to the current window not in current window and move existing next to it
+## TODO: open the same nvim tree in different tabs
+## more info on floating preview (https://github.com/nvim-tree/nvim-tree.lua/issues/135) (https://github.com/JMarkin/mynvim/blob/d733abb2ec72654211dafb089f237df9c2745758/lua/plugins/nvimtree.lua#L5)
+## https://github.com/JMarkin/nvim-tree.lua-float-preview
+(:NvimTreeToggle) - open file explorer
+(:NvimTreeFindFileToggle) - Search in file explorer - TODO: Not working
+Tab - open preview for a file
+- exit preview?
+a <filename> <CR> - create a new file/folder (while in nvimtree)
+Ctrl + r - Rename a file in nvimtree (does not updated references with lsp) (TODO: update references, use telescope file browser maybe?, use https://github.com/nvim-tree/nvim-tree.lua/wiki/Extension-Plugins)
+d - remove selected file (confirm with y)
+g? - To view shortcuts while in nvim tree
+
+# neovim terminal emulator
+## more info - (https://neovim.io/doc/user/nvim_terminal_emulator.html)
+## modify terminal buffers with https://www.reddit.com/r/neovim/comments/cger8p/how_quickly_close_a_terminal_buffer/
+(:terminal) - open neovim terminal emulator
+- open terminal in horizontal/vertical split
+Ctrl + \ + Ctrl + n - Go to normal mode from terminal mode
+Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to terminal mode
+Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator
+
+# buffers
+## %a - currently opened buffer, a - preview buffer closed when closed, #h - last opened buffer/file , h - file closed but buffer open
+## the buffers stay open by default even after :q - use :bd to delete buffer
+Space + Space - Open list of active buffers (Telescope)
+Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (REMAP)
+:q - keep buffer open
+:bd - delete current buffer
 
 # lua basics
 print("print something") - execute and print something in lua script
@@ -321,10 +357,13 @@ print("print something") - execute and print something in lua script
 # Other useful info and commands
 `:Telescope keymaps` - search LSP keymaps
 `:Mason` + i - To install a new LSP server for a language
-- Update lsp servers? Automatic?
+U (when in Mason) - Update lsp servers
+g? (when in Mason) - To view additional info on mason
+:Lazy - Open package manager installation
 - Open command pallete?
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
+## learn about LspAttach
 
 ## commands
 :Mason - open mason
@@ -385,6 +424,7 @@ v ib - visual selection inside brackets excluding brackets
 ## telescope helpful commands
 :Telescope keymaps - To view all telescope keybindings - n (normal) - keymap - function - description. Follow this format when adding new keybindings to show in telescope
 :Telescope help_tags - To search for help across all of neovim
+Esc + Esc - exit telescope
 
 ## telescope finder
 ## Just hit SPACE to show some suggestions on what to do
@@ -395,6 +435,9 @@ Space + Space - Open list of active buffers
 Space + / - To search within current file
 Space + s + / - To search within all open files
 Space + ? - Search recently opened files
+Space + s + r - Resume last search
+
+## telescope file browser
 - Open file explorer - use nvim tree
 - Rename files in directory
 - Add/Remove folders and files within telescope ? or use something else
@@ -407,6 +450,6 @@ Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open search in quickfix menu
 
 # others
-# TODO: setup keybinding and save setting for setting filetype
+# TODO: setup keybinding and save setting for setting filetype and persist value
 :set filetype=lua - to manually set a filetype
 ```
