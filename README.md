@@ -252,8 +252,6 @@ Ctrl + Shift + f - search in terminal backlog
 ### zsh shortcuts
 
 ```text
-# TODO: doesnt work in linux
-
 # keybindings
 Ctrl + f      - fzf open nvim in directory
 Ctrl + Space  - Accept suggestion from auto suggest
@@ -282,16 +280,18 @@ Ctrl + r - redo
 Ctrl + o - move backwards through the jump list
 Ctrl + i - move forward to the next jump in the jumplist
 Ctrl + t - move forward to next item in tag list (Works like a stack so only pops)
+vt - select till - f for inclusive
+vT - select back - F for inclusive
+- Delete forward during insert mode
+
+ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
+ZQ (:q!) - while in normal mode. Exit without saving
+
+:Lsp + Tab - Use Tab to autocomplete in status line
 :jumps - view all jumps
 :tags - view all tags
 :e - update file to latest version when updated from elsewhere
-:Lsp + Tab - Use Tab to autocomplete in status line
 
-vt - select till - f for inclusive
-vT - select back - F for inclusive
-ZZ (:wq) (:x) - while in normal mode. Save and Exit
-ZQ (:q!) - while in normal mode. Exit without saving
-Ctrl + w + q - to quit a window (telescope)
 
 # macros
 q <register: a-z> {do stuff} q - record macro
