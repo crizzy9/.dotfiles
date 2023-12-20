@@ -324,6 +324,8 @@ Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current bu
 
 # git
 - Open Git console
+Space + h + s - Stage a hunk (a selection) from the current buffer
+- Jump between hunks in the current file?
 
 # nvim-tree (Working with folder structure and opened files)
 ## netrw is turned off - enable if needed - more info in nvim-tree readme
@@ -365,6 +367,7 @@ Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (R
 # lua basics
 print("print something") - execute and print something in lua script
 :messages - to view the output of the print statements in neovim
+:lua vim.lsp.buf.formatting() - to call a lua function from status line
 
 # Other useful info and commands and TODO
 `:Telescope keymaps` - search LSP keymaps
@@ -391,7 +394,7 @@ gD - Go to declaration
 gI - Go to implementation
 gF - ?
 gf - Go to file under cursor?
-Space + D - Type Definition
+Space + D - Type Definition (Goes into packages also)
 Space + d s - Search Document Symbols
 Space + w s - Search Workspace Symbols - TODO: Not displaying anything
 
