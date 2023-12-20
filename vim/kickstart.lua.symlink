@@ -44,9 +44,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+
+-- ********************** CUSTOM *************************
 -- Turn off netrw to work with nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+-- *******************************************************
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -273,6 +276,7 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
   --
 
+  -- ********************** CUSTOM *************************
   -- nvim tree
   {
     -- WHAT IS THE POINT OF IMPORT _ READ LAZY INSTRUCTIONS
@@ -292,13 +296,38 @@ require('lazy').setup({
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    event = "VeryLazy", -- WHAT IS THIS FOR ?
     config = function()
       require("nvim-surround").setup({
           -- Configuration here, or leave empty to use defaults
       })
     end
   },
+
+  -- startup - for fancy screen as dashboard
+  -- TODO: fix error cursor outside buffer??
+  -- Error executing vim.schedule lua callback: ....local/share/nvim/lazy/startup.nvim/lua/startup/init.lua:524: Cursor position outside buffer
+  -- stack traceback:
+  --         [C]: in function 'nvim_win_set_cursor'
+  --         ....local/share/nvim/lazy/startup.nvim/lua/startup/init.lua:524: in function ''
+  --         vim/_editor.lua: in function ''
+  --         vim/_editor.lua: in function <vim/_editor.lua:0>
+  -- {
+  --   "startup-nvim/startup.nvim",
+  --   version = "*", -- Use for stability; omit to use `main` branch for the latest features
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     require("startup").setup({
+  --         -- Configuration here, or leave empty to use defaults
+  --     })
+  --   end
+  -- },
+
+-- *******************************************************
 
 }, {})
 

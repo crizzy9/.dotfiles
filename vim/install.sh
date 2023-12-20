@@ -52,9 +52,10 @@ install_ripgrep_fzf() {
 install_kickstart() {
     info 'Downloading kickstart'
     # TODO: do not overwrite existing one that i have create a backup of it
-    curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart.lua.symlink
+    # curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart.lua.symlink
+    curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua > ./vim/kickstart-new.lua.symlink
     success 'kickstart config downloaded'
-    apply_symlink "vim" "kickstart.lua" "" ".config/nvim" "init.lua"
+    apply_symlink "vim" "kickstart-new.lua" "" ".config/nvim" "init.lua"
 }
 
 # TODO: add support for lunarvim?

@@ -348,7 +348,9 @@ g? - To view shortcuts while in nvim tree
 # neovim terminal emulator
 ## more info - (https://neovim.io/doc/user/nvim_terminal_emulator.html)
 ## modify terminal buffers with https://www.reddit.com/r/neovim/comments/cger8p/how_quickly_close_a_terminal_buffer/
-(:terminal) - open neovim terminal emulator
+## TODO: add mapping to open existing terminal vs new terminal
+(:term or :terminal) - open neovim terminal emulator in current buffer
+(:tabnew | term) - open terminal in new tab
 - open terminal in horizontal/vertical split
 Ctrl + \ + Ctrl + n - Go to normal mode from terminal mode
 Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to terminal mode
