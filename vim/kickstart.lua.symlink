@@ -272,7 +272,8 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
   --
-  --
+
+  -- nvim tree
   {
     -- WHAT IS THE POINT OF IMPORT _ READ LAZY INSTRUCTIONS
     -- import = 'nvim-tree/nvim-tree.lua',
@@ -286,6 +287,19 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
+
+  -- nvim surround
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+          -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
 }, {})
 
 -- [[ Setting options ]]
@@ -343,7 +357,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', "<cmd>:Telescope diagnostics<CR>", { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

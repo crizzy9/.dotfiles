@@ -282,7 +282,7 @@ Ctrl + i - move forward to the next jump in the jumplist
 Ctrl + t - move forward to next item in tag list (Works like a stack so only pops)
 vt - select till - f for inclusive
 vT - select back - F for inclusive
-- Delete forward during insert mode
+fn + Backspace - Delete forward during normal/insert mode
 
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
@@ -303,7 +303,9 @@ q <register: a-z> {do stuff} q - record macro
 # marks (used as bookmarks) - use harpoon?
 g' or (:marks) - view all marks
 g' <mark> - to go back to a specific mark
-g' " - go back to last edited line
+g' " - go back to last exited current buffer
+g' [ - start of last yank or text edit
+g' . - last change in current buffer
 - Set a mark
 - go back to mark
 
@@ -368,6 +370,11 @@ Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (R
 print("print something") - execute and print something in lua script
 :messages - to view the output of the print statements in neovim
 :lua vim.lsp.buf.formatting() - to call a lua function from status line
+## ways of writing key mappings
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', "<cmd>:Telescope diagnostics<CR>", { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
 # Other useful info and commands and TODO
 `:Telescope keymaps` - search LSP keymaps
@@ -394,18 +401,23 @@ gD - Go to declaration
 gI - Go to implementation
 gF - ?
 gf - Go to file under cursor?
+[d - Go to previous error (diagnostic)
+]d - Go to next error (diagnostic)
+Space + e - Open error in floating block
+(Space + q) (+ Ctrl + q - to go quickfix) - Open list of all errors in quickfix menu ( Switched to using telescope diagnostics )
+Space + q (:Telescope diagnostics) - List of all errors in telescope (REMAP)
 Space + D - Type Definition (Goes into packages also)
 Space + d s - Search Document Symbols
-Space + w s - Search Workspace Symbols - TODO: Not displaying anything
+Space + w s - Search Workspace Symbols
 
 ## utility mappings
-Space + r n - Rename - Be careful Also Renames references
-Space + c a - Code action
+Space + r n - Rename - Be careful Also Renames references - need to do :wa
+Space + c a - Code action (Such as add or organize imports and remove unused imports) TODO: these are per lsp and not working in python
 Space + w l - Workspace List Folders
 Space + w a - Workspace Add Folder
 Space + w r - Workspace Remove Folder
 
-## lsp suggestion mappings
+## lsp suggestion/autocomplete mappings
 K - hover documentation , K again to go inside the hover
 ctrl + k - signature documentation
 
@@ -430,7 +442,14 @@ v ab - visual selection around brackets including brackets
 v ib - visual selection inside brackets excluding brackets
 ## move entire visual selection? does that work?
 
-## vim surround a block of text with braces / quotes etc
+## nvim surround a block of text with braces / quotes etc
+### :h nvim-surround.usage
+ysiw ( - surround inside word with ()
+ys<select-motion: iw, aw, t, etc><surround-char> - surround general format
+ds] - delete surround [abc]
+cs'" - change surround from 'item' -> "item"
+csth1<CR> - change html tag <b>text</b> -> <h1>text</h1>
+dsf - delete function call func(abc) -> abc
 
 ## move to keymapings. might work to extend visual selection
 ]m - move to next function
@@ -467,7 +486,7 @@ Ctrl + p & Ctrl + n - Cycle through suggestions
 Ctrl + t - Open file in new tab
 Ctrl + v - Open in vertical window pane
 Ctrl + x - Open in horizontal window pane
-Ctrl + q - Open search in quickfix menu
+Ctrl + q - Open any telescope search in quickfix menu
 
 # others
 # TODO: setup keybinding and save setting for setting filetype and persist value
