@@ -282,6 +282,8 @@ Ctrl + i - move forward to the next jump in the jumplist
 Ctrl + t - move forward to next item in tag list (Works like a stack so only pops)
 vt - select till - f for inclusive
 vT - select back - F for inclusive
+~ - Convert letter to upper case
+% - move cursor between two sets of brackets
 fn + Backspace - Delete forward during normal/insert mode
 
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
@@ -292,11 +294,39 @@ ZQ (:q!) - while in normal mode. Exit without saving
 :tags - view all tags
 :e - update file to latest version when updated from elsewhere
 
+Ctrl + a - increment number
+Ctrl + x - decrement number
+Ctrl + v (Vertical edit: select multiple numbers) + g + Ctrl + a - seralize all numbers(0s)
+Shift + v (Line edit: select multiple lines) + g + Ctrl + a + Ctrl + a - seralize all numbers found in line
+
 # advanced vim motions
 =ap - align (re-indent) entire paragraph
 <visual select> = - align selection
+<visual select> o - move to the other side of visual select
+<visual select> { - select till previous empty line
+<visual select> } - select till next empty line
+z - show folding and other movement which-key suggestions
+zz - adjust line under cursor as the middle of file
+zt - adjust line under cursor as the top of file
+zb - adjust line under cursor as the bottom of file
+
+Ctrl + v - multi line cursor select. E.g (Ctrl+v j j j(place cursors) I(go to insert mode) data[0] = " Esc(exit and apply)) -> performs the same thing for all selected lines. To convert a few lines to content `abc` into `data[0]="abc"`
+Shift + v (select multiple lines) :s/<motion:$>/";(your changes) - perform multiline changes via commands
+
+# patterns in vim
+<visual selection>:s/pattern/result/g
+
+## useful patterns (:help pattern)
+
+### pattern explaination `\<` matches the start of a word, `.` matches the first character of a word `\u` tells Vim to uppercase the following character in the substitution string (&) `&` means substitute whatever was matched on the left-hand side `g` means substitute all matches, not only the first
+<visual selection>:s/\<./\u&/g - Convert first letter in each word to upper case in a selection
+
+### do the same thing described above with Ctrl + v multi cursor select but with regex
+#### \w - remove white space, .* select the rest of the stuff in there / replace with data[0] = " \1(reference what was replaced) ";
+<visual selection>:s/\(\w.*\)/data[0] = "\1";
 
 # macros
+" - view all registers in which key
 q <register: a-z> {do stuff} q - record macro
 @<register> - use macro
 @@ - run last ran macro
@@ -309,8 +339,8 @@ g' <mark> - to go back to a specific mark
 g' " - go back to last exited current buffer
 g' [ - start of last yank or text edit
 g' . - last change in current buffer
-- Set a mark
-- go back to mark
+g' ' - go back to where you jumped from
+- Set a new mark
 
 # which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings

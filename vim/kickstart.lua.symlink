@@ -49,6 +49,7 @@ vim.g.maplocalleader = ' '
 -- Turn off netrw to work with nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.wo.relativenumber = true
 -- *******************************************************
 
 -- [[ Install `lazy.nvim` plugin manager ]]

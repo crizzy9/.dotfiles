@@ -193,6 +193,7 @@ bindkey -r '^Q' '^[Q'
 bindkey '^ ' autosuggest-accept
 
 ### nvim keybindings ###
+# TODO: use the most efficient mapping here
 bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
 
 ### history keybindings ###
