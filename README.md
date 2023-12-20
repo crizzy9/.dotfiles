@@ -58,11 +58,14 @@ chmod +x ./install
 ./install
 ```
 
+### Consolidated TODO
+- [ ] Update
+
 ### Supported Plugins
 
 Below is a list of all the plugins supported by this repository, more to come...
 
-### Git
+#### Git
 
 TODO
 
@@ -212,7 +215,8 @@ nvim
 ###### configuration
 
 LSP and mason config
-> TODO: not working with libraries in python such as boto3.. no suggestion.. need to debug
+> TODO: not working with libraries in python such as boto3.. no suggestion.. Working now using pyright lsp
+> TODO: Java language server also not working - https://github.com/georgewfraser/java-language-server/issues/273
 
 ```
 To add more plugins in init.lua packer config
@@ -274,11 +278,14 @@ leader key is mapped to `Space`
 ```text
 # vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
 u - undo
-Ctrl+r - redo
+Ctrl + r - redo
 Ctrl + o - move backwards through the jump list
 Ctrl + i - move forward to the next jump in the jumplist
+Ctrl + t - move forward to next item in tag list (Works like a stack so only pops)
 :jumps - view all jumps
+:tags - view all tags
 :e - update file to latest version when updated from elsewhere
+:Lsp + Tab - Use Tab to autocomplete in status line
 
 vt - select till - f for inclusive
 vT - select back - F for inclusive
@@ -293,7 +300,7 @@ q <register: a-z> {do stuff} q - record macro
 . - repeat previous action (does not repeat motion keys)
 - Check existing registers
 
-# marks (used for quick movement) - use harpoon?
+# marks (used as bookmarks) - use harpoon?
 g' or (:marks) - view all marks
 g' <mark> - to go back to a specific mark
 g' " - go back to last edited line
@@ -305,6 +312,7 @@ Ctrl + w - Opens menu for other keybindings
 g - Open all g related shortcuts
 g? - To open keymaps within certain things like nvim tree and mason
 
+# Quick Movement keybindings
 Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
 Ctrl + w + x - Switch splits
@@ -312,18 +320,17 @@ Ctrl + w + w - Cycle through window panes
 gt - Next tab
 gT - Previous tab
 <num> gt - numbered tab
-
 Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
 
 # git
 - Open Git console
 
 # nvim-tree (Working with folder structure and opened files)
-## TODO: follow instructions in nvim-tree readme to turn off netrw
+## netrw is turned off - enable if needed - more info in nvim-tree readme
+## TODO: create full side bar with git, active buffers as shown in (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 ## TODO: Update to open the split next to the current window not in current window and move existing next to it
-## TODO: open the same nvim tree in different tabs
-## more info on floating preview (https://github.com/nvim-tree/nvim-tree.lua/issues/135) (https://github.com/JMarkin/mynvim/blob/d733abb2ec72654211dafb089f237df9c2745758/lua/plugins/nvimtree.lua#L5)
-## https://github.com/JMarkin/nvim-tree.lua-float-preview
+## TODO: open the same nvim tree in different tabs (https://github.com/nvim-tree/nvim-tree.lua/discussions/2244) (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
+## more info on floating preview (https://github.com/nvim-tree/nvim-tree.lua/issues/135) (https://github.com/JMarkin/mynvim/blob/d733abb2ec72654211dafb089f237df9c2745758/lua/plugins/nvimtree.lua#L5) (https://github.com/JMarkin/nvim-tree.lua-float-preview)
 (:NvimTreeToggle) - open file explorer
 (:NvimTreeFindFileToggle) - Search in file explorer - TODO: Not working
 Tab - open preview for a file
@@ -331,6 +338,7 @@ Tab - open preview for a file
 a <filename> <CR> - create a new file/folder (while in nvimtree)
 Ctrl + r - Rename a file in nvimtree (does not updated references with lsp) (TODO: update references, use telescope file browser maybe?, use https://github.com/nvim-tree/nvim-tree.lua/wiki/Extension-Plugins)
 d - remove selected file (confirm with y)
+Ctrl + k - View file size and other info
 g? - To view shortcuts while in nvim tree
 
 # neovim terminal emulator
@@ -344,29 +352,37 @@ Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator
 
 # buffers
 ## %a - currently opened buffer, a - preview buffer closed when closed, #h - last opened buffer/file , h - file closed but buffer open
+## + - represents file is unsaved but in buffer
 ## the buffers stay open by default even after :q - use :bd to delete buffer
 Space + Space - Open list of active buffers (Telescope)
 Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (REMAP)
 :q - keep buffer open
 :bd - delete current buffer
 
+# changing themes/highlighting etc
+## show tab in a different way with x? (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
+
 # lua basics
 print("print something") - execute and print something in lua script
 :messages - to view the output of the print statements in neovim
 
-# Other useful info and commands
+# Other useful info and commands and TODO
 `:Telescope keymaps` - search LSP keymaps
 `:Mason` + i - To install a new LSP server for a language
 U (when in Mason) - Update lsp servers
 g? (when in Mason) - To view additional info on mason
 :Lazy - Open package manager installation
 - Open command pallete?
+K (in help man page) - Go to info about function while in :help pages
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
 ## learn about LspAttach
 
 ## commands
 :Mason - open mason
+:Lspinfo - Lsp info for current project
+:LspLog - Lsp logs
+:LspStop /Start/Install - Other Lsp commands
 
 ## goto mappings
 gr - Go to reference / Open lsp references
@@ -387,7 +403,7 @@ Space + w a - Workspace Add Folder
 Space + w r - Workspace Remove Folder
 
 ## lsp suggestion mappings
-K - hover documentation
+K - hover documentation , K again to go inside the hover
 ctrl + k - signature documentation
 
 # tree-sitter
@@ -427,8 +443,9 @@ v ib - visual selection inside brackets excluding brackets
 Esc + Esc - exit telescope
 
 ## telescope finder
-## Just hit SPACE to show some suggestions on what to do
-## Just hit Space + ' to simliarly view other options
+### TODO: Shorten file paths especially in java for telescope finder
+### Just hit SPACE to show some suggestions on what to do
+### Just hit Space + ' to simliarly view other options
 Space + s + f - telescope file search
 Space + s + g - telescope in file grep
 Space + Space - Open list of active buffers
