@@ -292,6 +292,9 @@ ZQ (:q!) - while in normal mode. Exit without saving
 :tags - view all tags
 :e - update file to latest version when updated from elsewhere
 
+# advanced vim motions
+=ap - align (re-indent) entire paragraph
+<visual select> = - align selection
 
 # macros
 q <register: a-z> {do stuff} q - record macro
