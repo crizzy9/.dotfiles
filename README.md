@@ -21,6 +21,19 @@ Author: @crizzy9
   - ~~ctags~~
 - Custom Keybidings
 
+## Pending Tasks
+List of pending todos and errors to fix
+
+### Consolidated TODO
+- [ ] Statusline symbols for filetype
+- [ ] Add easy todo creating plugin nvim
+- [ ] Add x icon for mouse close on tabs nvim
+
+### Errors to Debug
+- [ ] NvimTree txt file when created not shown in tree
+- [ ] Fix neovim reset window arrangement when new split is added
+- [ ] Update neovim to open second child split not in current position but other
+
 ## Installation
 
 The installation is done via the installation script `install`
@@ -57,9 +70,6 @@ chmod +x ./install
 # start installer
 ./install
 ```
-
-### Consolidated TODO
-- [ ] Update
 
 ### Supported Plugins
 
@@ -214,9 +224,11 @@ nvim
 
 ###### configuration
 
-LSP and mason config
-> TODO: not working with libraries in python such as boto3.. no suggestion.. Working now using pyright lsp
+LSPs and mason config
 > TODO: Java language server also not working - https://github.com/georgewfraser/java-language-server/issues/273
+
+LSPs/Linters to use
+1. Python - Pyright
 
 ```
 To add more plugins in init.lua packer config
@@ -260,13 +272,17 @@ Tab           - Accept first suggestion from auto complete
 - cd to a folder with fzf
 
 # aliases
-exa - better ls - rename to ls
+lss - exa ls - better ls
+lsa - exa la - better ls
 
 # working with foreground and background tasks
 Ctrl + z - puts any current task in background
 bg - list background tasks
 fg %<num> - bring task to foreground
 - using /dev/null 2>&1
+
+# useful plugins/commands
+w - shows list of all active terminals
 ```
 
 ### nvim shortcuts
@@ -334,13 +350,15 @@ q <register: a-z> {do stuff} q - record macro
 - Check existing registers
 
 # marks (used as bookmarks) - use harpoon?
+## regular marks are lower case, Upper case marks are global marks
 g' or (:marks) - view all marks
-g' <mark> - to go back to a specific mark
-g' " - go back to last exited current buffer
-g' [ - start of last yank or text edit
-g' . - last change in current buffer
-g' ' - go back to where you jumped from
-- Set a new mark
+' <mark> - to go back to a specific mark
+' " - go back to where you last exited current buffer
+' [ - start of last yank or text edit
+' . - last change in current buffer
+' ' - go back to where you jumped from
+m <mark:a-z> - Set a new mark
+:delmar! - delete all lettered marks
 
 # which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings
@@ -352,6 +370,7 @@ Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
 Ctrl + w + x - Switch splits
 Ctrl + w + w - Cycle through window panes
+- Maximize current window?
 gt - Next tab
 gT - Previous tab
 <num> gt - numbered tab
@@ -377,6 +396,7 @@ Ctrl + r - Rename a file in nvimtree (does not updated references with lsp) (TOD
 d - remove selected file (confirm with y)
 Ctrl + k - View file size and other info
 g? - To view shortcuts while in nvim tree
+m - create a bookmark
 
 # neovim terminal emulator
 ## more info - (https://neovim.io/doc/user/nvim_terminal_emulator.html)
@@ -387,7 +407,7 @@ g? - To view shortcuts while in nvim tree
 - open terminal in horizontal/vertical split
 Ctrl + \ + Ctrl + n - Go to normal mode from terminal mode
 Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to terminal mode
-Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator
+Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator - only from normal mode
 
 # buffers
 ## %a - currently opened buffer, a - preview buffer closed when closed, #h - last opened buffer/file , h - file closed but buffer open
@@ -422,6 +442,7 @@ K (in help man page) - Go to info about function while in :help pages
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
 ## learn about LspAttach
+## most of these only where when there is an lsp associated
 
 ## commands
 :Mason - open mason
@@ -510,6 +531,7 @@ Space + / - To search within current file
 Space + s + / - To search within all open files
 Space + ? - Search recently opened files
 Space + s + r - Resume last search
+Space + s + h - Search help (same as :Telescope help_tags)
 
 ## telescope file browser
 - Open file explorer - use nvim tree

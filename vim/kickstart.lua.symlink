@@ -45,13 +45,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 
--- ********************** CUSTOM *************************
--- Turn off netrw to work with nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.wo.relativenumber = true
--- *******************************************************
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -289,7 +282,23 @@ require('lazy').setup({
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup {}
+      require("nvim-tree").setup {
+        -- TODO: doesnt work from on_attach
+        -- on_attach = function(bufnr)
+        --   local api = require "nvim-tree.api"
+        --
+        --   local function opts(desc)
+        --     return { desc = "nvim tree: " ..desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        --   end
+        --
+        --   -- default mappings
+        --   api.config.mappings.default_on_attach(bufnr)
+        --
+        --   -- custom mappings
+        --   vim.keymap.set('n', '<leader>tn', api.tree.toggle, opts('Toggle Directory Tree'))
+        --
+        -- end
+      }
     end,
   },
 
@@ -342,6 +351,14 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
+-- ********************** CUSTOM *************************
+-- Turn off netrw to work with nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.wo.relativenumber = true
+-- *******************************************************
+
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -387,10 +404,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
--- vim.keymap.set('n', '<leader>q', "<cmd>:Telescope diagnostics<CR>", { desc = 'Open diagnostics list' })
--- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
-vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -482,6 +495,20 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+
+-- ********************** CUSTOM *************************
+
+-- telescope keymaps
+-- 4 ways of doing the same thing
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', "<cmd>:Telescope diagnostics<CR>", { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
+
+-- nvim tree keymaps
+vim.keymap.set('n', '<leader>tn', require('nvim-tree.api').tree.toggle, { desc = '[T]oggle [N]vim-tree' })
+
+-- *******************************************************
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
