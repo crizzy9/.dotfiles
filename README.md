@@ -422,6 +422,7 @@ Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (R
 ## show tab in a different way with x? (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 
 # lua basics
+## run lua script such as test.lua with `luajit test.lua`
 print("print something") - execute and print something in lua script
 :messages - to view the output of the print statements in neovim
 :lua vim.lsp.buf.formatting() - to call a lua function from status line
@@ -506,6 +507,7 @@ ds] - delete surround [abc]
 cs'" - change surround from 'item' -> "item"
 csth1<CR> - change html tag <b>text</b> -> <h1>text</h1>
 dsf - delete function call func(abc) -> abc
+ds[ - delete surrounding brackets [abc] -> abc
 
 ## move to keymapings. might work to extend visual selection
 ]m - move to next function
@@ -525,10 +527,10 @@ Esc + Esc - exit telescope
 ### Just hit SPACE to show some suggestions on what to do
 ### Just hit Space + ' to simliarly view other options
 Space + s + f - telescope file search
-Space + s + g - telescope in file grep
+Space + s + g - telescope fuzzy search workspace
+Space + s + / - telescope fuzzy search within all open files
+Space + / - telescope fuzzy search within current file
 Space + Space - Open list of active buffers
-Space + / - To search within current file
-Space + s + / - To search within all open files
 Space + ? - Search recently opened files
 Space + s + r - Resume last search
 Space + s + h - Search help (same as :Telescope help_tags)
