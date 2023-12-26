@@ -28,6 +28,8 @@ List of pending todos and errors to fix
 - [ ] Statusline symbols for filetype
 - [ ] Add easy todo creating plugin nvim
 - [ ] Add x icon for mouse close on tabs nvim
+- [ ] Generalized filetype matching for symlink files with priority
+- [ ] Create custom plugin/mapping directory and files for ease of management
 
 ### Errors to Debug
 - [ ] NvimTree txt file when created not shown in tree
@@ -222,6 +224,11 @@ nvim
 # TODO
 ```
 
+###### Github Copilot setup
+Install copilot using preferred package manager in nvim `github/copilot.vim`
+save and run `:Copilot setup` it should allow you to connect with your github account now. Might not work with noice.nvim
+Run `:Copilot status` to check for Tab availability. If not available remap to something else like Ctrl + e. It will then use tab when available and use Ctrl+e otherwise. To debug use these issues: [i1](https://github.com/NvChad/NvChad/issues/2020#issuecomment-1691652333), [i2](https://github.com/orgs/community/discussions/64834)
+
 ###### configuration
 
 LSPs and mason config
@@ -293,6 +300,7 @@ leader key is mapped to `Space`
 # vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
 u - undo
 Ctrl + r - redo
+s - replace character with a string. abc -> 1234bc
 Ctrl + o - move backwards through the jump list
 Ctrl + i - move forward to the next jump in the jumplist
 Ctrl + t - move forward to next item in tag list (Works like a stack so only pops)
@@ -365,12 +373,17 @@ Ctrl + w - Opens menu for other keybindings
 g - Open all g related shortcuts
 g? - To open keymaps within certain things like nvim tree and mason
 
-# Quick Movement keybindings
+# Quick Window Pane and Tab movement
 Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
 Ctrl + w + x - Switch splits
+Ctrl + w + L - Convert from horizontal split to vertical
+Ctrl + w + T - Convert chosen split into a Tab
+Ctrl + w + o - Open only current window and minimize the rest
+Ctrl + w + | - Maximize the current window vertically
+Ctrl + w + _ - Maximize the current window horizontally
+Ctrl + w + = - Eqaulize all windows back to normal
 Ctrl + w + w - Cycle through window panes
-- Maximize current window?
 gt - Next tab
 gT - Previous tab
 <num> gt - numbered tab
@@ -380,6 +393,9 @@ Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current bu
 - Open Git console
 Space + h + s - Stage a hunk (a selection) from the current buffer
 - Jump between hunks in the current file?
+
+# conda environments in vim using swenv and dressing
+:lua require('swenv.nvim').pick_venv()
 
 # nvim-tree (Working with folder structure and opened files)
 ## netrw is turned off - enable if needed - more info in nvim-tree readme
@@ -487,6 +503,7 @@ ctrl + k - signature documentation
 ## basic keymaps
 Ctrl + Space - incremental highlight syntactic region. word-line-block-function-class
 Ctrl + Backspace - decrement highlight syntactic region. word-line-block-function-class
+Space + c n - Split / Condense code block using ts-node-action and treesitter
 
 ## visual selection bindings - start with v
 v aa - visual select to around param - including spaces, commas and such

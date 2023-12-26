@@ -201,14 +201,15 @@ require('lazy').setup({
 
   {
     -- Set lualine as statusline
+    -- MODIFIED
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        -- icons_enabled = false,
         theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
+        -- component_separators = '|',
+        -- section_separators = '',
       },
     },
   },
@@ -312,6 +313,107 @@ require('lazy').setup({
           -- Configuration here, or leave empty to use defaults
       })
     end
+  },
+
+  -- github copilot
+  {
+    "github/copilot.vim",
+    lazy = false,
+    config = function()
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      -- below messes up tab indentation
+      -- vim.g.copilot_tab_fallback = ""
+
+      vim.keymap.set('i', '<C-e>', [[copilot#Accept("\<CR>")]], {
+        silent = true,
+        expr = true,
+        script = true,
+        replace_keycodes = false,
+      })
+    end
+  },
+
+  -- swenv - show python virtual environment in lualine
+  {
+    "AckslD/swenv.nvim",
+    lazy = false,
+    config = function()
+      require("swenv").setup({
+        require("lualine").setup({
+          sections = {
+            lualine_b = {
+              {
+                "swenv",
+                icon='',
+                on_click=require("swenv.api").pick_venv,
+                cond = function()
+                    return vim.bo.filetype == "python"
+                end,
+              },
+              "branch",
+              "diff",
+              "diagnostics"
+            },
+          },
+        }),
+        -- TODO: fix this... not working fix
+        post_set_venv = function(venv)
+          print("venv set to " .. venv)
+          vim.cmd('LspRestart')
+        end,
+      })
+    end
+  },
+
+  -- dressing for vim.ui selections
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+
+  -- noice - better looking command line in neovim
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+    config = function ()
+      require('noice').setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      })
+    end
+  },
+
+  -- split/condense code blocks using tree sitter
+  {
+    'ckolkey/ts-node-action',
+    dependencies = { 'nvim-treesitter' },
+    opts = {},
   },
 
   -- startup - for fancy screen as dashboard
@@ -520,6 +622,30 @@ vim.filetype.add({
   }
 })
 
+-- code actions for splitting and condensing code blocks
+vim.keymap.set( "n", "<leader>cn", require("ts-node-action").node_action, { desc = "Trigger Node Action" })
+
+-- display conda environment in lualine
+-- inspired from AckslD/swenv.nvim
+-- local env_line = require('lualine.component'):extend()
+-- local d_opts = {
+--   icon = '',
+--   color = { fg = '#FFD43B' },
+-- }
+
+-- function env_line:init(options)
+--   options = vim.tbl_deep_extend('keep', options or {}, d_opts)
+--   env_line.super.init(self, options)
+-- end
+
+-- function env_line:update_status()
+--   local env = vim.env.CONDA_DEFAULT_ENV
+--   if env == nil then
+--     env = ''
+--   end
+--   return env
+-- end
+
 -- *******************************************************
 
 -- [[ Configure Treesitter ]]
@@ -681,6 +807,9 @@ local servers = {
       telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
+      diagnostics = {
+        globals = { 'vim' },
+      },
     },
   },
 }
