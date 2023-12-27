@@ -30,9 +30,9 @@ List of pending todos and errors to fix
 - [ ] Add x icon for mouse close on tabs nvim
 - [ ] Generalized filetype matching for symlink files with priority
 - [ ] Create custom plugin/mapping directory and files for ease of management
+- [ ] Optimize startup time
 
 ### Errors to Debug
-- [ ] NvimTree txt file when created not shown in tree
 - [ ] Fix neovim reset window arrangement when new split is added
 - [ ] Update neovim to open second child split not in current position but other
 
@@ -254,6 +254,14 @@ setup functions for plugins within kickstart
 ## check for help of specific plugin with :help plugn ... instructions in init.lua
 ```
 
+Measure startup times using
+```sh
+nvim --startuptime startup.log -c exit && tail -100 startup.log
+hyperfine "nvim --headless +qa"
+hyperfine "nvim --clean --headless +qa"
+code --prof-startup
+```
+
 ## Custom Keybindings
 
 Custom keybindings for zsh, nvim and ranger
@@ -295,6 +303,7 @@ w - shows list of all active terminals
 ### nvim shortcuts
 
 leader key is mapped to `Space`
+View what is mapped to what key with `:verbose imap <Tab>`
 
 ```text
 # vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
