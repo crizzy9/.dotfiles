@@ -25,14 +25,21 @@ Author: @crizzy9
 List of pending todos and errors to fix
 
 ### Consolidated TODO
-- [ ] Statusline symbols for filetype
-- [ ] Add easy todo creating plugin nvim
+- [ ] Add dashboard for nvim with custom image
+- [x] Update venv pick shortcut to work only when in python files
+- [ ] Add history based ripgrep/fzf search
 - [ ] Add x icon for mouse close on tabs nvim
-- [ ] Generalized filetype matching for symlink files with priority
+- [ ] Integrated terminal emulator with shortcuts and opening of existing buffer
+- [ ] Java and React Lsp setup
+- [ ] Tests and debugging setup
+- [ ] nvim tree common tree between tabs edgy.nvim?
 - [ ] Create custom plugin/mapping directory and files for ease of management
 - [ ] Optimize startup time
+- [ ] Add easy todo creating plugin nvim
+- [ ] Update generalized filetype matching for symlink files with priority
 
 ### Errors to Debug
+- [x] Fix LspRestart after pick venv swenv
 - [ ] Fix neovim reset window arrangement when new split is added
 - [ ] Update neovim to open second child split not in current position but other
 
@@ -280,6 +287,8 @@ Ctrl + Shift + f - search in terminal backlog
 
 ```text
 # keybindings
+Ctrl + a      - move cursor to beginning
+Ctrl + e      - move cursor to end
 Ctrl + f      - fzf open nvim in directory
 Ctrl + Space  - Accept suggestion from auto suggest
 Tab           - Accept first suggestion from auto complete
@@ -302,7 +311,8 @@ w - shows list of all active terminals
 
 ### nvim shortcuts
 
-leader key is mapped to `Space`
+Leader key is mapped to `Space`
+Meta key mapped to Left `Alt` in iterm2->profiles->keys->general->left option key map to Esc+
 View what is mapped to what key with `:verbose imap <Tab>`
 
 ```text
@@ -511,7 +521,8 @@ ctrl + k - signature documentation
 
 ## basic keymaps
 Ctrl + Space - incremental highlight syntactic region. word-line-block-function-class
-Ctrl + Backspace - decrement highlight syntactic region. word-line-block-function-class
+Alt(Left Alt/Meta, mapped in iterm) + Space - decrement highlight syntactic region. word-line-block-function-class
+Ctrl + s - increment highlight on scoped regions
 Space + c n - Split / Condense code block using ts-node-action and treesitter
 
 ## visual selection bindings - start with v

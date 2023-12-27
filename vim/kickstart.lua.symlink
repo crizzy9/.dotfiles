@@ -340,28 +340,27 @@ require('lazy').setup({
     lazy = false,
     config = function()
       require("swenv").setup({
-        require("lualine").setup({
-          sections = {
-            lualine_b = {
-              {
-                "swenv",
-                icon='',
-                on_click=require("swenv.api").pick_venv,
-                cond = function()
-                    return vim.bo.filetype == "python"
-                end,
-              },
-              "branch",
-              "diff",
-              "diagnostics"
-            },
-          },
-        }),
-        -- TODO: fix this... not working fix
         post_set_venv = function(venv)
-          print("venv set to " .. venv)
+          print("Virtual environment set to: " .. venv.name)
           vim.cmd('LspRestart')
         end,
+      })
+      require("lualine").setup({
+        sections = {
+          lualine_b = {
+            {
+              "swenv",
+              icon='',
+              on_click=require("swenv.api").pick_venv,
+              cond = function()
+                return vim.bo.filetype == "python"
+              end,
+            },
+            "branch",
+            "diff",
+            "diagnostics"
+          },
+        },
       })
     end
   },
@@ -373,6 +372,7 @@ require('lazy').setup({
   },
 
   -- noice - better looking command line in neovim
+  -- https://github.com/folke/noice.nvim
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -382,6 +382,7 @@ require('lazy').setup({
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
+      -- "hrsh7th/cmp-cmdline",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
@@ -405,6 +406,9 @@ require('lazy').setup({
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = false, -- add a border to hover docs and signature help
         },
+        -- popupmenu = {
+        --   backend = "cmp" -- use cmp to show suggestions in popupmenu
+        -- }
       })
     end
   },
@@ -607,7 +611,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
--- nvim tree keymaps
+-- nvim tree keymaps, TODO: update to use common nvim-tree
 vim.keymap.set('n', '<leader>tn', require('nvim-tree.api').tree.toggle, { desc = '[T]oggle [N]vim-tree' })
 
 -- set filetype for symlink files
@@ -623,28 +627,20 @@ vim.filetype.add({
 })
 
 -- code actions for splitting and condensing code blocks
-vim.keymap.set( "n", "<leader>cn", require("ts-node-action").node_action, { desc = "Trigger Node Action" })
+vim.keymap.set('n', '<leader>cn', require('ts-node-action').node_action, { desc = '[T]rigger [N]ode Action' })
 
--- display conda environment in lualine
--- inspired from AckslD/swenv.nvim
--- local env_line = require('lualine.component'):extend()
--- local d_opts = {
---   icon = '',
---   color = { fg = '#FFD43B' },
--- }
+-- swenv choose conda environment
+-- create mapping to choose conda environment with autocmd if filetype is python
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    if vim.bo.filetype == "python" then
+      vim.keymap.set('n', '<leader>ce', require('swenv.api').pick_venv, { desc = 'Choose [C]onda [E]nvironment' })
+    end
+  end,
+  pattern = 'python',
+})
 
--- function env_line:init(options)
---   options = vim.tbl_deep_extend('keep', options or {}, d_opts)
---   env_line.super.init(self, options)
--- end
-
--- function env_line:update_status()
---   local env = vim.env.CONDA_DEFAULT_ENV
---   if env == nil then
---     env = ''
---   end
---   return env
--- end
+-- toggle terminal emulator
 
 -- *******************************************************
 
@@ -893,4 +889,5 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- https://www.reddit.com/r/neovim/comments/chlmfk/highlight_trailing_whitespaces_in_neovim/
 -- listchars=eol:↵,trail:~,tab:>-,nbsp:␣

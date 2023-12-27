@@ -19,6 +19,7 @@ RB_BLUE=$(printf '\033[38;5;021m')
 RB_INDIGO=$(printf '\033[38;5;093m')
 RB_VIOLET=$(printf '\033[38;5;163m')
 
+# font - isometric 3 - https://patorjk.com/software/taag/#p=display&f=Isometric3&t=Mr%20Black
 printf '%s      ___      %s      ___         %s                    %s               %s      ___      %s      ___      %s      ___      %s\n' $RB_RED $RB_ORANGE $RB_YELLOW $RB_GREEN $RB_BLUE $RB_INDIGO $RB_VIOLET $RB_RESET
 printf '%s     /__/\     %s     /  /\        %s          _____     %s               %s     /  /\     %s     /  /\     %s     /__/|     %s\n' $RB_RED $RB_ORANGE $RB_YELLOW $RB_GREEN $RB_BLUE $RB_INDIGO $RB_VIOLET $RB_RESET
 printf '%s    |  |::\    %s    /  /::\       %s         /  /::\    %s               %s    /  /::\    %s    /  /:/     %s    |  |:|     %s\n' $RB_RED $RB_ORANGE $RB_YELLOW $RB_GREEN $RB_BLUE $RB_INDIGO $RB_VIOLET $RB_RESET
@@ -194,7 +195,9 @@ bindkey '^ ' autosuggest-accept
 
 ### nvim keybindings ###
 # TODO: use the most efficient mapping here
-bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
+# below ignoring init.vim file for some reason? !
+# bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
+bindkey -s '^f' 'nvim $(fzf)\n'
 
 ### history keybindings ###
 ### ranger keybindings ###
