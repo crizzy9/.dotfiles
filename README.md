@@ -28,7 +28,7 @@ List of pending todos and errors to fix
 - [ ] Add dashboard for nvim with custom image
 - [x] Update venv pick shortcut to work only when in python files
 - [ ] Add history based ripgrep/fzf search
-- [ ] Add x icon for mouse close on tabs nvim
+- [ ] Add x icon for mouse close on tabs nvim - [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
 - [ ] Integrated terminal emulator with shortcuts and opening of existing buffer
 - [ ] Java and React Lsp setup
 - [ ] Tests and debugging setup
@@ -37,6 +37,7 @@ List of pending todos and errors to fix
 - [ ] Optimize startup time
 - [ ] Add easy todo creating plugin nvim
 - [ ] Update generalized filetype matching for symlink files with priority
+- [ ] Install and configure ranger with [zoxide](https://github.com/ajeetdsouza/zoxide)
 
 ### Errors to Debug
 - [x] Fix LspRestart after pick venv swenv

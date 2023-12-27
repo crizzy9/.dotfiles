@@ -12,7 +12,7 @@ tap 'homebrew/services' || true
 
 # tap 'universal-ctags/universal/ctags' || true
 tap 'zegervdv/zathura' || true
-tap 'sambadevi/powerlevel9k' || true
+# tap 'sambadevi/powerlevel9k' || true
 
 # Update Home Brew
 # update || true
@@ -20,17 +20,27 @@ tap 'sambadevi/powerlevel9k' || true
 # Basic Utility brew packages
 brew 'neovim'
 brew 'nmap'
-brew 'nvm'
+# brew 'nvm'
 brew 'wget'
 brew 'ranger'
-brew 'openssl'
+# brew 'openssl'
 brew 'cmake'
-brew 'mplayer'
+# brew 'mplayer'
 brew 'tmux'
 brew 'ripgrep'
+brew 'fd'
 brew 'fzf'
-brew 'htop'
-brew 'mosh'
+# brew 'htop'
+# brew 'mosh'
+brew 'bat'
+brew 'btop'
+brew 'tree'
+# brew 'tldr'
+brew 'exa'
+brew 'hyperline'
+# brew 'pyenv'
+brew 'entr'
+brew 'zoxide'
 
 # To install useful key bindings and fuzzy completion:
 # $(brew --prefix)/opt/fzf/install
@@ -47,11 +57,11 @@ brew 'node'
 # https://medium.com/ayuth/install-anaconda-on-macos-with-homebrew-c94437d63a37
 
 # CTAGS
-brew 'ctags'
+# brew 'ctags'
 
 # zsh related plugins
 # brew 'zsh'
-brew 'zsh-completions'
+# brew 'zsh-completions'
 
 # zathura
 brew 'poppler'
@@ -60,13 +70,13 @@ brew 'zathura-pdf-poppler'
 brew 'zathura'
 
 # Install powerlevel9k for zsh
-brew 'powerlevel9k'
+# brew 'powerlevel9k'
 
 # brew cask install java ==  cask 'java' in Brew File
 
 # Casks
 # Casks for other gui based apps (Firefox, iterm2, spotify, virtualbox, slack, dropbox)
-cask 'font-hack-nerd-font'
+# cask 'font-hack-nerd-font'
 # cask 'iterm2' # only if not installed already
 
 # Health Check
