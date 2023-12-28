@@ -130,6 +130,11 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# TODO: set npm registry for both company and individual
+# npm config set registry https://registry.npmjs.intuit.com/
+# npm config set registry https://registry.npmjs.com/
+#
+
 # only include if installed with brew or apt
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
