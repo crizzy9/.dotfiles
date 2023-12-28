@@ -26,21 +26,14 @@ List of pending todos and errors to fix
 
 ### Consolidated TODO
 - [ ] Add dashboard for nvim with custom image
-- [x] Update venv pick shortcut to work only when in python files
-- [ ] Add history based ripgrep/fzf search
 - [ ] Add x icon for mouse close on tabs nvim - [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
+- [ ] Fix Telescope file preview syntax highlighting is not present
 - [ ] Integrated terminal emulator with shortcuts and opening of existing buffer
-- [ ] Java and React Lsp setup
-- [ ] Tests and debugging setup
-- [ ] nvim tree common tree between tabs edgy.nvim?
-- [ ] Create custom plugin/mapping directory and files for ease of management
-- [ ] Optimize startup time
 - [ ] Add easy todo creating plugin nvim
 - [ ] Update generalized filetype matching for symlink files with priority
 - [ ] Install and configure ranger with [zoxide](https://github.com/ajeetdsouza/zoxide)
 
 ### Errors to Debug
-- [x] Fix LspRestart after pick venv swenv
 - [ ] Fix neovim reset window arrangement when new split is added
 - [ ] Update neovim to open second child split not in current position but other
 
@@ -290,10 +283,12 @@ Ctrl + Shift + f - search in terminal backlog
 # keybindings
 Ctrl + a      - move cursor to beginning
 Ctrl + e      - move cursor to end
-Ctrl + f      - fzf open nvim in directory
 Ctrl + Space  - Accept suggestion from auto suggest
 Tab           - Accept first suggestion from auto complete
-- Search history with fzf
+
+# fzf based search and execute
+Ctrl + f      - fzf open nvim in directory
+Ctrl + r      - Search history with fzf
 - cd to a folder with fzf
 
 # aliases
@@ -333,7 +328,8 @@ fn + Backspace - Delete forward during normal/insert mode
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
 
-:Lsp + Tab - Use Tab to autocomplete in status line
+## noice - command line
+:Lsp + Tab - Use Tab to autocomplete in command line
 :jumps - view all jumps
 :tags - view all tags
 :e - update file to latest version when updated from elsewhere
