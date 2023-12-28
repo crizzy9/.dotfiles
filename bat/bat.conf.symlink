@@ -1,0 +1,22 @@
+# Set the theme to "TwoDark"
+# --theme="TwoDark"
+#
+ --color=always
+
+# Show line numbers, Git modifications and file header with a grid
+--style="numbers,changes,header,grid"
+
+# allow mouse scrolling
+--pager="less -RF --mouse"
+
+# not taking line range from conf file
+# something to do with {} - what is the siginificance of {}
+# --line-range=:200 {}
+
+# Use italic text on the terminal (not supported on all terminals)
+# --italic-text=always
+
+# set syntax for symlink files
+--map-syntax="*.lua.symlink:Lua"
+--map-syntax="*.conf.symlink:INI"
+--map-syntax "*rc.symlink:Bourne Again Shell (bash)"

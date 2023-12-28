@@ -172,11 +172,27 @@ else
 fi
 
 ## custom exports
-# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
+
+# The 2> /dev/null part redirects the standard error output of the command to /dev/null, which discards it
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+# export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border --preview "bat --color=always --style=header,grid --line-range :600 {}"'
+
+# bat config taken from bat.conf
+## FZF default config
+export FZF_DEFAULT_OPTS='--height 80% --layout=reverse --border --margin=1 --padding=1 --preview-window "right:50%" --preview "bat --line-range :500 {}"'
+# use fd for file search
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}/*"'
+# use rg for content search
+
+## Ctrl+R commands
+export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)+abort'"
+#
+## Ctrl+T commands
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_ALT_C_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
 ## custom aliases
 # alias rg='rg --hidden --follow --glob "!.git/*"'

@@ -186,6 +186,12 @@ link_file()  {
 }
 
 # apply symlink based on old/new configuration
+#
+# syntax: apply_symlink <src_dir> <src_symlink_file> <exclude> <dest_suffix> <dest_file>
+# src_file is without extension - default is .symlink
+# dest_suffix already includes HOME path
+# dest_file is with extension, if empty - it will be the same as src_symlink_file
+#
 # TODO: add a file with all symlinks as datastore
 # TODO: make it a bit more smart to gracefully apply symlinks for harder cases
 # TODO: update to work globally with just skip, backup, overwrite options

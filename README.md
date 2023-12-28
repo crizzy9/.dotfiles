@@ -9,13 +9,15 @@ Author: @crizzy9
 - Supported Plugins
   - nvim/vim
   - zsh
-  - git
+  - ripgrep/fd/fzf
+  - bat
+  - ranger
   - homebrew/apt
 - TODO:
-  - iterm/termintor/tmux
+  - git
+  - iterm/termintor/tmux/wezterm
+  - yabai
   - btop
-  - ripgrep/fzf
-  - ranger
   - zathura
   - entr/cron
   - ~~ctags~~
@@ -80,7 +82,8 @@ Below is a list of all the plugins supported by this repository, more to come...
 
 #### Git
 
-TODO
+Plugin setup. TODO setup [2 gitconfigs](https://blog.hao.dev/how-to-use-different-git-emails-for-personal-and-work-repositories-on-the-same-machine) one for work and another for personal
+
 
 #### ZSH
 
@@ -96,6 +99,18 @@ After installation is done
 iTerm > Preferences > Profile > Text > Font > Hack Nerd Font
 
 TODO: fix hanging on up arrow key in macos
+
+#### Bat
+Enhanced cat to view files at a glance. Useful with fzf and ranger
+
+```sh
+bat --diagnostic
+bat --list-languages
+bat --list-themes
+```
+
+#### Ranger
+TODO
 
 #### Neovim
 
@@ -233,7 +248,7 @@ Run `:Copilot status` to check for Tab availability. If not available remap to s
 ###### configuration
 
 LSPs and mason config
-> TODO: Java language server also not working - https://github.com/georgewfraser/java-language-server/issues/273
+> TODO: Java language server also not working - https://github.com/georgewfraser/java-language-server/issues/273 - because of company level nexus artifactory
 
 LSPs/Linters to use
 1. Python - Pyright
@@ -279,10 +294,14 @@ Ctrl + Shift + f - search in terminal backlog
 
 ### zsh shortcuts
 
+> Some useful [shortcuts](https://gist.github.com/acamino/2bc8df5e2ed0f99ddbe7a6fddb7773a6)
 ```text
 # keybindings
-Ctrl + a      - move cursor to beginning
-Ctrl + e      - move cursor to end
+Ctrl + a      - Move cursor to beginning of line
+Ctrl + e      - Move cursor to end of line
+Alt + b       - Move back one word
+Alt + f       - Move forward one word
+Ctrl + w      - Delete previous word
 Ctrl + Space  - Accept suggestion from auto suggest
 Tab           - Accept first suggestion from auto complete
 
@@ -296,8 +315,10 @@ lss - exa ls - better ls
 lsa - exa la - better ls
 
 # working with foreground and background tasks
+ps aux | fzf (ps -e | fzf) - fzf search current tasks
+jobs - list all current background tasks
 Ctrl + z - puts any current task in background
-bg - list background tasks
+bg - run a task as a background process (alias jupyter-bg='jupyter notebook > /dev/null 2>&1 &', alias jupyter-lab-bg='jupyter-lab > /dev/null 2>&1 &')
 fg %<num> - bring task to foreground
 - using /dev/null 2>&1
 
@@ -383,6 +404,9 @@ g' or (:marks) - view all marks
 ' ' - go back to where you jumped from
 m <mark:a-z> - Set a new mark
 :delmar! - delete all lettered marks
+
+# folds
+zf - view folding options via which-key
 
 # which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings
