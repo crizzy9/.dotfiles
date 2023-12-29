@@ -11,11 +11,11 @@ Author: @crizzy9
   - zsh
   - ripgrep/fd/fzf
   - bat
-  - ranger
   - homebrew/apt
 - TODO:
   - git
-  - iterm/termintor/tmux/wezterm
+  - ranger/broot/zoxide
+  - iterm/termintor/tmux/kitty/wezterm
   - yabai
   - btop
   - zathura
@@ -107,6 +107,8 @@ Enhanced cat to view files at a glance. Useful with fzf and ranger
 bat --diagnostic
 bat --list-languages
 bat --list-themes
+
+bat --list-languages | fzf --ansi --no-preview
 ```
 
 #### Ranger
@@ -295,20 +297,28 @@ Ctrl + Shift + f - search in terminal backlog
 ### zsh shortcuts
 
 > Some useful [shortcuts](https://gist.github.com/acamino/2bc8df5e2ed0f99ddbe7a6fddb7773a6)
-```text
-# keybindings
-Ctrl + a      - Move cursor to beginning of line
-Ctrl + e      - Move cursor to end of line
-Alt + b       - Move back one word
-Alt + f       - Move forward one word
-Ctrl + w      - Delete previous word
-Ctrl + Space  - Accept suggestion from auto suggest
-Tab           - Accept first suggestion from auto complete
+> TODO: write macro to convert keymaps into tables
 
-# fzf based search and execute
+##### basic keybindings
+| Keymap            | Action                                                                    |
+|:------------------|:--------------------------------------------------------------------------|
+| `Ctrl + a`        | `Move cursor to beginning of line`                                        |
+| `Ctrl + e`        | `Move cursor to end of line`                                              |
+| `Alt + b`         | `Move back one word`                                                      |
+| `Alt + f`         | `Move forward one word`                                                   |
+| `Ctrl + w`        | `Delete previous word`                                                    |
+| `Ctrl + Space`    | `Accept suggestion from auto suggest`                                     |
+| `Tab`             | `Accept first suggestion from auto complete`                              |
+
+```text
+
+# fzf based search and execute - need to source keybindings for fzf in zshrc
 Ctrl + f      - fzf open nvim in directory
+Ctrl + t      - search and show file with fzf in directory
 Ctrl + r      - Search history with fzf
-- cd to a folder with fzf
+Alt + c       - cd to a folder with fzf
+Ctrl + p/n    - cycle through results
+Ctrl + (g|c)  - cancel fzf search
 
 # aliases
 lss - exa ls - better ls
@@ -566,6 +576,7 @@ cs'" - change surround from 'item' -> "item"
 csth1<CR> - change html tag <b>text</b> -> <h1>text</h1>
 dsf - delete function call func(abc) -> abc
 ds[ - delete surrounding brackets [abc] -> abc
+S" - surround a pre visual selection with given character
 
 ## move to keymapings. might work to extend visual selection
 ]m - move to next function

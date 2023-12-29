@@ -172,6 +172,7 @@ else
 fi
 
 ## custom exports
+# =============================================================================
 export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 
 # The 2> /dev/null part redirects the standard error output of the command to /dev/null, which discards it
@@ -180,52 +181,95 @@ export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 
 # bat config taken from bat.conf
 ## FZF default config
-export FZF_DEFAULT_OPTS='--height 80% --layout=reverse --border --margin=1 --padding=1 --preview-window "right:50%" --preview "bat --line-range :500 {}"'
+# export FZF_DEFAULT_OPTS='--height 80% --layout=reverse --border --margin=1 --padding=1 --preview-window "right:50%" --preview "bat --line-range :500 {}"'
 # use fd for file search
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}/*"'
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}/*"'
 # use rg for content search
 
+## TO ENABLE FZF KEYBINDINGS
+# source /usr/share/doc/fzf/examples/key-bindings.zsh
+# on M1 Mac - /opt/homebrew/Cellar/fzf/0.36.0/shell/key-bindings.zsh
+# https://github.com/junegunn/fzf/issues/1866
+# if not found from root / do `fd "key-bindings.zsh"` or `dpkg -L fzf | grep bindings`
+# get location based on installation method
+# for brew get the location using `brew info fzf` - /usr/local/opt/fzf is symlinked to /usr/local/Cellar/fzf/0.44.1
+source /usr/local/Cellar/fzf/0.44.1/shell/key-bindings.zsh
+# source /usr/local/Cellar/fzf/0.44.1/shell/completion.zsh
+
 ## Ctrl+R commands
-export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 # export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)+abort'"
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+    --prompt 'Command> '
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Ctrl+I completion
+
 #
-## Ctrl+T commands
+## Ctrl+T commands - paste selected file path into command line
+# make this directly work with neovim open?
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}/*"'
+export FZF_CTRL_T_OPTS="
+    --height 80%
+    --layout=reverse
+    --border
+    --margin=1
+    --padding=1
+    --prompt='Files> '
+    --preview-window='right:50%'
+    --preview='bat --line-range :500 {}'
+    --bind='ctrl-/:change-preview-window(down|hidden|)'
+    --header='CTRL-/: toggle preview | CTRL-Y: copy file path'"
+
+## Alt+C commands - cd to selected directory
 # export FZF_ALT_C_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_ALT_C_OPTS='--preview "tree -C {}"'
 
 ## custom aliases
+# =============================================================================
 # alias rg='rg --hidden --follow --glob "!.git/*"'
 alias lss='exa'
 alias lsa='exa -la'
 
 ## custom mappings
+# =============================================================================
 
-### ripgrep / fzf keybindings ###
-# bindkey '^P' fzf-history-widget
+### fzf / fd / ripgrep keybindings ###
+#
+# already bound in key-bindings.zsh
 # bindkey '^R' fzf-history-widget
-# bindkey '^T' fzf-cd-widget
-# bindkey '^F' fzf-file-widget
-# bindkey '^G' fzf-file-widget
-# bindkey '^B' fzf-cd-widget
+# bindkey '^T' fzf-file-widget
+# bindkey 'Alt-C' fzf-cd-widget
+#
+# additional bindings
+# search file and open in neovim - uses fzf default command and opts for file search using fd and bat
+# bindkey -s '^f' 'nvim $(fzf)\n'
+#
+# search processes and kill
+#(date; ps -ef) |
+# fzf --bind='ctrl-r:reload(date; ps -ef)' \
+#     --header=$'Press CTRL-R to reload\n\n' --header-lines=2 \
+#     --preview='echo {}' --preview-window=down,3,wrap \
+#     --layout=reverse --height=80% | awk '{print $2}' | xargs kill -9
 
 ### zsh keybindings ###
 bindkey '^[q' push-line-or-edit
 bindkey -r '^Q' '^[Q'
 bindkey '^ ' autosuggest-accept
 
-### fzf/rg/fd keybindings ###
-# TODO: use the most efficient mapping here
-# below ignoring init.vim file for some reason? !
-# bindkey -s '^f' 'nvim $(rg --files | fzf --reverse)\n'
-bindkey -s '^f' 'nvim $(fzf)\n'
-
-### history keybindings ###
 ### ranger keybindings ###
 #
-### zoxide configuration and keybindings ###
-### ranger-zoxide keybindings ###
 
+
+### zoxide configuration and keybindings ###
+### ranger-zoxide ###
 # =============================================================================
 #
 # Utility functions for zoxide.
@@ -330,3 +374,6 @@ fi
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
 # eval "$(zoxide init zsh)"
+
+# source broot config
+# source /Users/spadia/.config/broot/launcher/bash/br

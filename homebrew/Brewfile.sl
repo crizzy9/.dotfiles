@@ -36,12 +36,14 @@ brew 'fzf'
 brew 'bat'
 brew 'btop'
 brew 'tree'
+# brew 'broot'
 # brew 'tldr'
 brew 'exa'
 brew 'hyperline'
 # brew 'pyenv'
 brew 'entr'
 brew 'zoxide'
+# brew 'dpkg'
 
 # To install useful key bindings and fuzzy completion:
 # $(brew --prefix)/opt/fzf/install
