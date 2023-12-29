@@ -296,7 +296,7 @@ Ctrl + Shift + f - search in terminal backlog
 
 ### zsh shortcuts
 
-> Some useful [shortcuts](https://gist.github.com/acamino/2bc8df5e2ed0f99ddbe7a6fddb7773a6)
+> Some useful [shortcuts1](https://gist.github.com/acamino/2bc8df5e2ed0f99ddbe7a6fddb7773a6) [shortcuts2](https://github.com/scanny/dotfiles/blob/master/link/.zsh/bindkeys.zsh)
 > TODO: write macro to convert keymaps into tables
 
 ##### basic keybindings
@@ -313,8 +313,7 @@ Ctrl + Shift + f - search in terminal backlog
 ```text
 
 # fzf based search and execute - need to source keybindings for fzf in zshrc
-Ctrl + f      - fzf open nvim in directory
-Ctrl + t      - search and show file with fzf in directory
+Ctrl + (t|f)  - search files with fzf in current directory (Ctrl + o - open it in nvim)
 Ctrl + r      - Search history with fzf
 Alt + c       - cd to a folder with fzf
 Ctrl + p/n    - cycle through results

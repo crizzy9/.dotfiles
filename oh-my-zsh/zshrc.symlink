@@ -193,7 +193,8 @@ export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
 # if not found from root / do `fd "key-bindings.zsh"` or `dpkg -L fzf | grep bindings`
 # get location based on installation method
 # for brew get the location using `brew info fzf` - /usr/local/opt/fzf is symlinked to /usr/local/Cellar/fzf/0.44.1
-source /usr/local/Cellar/fzf/0.44.1/shell/key-bindings.zsh
+source /usr/local/opt/fzf/shell/key-bindings.zsh
+# source /usr/local/Cellar/fzf/0.44.1/shell/key-bindings.zsh
 # source /usr/local/Cellar/fzf/0.44.1/shell/completion.zsh
 
 ## Ctrl+R commands
@@ -202,12 +203,12 @@ source /usr/local/Cellar/fzf/0.44.1/shell/key-bindings.zsh
 # CTRL-/ to toggle small preview window to see the full command
 # CTRL-Y to copy the command into clipboard using pbcopy
 export FZF_CTRL_R_OPTS="
-    --prompt 'Command> '
-    --preview 'echo {}' --preview-window up:3:hidden:wrap
-    --bind 'ctrl-/:toggle-preview'
-    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-    --color header:italic
-    --header 'Press CTRL-Y to copy command into clipboard'"
+    --prompt='Command> '
+    --preview='echo {}' --preview-window up:3:hidden:wrap
+    --bind='ctrl-/:toggle-preview'
+    --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color=header:italic
+    --header='CTRL-/: toggle preview | CTRL-Y: copy command'"
 
 # Ctrl+I completion
 
@@ -216,6 +217,7 @@ export FZF_CTRL_R_OPTS="
 # make this directly work with neovim open?
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}/*"'
+# remove abort to go back to fzf
 export FZF_CTRL_T_OPTS="
     --height 80%
     --layout=reverse
@@ -226,7 +228,9 @@ export FZF_CTRL_T_OPTS="
     --preview-window='right:50%'
     --preview='bat --line-range :500 {}'
     --bind='ctrl-/:change-preview-window(down|hidden|)'
-    --header='CTRL-/: toggle preview | CTRL-Y: copy file path'"
+    --bind='ctrl-o:execute(nvim {1} > /dev/tty)+abort'
+    --color=header:italic
+    --header='CTRL-/: toggle preview | CTRL-O: open in neovim'"
 
 ## Alt+C commands - cd to selected directory
 # export FZF_ALT_C_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
@@ -251,7 +255,8 @@ alias lsa='exa -la'
 # additional bindings
 # search file and open in neovim - uses fzf default command and opts for file search using fd and bat
 # bindkey -s '^f' 'nvim $(fzf)\n'
-#
+bindkey '^F' fzf-file-widget
+
 # search processes and kill
 #(date; ps -ef) |
 # fzf --bind='ctrl-r:reload(date; ps -ef)' \

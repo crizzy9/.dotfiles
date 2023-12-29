@@ -19,4 +19,4 @@
 # set syntax for symlink files
 --map-syntax="*.lua.symlink:Lua"
 --map-syntax="*.conf.symlink:INI"
---map-syntax "*rc.symlink:Bourne Again Shell (bash)"
+--map-syntax="*rc.symlink:Bourne Again Shell (bash)"
