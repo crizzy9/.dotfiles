@@ -15,7 +15,7 @@ Author: @crizzy9
 - TODO:
   - git
   - ranger/broot/zoxide
-  - iterm/termintor/tmux/kitty/wezterm
+  - iterm/termintor/alacritty/tmux/kitty/wezterm
   - yabai
   - btop
   - zathura
@@ -54,6 +54,7 @@ Perform the following steps as per your operating system then install via the sc
 - Install **xcode** by running `$ xcode-select --install`
 - Install **homebrew**
 - install **unicode fonts**
+- Install Firefox with Tridactyl for vim like browser
 
 ### Linux
 
@@ -280,6 +281,11 @@ hyperfine "nvim --clean --headless +qa"
 code --prof-startup
 ```
 
+### Alacritty
+Install using brew `brew install --cask alacritty --no-quarantine`
+https://github.com/alacritty/alacritty/issues/4673#issuecomment-771291615
+
+
 ## Custom Keybindings
 
 Custom keybindings for zsh, nvim and ranger
@@ -333,6 +339,12 @@ fg %<num> - bring task to foreground
 
 # useful plugins/commands
 w - shows list of all active terminals
+
+# ZLE widgets and keybindings
+bindkey -L - view all existing keybindings
+man zshall - view full man page
+man zshzle -> /reset-prompt - view builtin widgets descriptions
+
 ```
 
 ### nvim shortcuts
@@ -426,7 +438,7 @@ g? - To open keymaps within certain things like nvim tree and mason
 Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
 Ctrl + w + x - Switch splits
-Ctrl + w + L - Convert from horizontal split to vertical
+Ctrl + w + L(K for horizontal) - Convert from horizontal split to vertical
 Ctrl + w + T - Convert chosen split into a Tab
 Ctrl + w + o - Open only current window and minimize the rest
 Ctrl + w + | - Maximize the current window vertically
@@ -439,9 +451,23 @@ gT - Previous tab
 Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
 
 # git
-- Open Git console
+:Git - Open Git Fugitive console
+- / :Gwrite - stage highlighted/current file
+u - unstage highlighted file
+= - view the diff
+:Gvdiff - open diff for current buffer in a vertical split
 Space + h + s - Stage a hunk (a selection) from the current buffer
-- Jump between hunks in the current file?
+`[c` & `]c` - Jump between hunks in the current file?
+:Git blame - git blame
+Space + t b / Space + h b - toggle git blame line
+Space + t d - toggle git blame delete line in current changes
+:Git commit - commit
+:Git commit -m "commit message" - commit with message
+:Git push - push to current branch
+:Git pull - pull current branch from origin
+
+## telescope git
+:Telescope git_commits - view commit histroy
 
 # conda environments in vim using swenv and dressing
 :lua require('swenv.nvim').pick_venv()
@@ -482,6 +508,7 @@ Space + Space - Open list of active buffers (Telescope)
 Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (REMAP)
 :q - keep buffer open
 :bd - delete current buffer
+:sb <buf-num/name> - show buffer in horizontal split - add :vert at the start to do it in vertical split
 
 # changing themes/highlighting etc
 ## show tab in a different way with x? (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
@@ -546,8 +573,13 @@ ctrl + k - signature documentation
 # tree-sitter
 
 ## commands
-`:TSUpdate` - update added languages
-- install new language support?
+`:TSUpdate` - Update added languages
+`:TSInstall markdown` - Install new language support
+`:TSUninstall markdown` - Uninstall new language support
+`:TSInstallInfo` - Show existing installed languages, TODO: make it look like mason or show in Quickfix menu
+`:TSModuleInfo` - Show module info for each filetype
+`:TSBufEnable markdown` - Enable treesitter on current buffer
+`:TSBufDisable markdown` - Disable treesitter on current buffer
 
 ## basic keymaps
 Ctrl + Space - incremental highlight syntactic region. word-line-block-function-class
@@ -555,7 +587,11 @@ Alt(Left Alt/Meta, mapped in iterm) + Space - decrement highlight syntactic regi
 Ctrl + s - increment highlight on scoped regions
 Space + c n - Split / Condense code block using ts-node-action and treesitter
 
+## text objects
+p - paragraph
+
 ## visual selection bindings - start with v
+v a p - visual select arund paragraph
 v aa - visual select to around param - including spaces, commas and such
 v ia - move visual selection to previous param
 v af - move visual selection to next function
