@@ -225,8 +225,13 @@ nvim # should start installing lsp servers now
 TODO
 ```
 
-##### lazy nvim
+##### lazy nvim/astro nvim/nv chad
 
+```sh
+TODO
+```
+
+##### Cyber nvim
 ```sh
 TODO
 ```
@@ -278,6 +283,7 @@ Measure startup times using
 nvim --startuptime startup.log -c exit && tail -100 startup.log
 hyperfine "nvim --headless +qa"
 hyperfine "nvim --clean --headless +qa"
+:Lazy profile - more accurate than --startuptime
 code --prof-startup
 ```
 
@@ -342,9 +348,17 @@ w - shows list of all active terminals
 
 # ZLE widgets and keybindings
 bindkey -L - view all existing keybindings
+zle -la - show all widgets
 man zshall - view full man page
 man zshzle -> /reset-prompt - view builtin widgets descriptions
+manually run widgets
+  autoload -Uz tetris
+  tetris
+  M-x (Alt-x) | : (in vi mode) - write zle function name and trigger it
 
+# bash functions
+Ctrl + s - fwd-i-search search forward and jump cursor
+Ctrl + r (in fwd-i-search mode to go back instead) - bck-i-search search forward and jump cursor
 ```
 
 ### nvim shortcuts
@@ -354,6 +368,11 @@ Meta key mapped to Left `Alt` in iterm2->profiles->keys->general->left option ke
 View what is mapped to what key with `:verbose imap <Tab>`
 
 ```text
+# lazy nvim - plugin manager
+- use lazy = true if you want to load the plugin when called using a keybinding
+- event=VeryLazy / event=InsertEnter to load it at the very end or on certain events
+:Lazy profile - to check startup time
+
 # vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
 u - undo
 Ctrl + r - redo
