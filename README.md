@@ -296,6 +296,14 @@ https://github.com/alacritty/alacritty/issues/4673#issuecomment-771291615
 
 Custom keybindings for zsh, nvim and ranger
 
+### Global shortcuts
+
+> MacOs
+```text
+Ctrl + Down Arrow - Quick change for same application
+Ctrl + Tab - Cycle through native tabs
+```
+
 ### terminator shortcuts
 
 ```text
@@ -669,6 +677,7 @@ Ctrl + t - Open file in new tab
 Ctrl + v - Open in vertical window pane
 Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open any telescope search in quickfix menu
+Ctrl + a - paste last line written in insert mode into telescope search
 
 # others
 # TODO: setup keybinding and save setting for setting filetype and persist value
