@@ -257,6 +257,8 @@ Run `:Copilot status` to check for Tab availability. If not available remap to s
 
 LSPs and mason config
 > TODO: Java language server also not working - https://github.com/georgewfraser/java-language-server/issues/273 - because of company level nexus artifactory
+for LSP configure with node, public npm registry along with private
+for LSP configure with java (java lanuage server), update `~/.m2/settings.xml` and remove private artifactory mirror - also only works with Java 18+
 
 LSPs/Linters to use
 1. Python - Pyright
@@ -302,16 +304,26 @@ Custom keybindings for zsh, nvim and ranger
 ```text
 Ctrl + Down Arrow - Quick change for same application
 Ctrl + Tab - Cycle through native tabs
+Cmd + Shift + O - Open tick tick todo
+Cmd + Shift + . - Show hidden files in finder
 ```
 
 ### terminator shortcuts
 
 ```text
 Ctrl + Shift + e - Vertical pane
-Ctrl + Shift + o - Vertical pane
+Ctrl + Shift + o - Horizontal pane
 Ctrl + Shift + n - cycle through panes
 Ctrl + Shift + x - maximize active pane
 Ctrl + Shift + f - search in terminal backlog
+```
+
+### Wezterm shortcuts
+
+```text
+Ctrl + Alt + Shift + % - Vertical pane
+Ctrl + Alt + Shift + " - Horizontal pane
+- Maximize pane - TODO: show it is maximized
 ```
 
 ### zsh shortcuts
@@ -393,6 +405,10 @@ vT - select back - F for inclusive
 ~ - Convert letter to upper case
 % - move cursor between two sets of brackets
 fn + Backspace - Delete forward during normal/insert mode
+:sp(:split|:hor) <file|command|terminal> - open in horizontal pane
+:vsp(:vsplit|:vert) <file|command|terminal> - open in vertical pane
+:tabnew <file|command|terminal> - open in new tab
+Ctrl+W gf - jump to file under cursor in new tab
 
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
@@ -455,6 +471,9 @@ m <mark:a-z> - Set a new mark
 
 # folds
 zf - view folding options via which-key
+za - toggle folds
+zR - expand all folds
+zM - close all folds
 
 # which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings
@@ -472,9 +491,10 @@ Ctrl + w + | - Maximize the current window vertically
 Ctrl + w + _ - Maximize the current window horizontally
 Ctrl + w + = - Eqaulize all windows back to normal
 Ctrl + w + w - Cycle through window panes
-gt - Next tab
+gt (g<Tab>) - Next tab
 gT - Previous tab
 <num> gt - numbered tab
+:tabmove - reorder tabs
 Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
 
 # git
@@ -522,7 +542,7 @@ m - create a bookmark
 ## TODO: add mapping to open existing terminal vs new terminal
 (:term or :terminal) - open neovim terminal emulator in current buffer
 (:tabnew | term) - open terminal in new tab
-- open terminal in horizontal/vertical split
+:sp term | :vsp term - open terminal in horizontal/vertical split - TODO: add keybinding
 Ctrl + \ + Ctrl + n - Go to normal mode from terminal mode
 Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to terminal mode
 Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator - only from normal mode
@@ -557,7 +577,7 @@ print("print something") - execute and print something in lua script
 U (when in Mason) - Update lsp servers
 g? (when in Mason) - To view additional info on mason
 :Lazy - Open package manager installation
-- Open command pallete?
+- Open command pallete? similar to vscode?
 K (in help man page) - Go to info about function while in :help pages
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
@@ -677,6 +697,7 @@ Ctrl + t - Open file in new tab
 Ctrl + v - Open in vertical window pane
 Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open any telescope search in quickfix menu
+Ctrl + u - erase all search text
 Ctrl + a - paste last line written in insert mode into telescope search
 
 # others
