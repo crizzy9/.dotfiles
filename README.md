@@ -393,7 +393,7 @@ View what is mapped to what key with `:verbose imap <Tab>`
 - event=VeryLazy / event=InsertEnter to load it at the very end or on certain events
 :Lazy profile - to check startup time
 
-# vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
+# basic vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
 u - undo
 Ctrl + r - redo
 s - replace character with a string. abc -> 1234bc
@@ -403,28 +403,25 @@ Ctrl + t - move forward to next item in tag list (Works like a stack so only pop
 vt - select till - f for inclusive
 vT - select back - F for inclusive
 ~ - Convert letter to upper case
-% - move cursor between two sets of brackets
+
 fn + Backspace - Delete forward during normal/insert mode
 :sp(:split|:hor) <file|command|terminal> - open in horizontal pane
 :vsp(:vsplit|:vert) <file|command|terminal> - open in vertical pane
 :tabnew <file|command|terminal> - open in new tab
 Ctrl+W gf - jump to file under cursor in new tab
+- jump to file under cursor in vertical split
 
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
 
-## noice - command line
-:Lsp + Tab - Use Tab to autocomplete in command line
-:jumps - view all jumps
-:tags - view all tags
-:e - update file to latest version when updated from elsewhere
+# vim motions
+$ - end of line with new line char
+g_ - end of line without new line char
+0 - beggining of line
+^ | _ - beggining of line non-blank
+% - move cursor between two sets of brackets
 
-Ctrl + a - increment number
-Ctrl + x - decrement number
-Ctrl + v (Vertical edit: select multiple numbers) + g + Ctrl + a - seralize all numbers(0s)
-Shift + v (Line edit: select multiple lines) + g + Ctrl + a + Ctrl + a - seralize all numbers found in line
-
-# advanced vim motions
+# advanced vim keybindings
 =ap - align (re-indent) entire paragraph
 <visual select> = - align selection
 <visual select> o - move to the other side of visual select
@@ -434,6 +431,10 @@ z - show folding and other movement which-key suggestions
 zz - adjust line under cursor as the middle of file
 zt - adjust line under cursor as the top of file
 zb - adjust line under cursor as the bottom of file
+Ctrl + a - increment number
+Ctrl + x - decrement number
+Ctrl + v (Vertical edit: select multiple numbers) + g + Ctrl + a - seralize all numbers(0s)
+Shift + v (Line edit: select multiple lines) + g + Ctrl + a + Ctrl + a - seralize all numbers found in line
 
 Ctrl + v - multi line cursor select. E.g (Ctrl+v j j j(place cursors) I(go to insert mode) data[0] = " Esc(exit and apply)) -> performs the same thing for all selected lines. To convert a few lines to content `abc` into `data[0]="abc"`
 Shift + v (select multiple lines) :s/<motion:$>/";(your changes) - perform multiline changes via commands
@@ -456,7 +457,8 @@ q <register: a-z> {do stuff} q - record macro
 @<register> - use macro
 @@ - run last ran macro
 . - repeat previous action (does not repeat motion keys)
-- Check existing registers
+- Check existing macros/registers
+:cdo execute "norm! @a" | update - run macro on a quickfix menu after recording for @a (update saves, remove to to keep unsaved)
 
 # marks (used as bookmarks) - use harpoon?
 ## regular marks are lower case, Upper case marks are global marks
@@ -480,6 +482,7 @@ Ctrl + w - Opens menu for other keybindings
 g - Open all g related shortcuts
 g? - To open keymaps within certain things like nvim tree and mason
 
+# :help windows-intro
 # Quick Window Pane and Tab movement
 Ctrl + w + l - Move to right window pane
 Ctrl + w + h - Move to left window pane
@@ -496,6 +499,13 @@ gT - Previous tab
 <num> gt - numbered tab
 :tabmove - reorder tabs
 Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
+
+# noice - command line
+:Lsp + Tab - Use Tab to autocomplete in command line
+:jumps - view all jumps
+:tags - view all tags
+:e - update file to latest version when updated from elsewhere
+- TODO: add routes to customize views based on different event filters
 
 # git
 :Git - Open Git Fugitive console
@@ -526,7 +536,7 @@ Space + t d - toggle git blame delete line in current changes
 ## TODO: open the same nvim tree in different tabs (https://github.com/nvim-tree/nvim-tree.lua/discussions/2244) (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 ## more info on floating preview (https://github.com/nvim-tree/nvim-tree.lua/issues/135) (https://github.com/JMarkin/mynvim/blob/d733abb2ec72654211dafb089f237df9c2745758/lua/plugins/nvimtree.lua#L5) (https://github.com/JMarkin/nvim-tree.lua-float-preview)
 (:NvimTreeToggle) - open file explorer
-(:NvimTreeFindFileToggle) - Search in file explorer - TODO: Not working
+(:NvimTreeFindFileToggle) - Search in file explorer - TODO: Not finding file ?
 Tab - open preview for a file
 - exit preview?
 a <filename> <CR> - create a new file/folder (while in nvimtree)
