@@ -433,6 +433,7 @@ zt - adjust line under cursor as the top of file
 zb - adjust line under cursor as the bottom of file
 Ctrl + a - increment number
 Ctrl + x - decrement number
+Ctrl + r = - opens calculator while in insert mode
 Ctrl + v (Vertical edit: select multiple numbers) + g + Ctrl + a - seralize all numbers(0s)
 Shift + v (Line edit: select multiple lines) + g + Ctrl + a + Ctrl + a - seralize all numbers found in line
 
@@ -452,13 +453,15 @@ Shift + v (select multiple lines) :s/<motion:$>/";(your changes) - perform multi
 <visual selection>:s/\(\w.*\)/data[0] = "\1";
 
 # macros
+## macros and marks are stored as registers, marks to move, macros to repeat action
 " - view all registers in which key
 q <register: a-z> {do stuff} q - record macro
 @<register> - use macro
 @@ - run last ran macro
 . - repeat previous action (does not repeat motion keys)
-- Check existing macros/registers
-:cdo execute "norm! @a" | update - run macro on a quickfix menu after recording for @a (update saves, remove to to keep unsaved)
+" - Check existing macros/registers
+:cdo execute "norm! @a" | update - run macro on a quickfix menu after recording for @a (update saves the file)
+qa <record macro> q -> "ap <paste to buffer and change macro> "ayy <update> - update existing recorded macro with new changes
 
 # marks (used as bookmarks) - use harpoon?
 ## regular marks are lower case, Upper case marks are global marks
@@ -558,16 +561,18 @@ Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to ter
 Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator - only from normal mode
 
 # buffers
-## %a - currently opened buffer, a - preview buffer closed when closed, #h - last opened buffer/file , h - file closed but buffer open
-## + - represents file is unsaved but in buffer
+## :h ls - to view markers for buffers # - hidden and recently edited, %a - buffer open in current window etc
 ## the buffers stay open by default even after :q - use :bd to delete buffer
 Space + Space - Open list of active buffers (Telescope)
 Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (REMAP)
 :q - keep buffer open
 :bd - delete current buffer
 :sb <buf-num/name> - show buffer in horizontal split - add :vert at the start to do it in vertical split
+:bnext / :bprev - move between buffers
+:enew - create new empty buffer
 
 # changing themes/highlighting etc
+# update colorscheme in init.lua and update lualine with said colorscheme
 ## show tab in a different way with x? (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 
 # lua basics
