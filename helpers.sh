@@ -116,11 +116,8 @@ link_file()  {
         info "Attempting to symlink: $1 ---> $2"
         # -f if a file -d if if a directory -L if a symbolic link, -o or
         if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
-            info "file found"
             if  [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
                 local currentSrc="$(readlink $dst)" # reads destination symlink if it exists and checks if symlink already established with source
-                info "this is currSrc = $currentSrc"
-                info "overwrite=$overwrite, backup=$backup, skip=$skip"
                 if [ "$currentSrc" == "$src" ]; then
                     # handle both scenarios linked with a different file and unlinking if linked correctly
                     skip=true;

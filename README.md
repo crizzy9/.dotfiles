@@ -317,13 +317,29 @@ Ctrl + Shift + n - cycle through panes
 Ctrl + Shift + x - maximize active pane
 Ctrl + Shift + f - search in terminal backlog
 ```
+### Kitty shortcuts
+
+```text
+Ctrl + Shift + <F5> - Reload Kitty config
+Ctrl + Shift + <F6> - Open current kitty config
+Cmd + Enter - Open a horizontal pane
+Cmd + Shift + d (Ctrl + Shift + w) - Close a window
+Ctrl + Shift + ] [ - Cycle through panes
+Ctrl + Shift + L - Change Layout
+Cmd + t (Ctrl + Shift + t) - Open new tab
+Cmd + w (Ctrl + Shift + q) - Close a tab
+Cmd + Shift + ] [ (Ctrl + Shift + Left | Right) - Cycle through tabs
+```
 
 ### Wezterm shortcuts
 
 ```text
 Ctrl + Alt + Shift + % - Vertical pane
 Ctrl + Alt + Shift + " - Horizontal pane
-- Maximize pane - TODO: show it is maximized
+Ctrl + Shift + left | right - Cycle through panes
+Cmd + t - New tab
+Ctrl + Shift + Z - Maximize pane - TODO: show it is maximized
+Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing current buffer?
 ```
 
 ### zsh shortcuts
