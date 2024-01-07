@@ -44,6 +44,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- disable --INSERT-- messages, already shown in lualine, still show recording message with noice
+vim.opt.showmode = false
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -212,6 +214,10 @@ require('lazy').setup({
         -- component_separators = '|',
         -- section_separators = '',
       },
+      sections = {
+        -- lualine_c = { 'filename' },
+        lualine_c = { 'buffers' },
+      },
     },
   },
 
@@ -349,7 +355,8 @@ require('lazy').setup({
       })
       require("lualine").setup({
         sections = {
-          lualine_b = {
+          lualine_y = {
+            "progress",
             {
               "swenv",
               icon='',
@@ -358,9 +365,6 @@ require('lazy').setup({
                 return vim.bo.filetype == "python"
               end,
             },
-            "branch",
-            "diff",
-            "diagnostics"
           },
         },
       })
@@ -411,7 +415,11 @@ require('lazy').setup({
         },
         routes = {
           {
-            view = "cmdline", -- show persistent macro record message
+            -- show persistent macro record message
+            -- :h ui-messages for different events
+            -- :h noice.nvim-noice-(nice,-noise,-notice)-views for views
+            -- view = "notify",
+            view = "cmdline",
             filter = { event = "msg_showmode" },
           },
         },
@@ -419,6 +427,21 @@ require('lazy').setup({
         --   backend = "cmp" -- use cmp to show suggestions in popupmenu
         -- }
       })
+      -- show recording message in lualine instead
+      -- require('lualine').setup({
+      --   sections = {
+      --     lualine_x = {
+      --       {
+      --         require('noice').api.statusline.mode.get,
+      --         cond = require('noice').api.statusline.mode.has,
+      --         color = { fg = '#ff9e64' },
+      --       },
+      --       'encoding',
+      --       'fileformat',
+      --       'filetype',
+      --     },
+      --   },
+      -- })
     end
   },
 
@@ -536,14 +559,37 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    -- removing allows scrolling through preview but blocks delete search with <C-u>
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
     },
+    path_display = {
+      shorten = {
+        len = 1,
+        exclude = { -3, -2, -1 },
+      },
+      truncate = true,
+    },
+    dynamic_preview_title = true,
+    -- included by default
+    -- file_ignore_patterns = { 'node_modules', '.git' },
   },
 }
+
+-- Does not work https://www.reddit.com/r/neovim/comments/vuxr5n/telescope_previewer_of_custom_strings/
+-- Update telescope preview window to show if file is dirty
+-- require('telescope.previewers').new({
+--   dynamic_title = function(_, entry)
+--     print(vim.inspect(entry))
+--     if entry.status == 'dirty' then
+--       return '[+] ' .. entry.value
+--     end
+--     return '[ ] ' .. entry.value
+--   end,
+-- })
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -586,7 +632,17 @@ vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set(
+  'n',
+  '<leader><space>',
+  function()
+    require('telescope.builtin').buffers({
+      sort_mru = true,
+      ignore_current_buffer = true,
+    })
+  end,
+  { desc = '[ ] Find existing buffers' }
+)
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -611,6 +667,8 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [m]arks' })
+vim.keymap.set('n', '<leader>sM', require('telescope.builtin').man_pages, { desc = '[S]earch [M]an Pages' })
 
 -- ********************** CUSTOM *************************
 
@@ -651,6 +709,10 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- toggle terminal emulator
+
+-- buffer next/previous
+vim.keymap.set('n', ']b', vim.cmd.bnext, { desc = '[B]uffer Next' })
+vim.keymap.set('n', '[b', vim.cmd.bprev, { desc = '[B]uffer Previous' })
 
 -- *******************************************************
 
@@ -895,6 +957,10 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   },
+  -- not required for copilot, on by default
+  -- experimental = {
+  --   ghost_text = true,
+  -- }
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

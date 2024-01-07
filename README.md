@@ -394,6 +394,7 @@ View what is mapped to what key with `:verbose imap <Tab>`
 :Lazy profile - to check startup time
 
 # basic vim keybindings (https://neovim.io/doc/user/motion.html - for additional key bindings)
+# https://gist.github.com/tuxfight3r/0dca25825d9f2608714b
 u - undo
 Ctrl + r - redo
 s - replace character with a string. abc -> 1234bc
@@ -408,8 +409,11 @@ fn + Backspace - Delete forward during normal/insert mode
 :sp(:split|:hor) <file|command|terminal> - open in horizontal pane
 :vsp(:vsplit|:vert) <file|command|terminal> - open in vertical pane
 :tabnew <file|command|terminal> - open in new tab
-Ctrl+W gf - jump to file under cursor in new tab
-- jump to file under cursor in vertical split
+gx - open a url under the cursor
+gf / ]f - open file under the cursor in current window
+Ctrl + w gf - open file under cursor in new tab
+Ctrl + w f - open file under cursor in horizontal split
+Ctrl + w v gf - open file under cursor in horizontal split
 
 ZZ (Ctrl+ w + q) (:wq) (:x) - while in normal mode. Save and Exit
 ZQ (:q!) - while in normal mode. Exit without saving
@@ -420,6 +424,7 @@ g_ - end of line without new line char
 0 - beggining of line
 ^ | _ - beggining of line non-blank
 % - move cursor between two sets of brackets
+{ } - move 5 lines above or below
 
 # advanced vim keybindings
 =ap - align (re-indent) entire paragraph
@@ -431,6 +436,7 @@ z - show folding and other movement which-key suggestions
 zz - adjust line under cursor as the middle of file
 zt - adjust line under cursor as the top of file
 zb - adjust line under cursor as the bottom of file
+z= - spell check current word based on current spelllang
 Ctrl + a - increment number
 Ctrl + x - decrement number
 Ctrl + r = - opens calculator while in insert mode
@@ -479,6 +485,12 @@ zf - view folding options via which-key
 za - toggle folds
 zR - expand all folds
 zM - close all folds
+
+# commands for vim commandline
+:norm ... - execute normal mode commands work on visual selection as well
+:! cat lala.txt / :'<,'>!sort | uniq - execute terminal commands with filter mode
+:X - encrypt current file with a key, unencrypt again with :X and empty key (only works in VIM)
+echo $((1+2+3)) <v-select> :!zsh- execute command in zsh and echo in vim
 
 # which-key keybindings - check general keybindings
 Ctrl + w - Opens menu for other keybindings
@@ -555,7 +567,7 @@ m - create a bookmark
 ## TODO: add mapping to open existing terminal vs new terminal
 (:term or :terminal) - open neovim terminal emulator in current buffer
 (:tabnew | term) - open terminal in new tab
-:sp term | :vsp term - open terminal in horizontal/vertical split - TODO: add keybinding
+:sp term | :vsp term - open terminal/or other file in horizontal/vertical split
 Ctrl + \ + Ctrl + n - Go to normal mode from terminal mode
 Ctrl + \ + Ctrl + o - Go to normal mode to run a single command then back to terminal mode
 Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator - only from normal mode
@@ -564,12 +576,15 @@ Ctrl + w + q (:q / :bd!) - exit neovim terminal emulator - only from normal mode
 ## :h ls - to view markers for buffers # - hidden and recently edited, %a - buffer open in current window etc
 ## the buffers stay open by default even after :q - use :bd to delete buffer
 Space + Space - Open list of active buffers (Telescope)
-Ctrl + 6 - Open previously opened buffer, Or to toggle between 2 files easily (REMAP)
 :q - keep buffer open
 :bd - delete current buffer
-:sb <buf-num/name> - show buffer in horizontal split - add :vert at the start to do it in vertical split
-:bnext / :bprev - move between buffers
+:sb <buf-num/name> - show buffer in horizontal split
+:vert help ui-messages - open help or others in vertical split (different from :vsp)
 :enew - create new empty buffer
+:bnext / :bprev - move between buffers
+:sbnext / :sbprev - open next/prev buffer in horizontal split
+:vert sbnext / :vert sbprev (:vsp | bnext / :vsp | bprev) - open next/prev buffer in vertical split
+Ctrl + ^ - switch between last 2 buffers
 
 # changing themes/highlighting etc
 # update colorscheme in init.lua and update lualine with said colorscheme
@@ -586,13 +601,12 @@ print("print something") - execute and print something in lua script
 -- vim.keymap.set('n', '<leader>q', vim.cmd.telescope.diagnostics, { desc = 'Open diagnostics list' })
 -- vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
-# Other useful info and commands and TODO
+# Other useful info and commands
 `:Telescope keymaps` - search LSP keymaps
 `:Mason` + i - To install a new LSP server for a language
 U (when in Mason) - Update lsp servers
 g? (when in Mason) - To view additional info on mason
 :Lazy - Open package manager installation
-- Open command pallete? similar to vscode?
 K (in help man page) - Go to info about function while in :help pages
 
 # LSP keymaps - Works if LSP installed and working and searches within workspace - how to debug?
