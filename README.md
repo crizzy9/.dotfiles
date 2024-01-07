@@ -520,7 +520,7 @@ Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current bu
 :jumps - view all jumps
 :tags - view all tags
 :e - update file to latest version when updated from elsewhere
-- TODO: add routes to customize views based on different event filters
+:Noice history/telescope - show messages
 
 # git
 :Git - Open Git Fugitive console

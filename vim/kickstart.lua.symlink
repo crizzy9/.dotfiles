@@ -204,7 +204,6 @@ require('lazy').setup({
 
   {
     -- Set lualine as statusline
-    -- MODIFIED
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -217,6 +216,7 @@ require('lazy').setup({
       sections = {
         -- lualine_c = { 'filename' },
         lualine_c = { 'buffers' },
+        lualine_x = { 'encoding', 'filetype' },
       },
     },
   },
@@ -236,7 +236,7 @@ require('lazy').setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    -- branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -360,6 +360,8 @@ require('lazy').setup({
             {
               "swenv",
               icon='',
+              -- custom color not working
+              -- use_mode_colors = true,
               on_click=require("swenv.api").pick_venv,
               cond = function()
                 return vim.bo.filetype == "python"
