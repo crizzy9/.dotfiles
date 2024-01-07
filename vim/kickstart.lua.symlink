@@ -216,7 +216,16 @@ require('lazy').setup({
       sections = {
         -- lualine_c = { 'filename' },
         lualine_c = { 'buffers' },
-        lualine_x = { 'encoding', 'filetype' },
+        lualine_x = {
+          {
+            'encoding',
+            -- only show if not utf-8
+            cond = function()
+              return vim.bo.fileencoding ~= 'utf-8'
+            end,
+          },
+          'filetype'
+        },
       },
     },
   },
