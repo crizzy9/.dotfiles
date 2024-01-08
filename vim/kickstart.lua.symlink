@@ -424,35 +424,32 @@ require('lazy').setup({
           -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = true, -- add a border to hover docs and signature help
         },
-        routes = {
-          {
-            -- show persistent macro record message
-            -- :h ui-messages for different events
-            -- :h noice.nvim-noice-(nice,-noise,-notice)-views for views
-            -- view = "notify",
-            view = "cmdline",
-            filter = { event = "msg_showmode" },
-          },
-        },
+        -- routes = {
+        --   {
+        --     -- show persistent macro record message
+        --     -- :h ui-messages for different events
+        --     -- :h noice.nvim-noice-(nice,-noise,-notice)-views for views
+        --     -- view = "notify",
+        --     view = "cmdline",
+        --     filter = { event = "msg_showmode" },
+        --   },
+        -- },
         -- popupmenu = {
         --   backend = "cmp" -- use cmp to show suggestions in popupmenu
         -- }
       })
       -- show recording message in lualine instead
-      -- require('lualine').setup({
-      --   sections = {
-      --     lualine_x = {
-      --       {
-      --         require('noice').api.statusline.mode.get,
-      --         cond = require('noice').api.statusline.mode.has,
-      --         color = { fg = '#ff9e64' },
-      --       },
-      --       'encoding',
-      --       'fileformat',
-      --       'filetype',
-      --     },
-      --   },
-      -- })
+      require('lualine').setup({
+        sections = {
+          lualine_y = {
+            'progress',
+            {
+              require('noice').api.statusline.mode.get,
+              cond = require('noice').api.statusline.mode.has,
+            },
+          },
+        },
+      })
     end
   },
 

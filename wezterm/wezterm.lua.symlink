@@ -1,5 +1,6 @@
 --  Pull in wezterm API
 local wezterm = require 'wezterm';
+local act = wezterm.action
 
 -- This table will hold the configuration
 local config = {}
@@ -14,6 +15,50 @@ end
 
 -- For example, changing the color scheme:
 -- config.color_scheme = 'AdventureTime'
+-- config.color_scheme = 'Catppuccin Mocha'
+
+-- set padding
+config.window_padding = {
+  left = 2,
+  right = 2,
+  top = 2,
+  bottom = 0,
+}
+
+-- set font
+-- config.font = wezterm.font("JetBrainsMono Nerd Font Mono", {weight="Bold"})
+-- set font size
+config.font_size = 15.0
+
+-- set default window size
+-- config.initial_rows = 30
+-- config.initial_cols = 90
+
+-- keymaps to set adjust pane size
+-- config.leader = { key = 'a', mods = 'CTRL' }
+--
+-- config.keys = {
+--   {
+--     key = 'H',
+--     mods = 'LEADER',
+--     action = act.AdjustPaneSize { 'Left', 5 },
+--   },
+--   {
+--     key = 'J',
+--     mods = 'LEADER',
+--     action = act.AdjustPaneSize { 'Down', 5 },
+--   },
+--   {
+--     key = 'K',
+--     mods = 'LEADER',
+--     action = act.AdjustPaneSize { 'Up', 5 },
+--   },
+--   {
+--     key = 'L',
+--     mods = 'LEADER',
+--     action = act.AdjustPaneSize { 'Right', 5 },
+--   },
+-- }
 
 -- and finally, return the configuration to wezterm
 return config

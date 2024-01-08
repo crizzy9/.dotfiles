@@ -672,6 +672,9 @@ ctrl + k - signature documentation
 `:TSModuleInfo` - Show module info for each filetype
 `:TSBufEnable markdown` - Enable treesitter on current buffer
 `:TSBufDisable markdown` - Disable treesitter on current buffer
+`:Inspect` - show highlight groups under the cursor
+`:InspectTree` - Toggle Treesitter parsed syntax tree
+`:Edit Query` - Open Live Query Editor (Neovim 0.10+)
 
 ## basic keymaps
 Ctrl + Space - incremental highlight syntactic region. word-line-block-function-class
