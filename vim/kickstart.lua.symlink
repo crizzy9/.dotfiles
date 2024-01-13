@@ -108,8 +108,10 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
@@ -722,6 +724,12 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set('n', ']b', vim.cmd.bnext, { desc = '[B]uffer Next' })
 vim.keymap.set('n', '[b', vim.cmd.bprev, { desc = '[B]uffer Previous' })
 
+-- move between window panes
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to Left pane' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to Down pane' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to Up pane' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to Right pane' })
+
 -- *******************************************************
 
 -- [[ Configure Treesitter ]]
@@ -872,19 +880,49 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  -- pyright = {
+  --   settings = {
+  --     python = {
+  --       analysis = {
+  --         autoSearchPaths = true,
+  --         useLibraryCodeForTypes = true,
+  --         diagnosticMode = 'workspace',
+  --         typeCheckingMode = 'basic',
+  --         stubPath = vim.fn.stdpath('data') .. '/stubs',
+  --       },
+  --     },
+  --   },
+  -- },
+  bash_language_server = {
+    filetypes = { 'sh', 'zsh' },
+    settings = {
+      bash = {
+        excludePaths = { '/usr/*', '/nix/*' },
+      },
+    },
+  },
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
       telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
       diagnostics = {
-        -- globals = { 'vim' },
+        globals = { 'vim' },
+      },
+      completion = {
+        -- NOTE: toggle below to enable Lua_LS's completion
+        -- callSnippet = 'Both',
+        callSnippet = 'Replace',
       },
     },
   },
@@ -915,6 +953,15 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+-- disables diagnostic messages from showing in insert mode
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--     -- Disable virtual text
+--     virtual_text = false,
+--     update_in_insert = false,
+--   }
+-- )
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
@@ -941,29 +988,33 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    -- disable to seamlessley use copilot
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_locally_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.locally_jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
   },
+  -- order defines ranking
   sources = {
+    { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
     { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 5 },
   },
   -- not required for copilot, on by default
   -- experimental = {
