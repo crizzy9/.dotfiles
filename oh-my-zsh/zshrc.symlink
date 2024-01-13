@@ -346,7 +346,7 @@ function displayFiles {
     echo $(fd --type f --hidden --follow --exclude '**/{.git,node_modules,__pycache__}/*' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
 }
 
-function nvimGoToLine {
+function fzfFileNvim {
     selection=$(displayFiles)
     if [ -z "$selection" ]; then
         echo "No file selected"

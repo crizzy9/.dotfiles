@@ -2,7 +2,7 @@
 # ===================== CUSTOM =====================
 # - Font Config
 font_family		MesloLGS NF Regular
-font_size		14
+font_size		15
 
 # - Use nerd symbols
 #
@@ -33,6 +33,10 @@ symbol_map U+E000-U+E00D Symbols Nerd Font
 
 # - Transparency
 # background_opacity	.7
+
+# remap opt to alt
+macos_option_as_alt yes
+cursor_blink_interval 0
 
 # ==================================================
 
