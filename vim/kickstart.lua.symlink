@@ -695,6 +695,7 @@ vim.keymap.set('n', '<leader>tn', require('nvim-tree.api').tree.toggle, { desc =
 -- set filetype for symlink files
 -- doesnt work with files like zshrc.symlink - needs to have extension within filename
 -- TODO: add priority and general function
+-- TODO: Make it work with all plugins (nvimtree, telescope, treitter, lsp)
 vim.filetype.add({
   pattern = {
     -- ['.*%.lua.symlink'] = { 'lua', { priority = 10 } },
@@ -896,14 +897,14 @@ local servers = {
   --     },
   --   },
   -- },
-  bash_language_server = {
-    filetypes = { 'sh', 'zsh' },
-    settings = {
-      bash = {
-        excludePaths = { '/usr/*', '/nix/*' },
-      },
-    },
-  },
+  -- bash_language_server = {
+  --   filetypes = { 'sh', 'zsh' },
+  --   settings = {
+  --     bash = {
+  --       excludePaths = { '/usr/*', '/nix/*' },
+  --     },
+  --   },
+  -- },
   lua_ls = {
     Lua = {
       runtime = {

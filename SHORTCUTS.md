@@ -11,6 +11,78 @@ Cmd + Shift + O - Open tick tick todo
 Cmd + Shift + . - Show hidden files in finder
 ```
 
+## Tmux Shortcuts
+Sessions = Traditional window type thigs
+Windows = Traditional Tabs
+Panes = Panes
+
+Use shift when required to get a character
+[cheatsheet](https://tmuxcheatsheet.com/)
+```text
+Ctrl + B - Prefix key
+Alt - Meta key
+
+-- Cli commands
+tmux / tmux new - create a new session
+tmux neww - Open new window
+tmux ls - list all sessions
+tmux a/at/attach/attach-session - attach to last known session
+tmux a -t <session-name> - attach to a specific session
+tmux kill-session -t <session-name> - kill a specific session
+
+-- Sessions
+<prefix> + d - detach current session
+<prefix> + $ - rename session
+<prefix> + s - list sessions and switch between
+<prefix> + (/) - Move between subsequent sessions
+
+-- Windows/Tabs
+<prefix> + c - New window/tab
+<prefix> + , - Rename window/tab
+<prefix> + & - Close current window
+<prefix> + w - List windows/tabs
+<prefix> + p/n - Cycle through windows/tabs
+<prefix> + <num> - Activate specific tab
+<prefix> + l - Activate last window/tab
+<prefix> + w - Select and switch session or window from preview list
+
+-- Panes
+<prefix> + " - Horizontal split
+<prefix> + % - Vertical split
+<prefix> + z - zoom into a pane
+<prefix> + Up/Down/Left/Right - Move to pane in direction
+<prefix> + o - Cycle through panes based on their numbers
+<prefix> + q - Show pane numbers
+<prefix> + q + <num> - Move to pane via number
+<prefix> + ! - Convert current pane to window
+<prefix> + x - Close current pane
+
+<prefix> + <meta> + Up/Down/Left/Right - Resize current pane
+<prefix> + E - Spread panes evenly
+
+<prefix> + space - Cycle through default layouts
+<prefix> + Ctrl + o - Rotate through pane locations
+<prefix> + {/} - Switch the current pane with left/right
+
+-- Copy mode - Used for movement also, mouse disabled by default
+<prefix> + [ - Enter copy mode and use vim motions to select
+q - Exit copy mode
+Enter - Copy selection
+<prefix> + ] - pase contents to buffer
+
+-- Command mode
+<prefix> + : - Enter command mode
+Esc + q - Exit out of commands
+
+-- Help
+<prefix> + ? / tmux list-keys - Show Keybindings
+tmux info - Show basic tmux info
+
+-- Resurrect sessions
+
+-- Custom configuration
+```
+
 ## terminator shortcuts
 
 ```text
@@ -26,6 +98,7 @@ Ctrl + Shift + f - search in terminal backlog
 Ctrl + Shift + <F5> - Reload Kitty config
 Ctrl + Shift + <F6> - Open current kitty config
 Cmd + Enter - Open a horizontal pane
+# Does not work - Ctrl + Shift + Enter - Open a Vertical pane
 Cmd + Shift + d (Ctrl + Shift + w) - Close a window
 Ctrl + Shift + ] [ - Cycle through panes
 Ctrl + Shift + L - Change Layout
@@ -64,11 +137,17 @@ Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing cur
 ```text
 
 # fzf based search and execute - need to source keybindings for fzf in zshrc
-Ctrl + (t|f)  - search files with fzf in current directory (Ctrl + o - open it in nvim)
+# OG mappings
+Ctrl + t  - search files with fzf in current directory (Ctrl + o - open it in nvim)
 Ctrl + r      - Search history with fzf
 Alt + c       - cd to a folder with fzf
+# Custom functions
+Ctrl + f - fzf nvim open a file
+Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
+Ctrl + x d - search a process with fzf
+
 Ctrl + p/n    - cycle through results
-Ctrl + (g|c)  - cancel fzf search
+Esc / Ctrl + (g|c)  - cancel fzf search
 
 # aliases
 lss - exa ls - better ls
