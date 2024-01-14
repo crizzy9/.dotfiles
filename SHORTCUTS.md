@@ -43,6 +43,7 @@ Alt - Meta key
 
 -- Cli commands
 tmux / tmux new - create a new session
+tmux new -s <name> - create new named session
 tmux neww - Open new window
 tmux ls - list all sessions
 tmux a/at/attach/attach-session - attach to last known session
@@ -292,6 +293,7 @@ qa <record macro> q -> "ap <paste to buffer and change macro> "ayy <update> - up
 
 # marks (used as bookmarks) - use harpoon?
 ## regular marks are lower case, Upper case marks are global marks
+## lowercase marks (a) are for individual files, uppercase marks (A) are across files
 g' or (:marks) - view all marks
 ' <mark> - to go back to a specific mark
 ' " - go back to where you last exited current buffer
@@ -300,6 +302,10 @@ g' or (:marks) - view all marks
 ' ' - go back to where you jumped from
 m <mark:a-z> - Set a new mark
 :delmar! - delete all lettered marks
+
+# jumplists
+:jumps
+:Telescope jumplist
 
 # folds
 zf - view folding options via which-key
@@ -337,6 +343,7 @@ gT - Previous tab
 Ctrl + z (to exit) , fg (to re-enter) - Exit to Terminal an Return to current buffer
 
 # noice - command line
+:Telescope commands - search commands via telescope and execute them
 :Lsp + Tab - Use Tab to autocomplete in command line
 :jumps - view all jumps
 :tags - view all tags
@@ -358,6 +365,9 @@ Space + t d - toggle git blame delete line in current changes
 :Git commit -m "commit message" - commit with message
 :Git push - push to current branch
 :Git pull - pull current branch from origin
+:Gvdiffsplit! - Resolve conflicts with 3 way splits <target branch://2, conflict copy, merge branch://3>
+:diffget <tab a branch> - get changes into conflict copy from respective branch
+:diffput <tab a branch> - push changes from branch to conflict copy
 
 ## telescope git
 :Telescope git_commits - view commit histroy
@@ -552,6 +562,7 @@ Ctrl + x - Open in horizontal window pane
 Ctrl + q - Open any telescope search in quickfix menu
 Ctrl + u - erase all search text
 Ctrl + a - paste last line written in insert mode into telescope search
+<Esc> Ctrl + i - select multiple items in telescope in normal mode
 
 # others
 # TODO: setup keybinding and save setting for setting filetype and persist value

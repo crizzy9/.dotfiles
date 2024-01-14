@@ -44,6 +44,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Turn off netrw to work with nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- disable --INSERT-- messages, already shown in lualine, still show recording message with noice
 vim.opt.showmode = false
 
@@ -500,13 +504,8 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
--- ********************** CUSTOM *************************
--- Turn off netrw to work with nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Enable relative line numbers
 vim.wo.relativenumber = true
--- *******************************************************
-
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -670,6 +669,7 @@ end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>gh', require('telescope.builtin').git_commits, { desc = 'Search [G]it Commit [H]istory' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -677,8 +677,10 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [m]arks' })
-vim.keymap.set('n', '<leader>sM', require('telescope.builtin').man_pages, { desc = '[S]earch [M]an Pages' })
+vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [M]arks' })
+vim.keymap.set('n', '<leader>sj', require('telescope.builtin').jumplist, { desc = '[S]earch [J]umplist' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
 
 -- ********************** CUSTOM *************************
 
@@ -705,6 +707,24 @@ vim.filetype.add({
   }
 })
 
+-- doesnt work
+-- require('nvim-web-devicons').setup {
+--   override = {
+--     lua = {
+--       icon = '',
+--       color = '#ffffff',
+--       name = 'Lua',
+--     },
+--   },
+--   override_by_extension = {
+--     ['symlink'] = {
+--       icon = '',
+--       color = '#7ebae4',
+--       name = 'Symlink',
+--     },
+--   },
+-- }
+
 -- code actions for splitting and condensing code blocks
 vim.keymap.set('n', '<leader>cn', require('ts-node-action').node_action, { desc = '[T]rigger [N]ode Action' })
 
@@ -730,6 +750,13 @@ vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to Left pane' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to Down pane' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to Up pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to Right pane' })
+
+-- trim whitespace
+local function trim_whitespace()
+  vim.cmd [[%s/\s\+$//e]]
+end
+vim.keymap.set('n', '<leader>tw', trim_whitespace, { desc = '[T]rim [W]hitespace' })
+-- vim.api.nvim_create_autocmd({ 'BufWritePre' }, { callback = trim_whitespace })
 
 -- *******************************************************
 
