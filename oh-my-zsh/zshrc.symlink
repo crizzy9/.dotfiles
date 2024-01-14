@@ -67,6 +67,10 @@ znap source marlonrichert/zsh-hist
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=1
 znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
@@ -242,7 +246,7 @@ export FZF_CTRL_R_OPTS="
 # paste selected file path into command line 
 
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude "**/{.git,node_modules,__pycache__}/*"'
+export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules,__pycache__}"'
 
 # remove abort to go back to fzf
 export FZF_CTRL_T_OPTS="
@@ -264,7 +268,7 @@ export FZF_CTRL_T_OPTS="
 ##### Alt+C commands #####
 # cd to selected directory
 # export FZF_ALT_C_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude "**/{.git,node_modules,__pycache__}/*"'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude "{.git,node_modules,__pycache__}"'
 export FZF_ALT_C_OPTS='--preview "tree -C {}"'
 ###########################
 
@@ -343,7 +347,7 @@ bindkey -s '^X' 'nvimGoToLine\n'
 ##### search files and open in neovim #####
 function fzfFindFileFd {
     # uses fzf-tmux to display files in preview window
-    echo $(fd --type f --hidden --follow --exclude '**/{.git,node_modules,__pycache__}/*' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
+    echo $(fd --type f --hidden --follow --exclude '{.git,node_modules,__pycache__}' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
 }
 
 function nvimGoToFile {

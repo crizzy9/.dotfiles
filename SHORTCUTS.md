@@ -141,6 +141,8 @@ Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing cur
 Ctrl + t  - search files with fzf in current directory (Ctrl + o - open it in nvim)
 Ctrl + r      - Search history with fzf
 Alt + c       - cd to a folder with fzf
+nvim/command ** <Tab> - get relevant fzf search
+
 # Custom functions
 Ctrl + f - fzf nvim open a file
 Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
@@ -152,11 +154,13 @@ Esc / Ctrl + (g|c)  - cancel fzf search
 # aliases
 lss - exa ls - better ls
 lsa - exa la - better ls
+z <dir shortcut> - zoxide
+zi - fzf search through zoxide db
 
 # working with foreground and background tasks
-ps aux | fzf (ps -e | fzf) - fzf search current tasks
-jobs - list all current background tasks
+ps aux | fzf (ps -e | fzf) (Ctrl+x+d) - fzf search current tasks
 Ctrl + z - puts any current task in background
+jobs - list all current background tasks
 bg - run a task as a background process (alias jupyter-bg='jupyter notebook > /dev/null 2>&1 &', alias jupyter-lab-bg='jupyter-lab > /dev/null 2>&1 &')
 fg %<num> - bring task to foreground
 - using /dev/null 2>&1
