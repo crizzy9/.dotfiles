@@ -11,6 +11,25 @@ Cmd + Shift + O - Open tick tick todo
 Cmd + Shift + . - Show hidden files in finder
 ```
 
+## Firefox shortcuts
+[link1](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#firefox:mac:fx118)
+[link2](https://support.mozilla.org/en-US/kb/search-firefox-address-bar)
+```text
+about:about
+Ctrl + Tab - Cycle through Tabs
+Ctrl + Alt + p/n - Cycle through Tab groups
+Ctrl + Alt + c - Goto custom tab group
+Cmd + L - Focus address bar
+Cmd + K - Focus address bar with default search engine
+Alt + up/down - cycle through search engines
+@b / @a in addres bar - to search with specific search engine (add more in search settings)
+% in address bar - Search Tabs across all tabgroups in simple tab groups excluding archived ones
+* in address bar - Search Bookmarks
+^ in address bar - Search History
+Ctrl + p/n - Cycle through suggestions in address bar
+Cmd + [ ] - Back/Forward
+```
+
 ## Tmux Shortcuts
 Sessions = Traditional window type thigs
 Windows = Traditional Tabs
