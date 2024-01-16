@@ -83,6 +83,11 @@ If znap is not working with error, upgrade zsh version to 5.8+
 ```sh
 znap pull
 ```
+Aliases 
+```txt
+jj - take json from clipboard and format it
+pomo 20m work - create a terminal based pomodoro timer
+```
 
 Remove old `~/.zshrc.zwc` file if changes not taking effect
 Also check `echo $ZDOTDIR`
