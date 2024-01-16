@@ -36,7 +36,8 @@ Windows = Traditional Tabs
 Panes = Panes
 
 Use shift when required to get a character
-[cheatsheet](https://tmuxcheatsheet.com/)
+[cheatsheet1](https://tmuxcheatsheet.com/)
+[cheatsheet2](https://learnxinyminutes.com/docs/tmux/)
 ```text
 Ctrl + B - Prefix key
 Alt - Meta key
@@ -46,9 +47,12 @@ tmux / tmux new - create a new session
 tmux new -s <name> - create new named session
 tmux neww - Open new window
 tmux ls - list all sessions
+tmux lsw - list all windows
+tmux lsp - list all panes
 tmux a/at/attach/attach-session - attach to last known session
 tmux a -t <session-name> - attach to a specific session
 tmux kill-session -t <session-name> - kill a specific session
+tmux popup - create a popup window
 
 -- Sessions
 <prefix> + d - detach current session
@@ -72,6 +76,7 @@ tmux kill-session -t <session-name> - kill a specific session
 <prefix> + z - zoom into a pane
 <prefix> + Up/Down/Left/Right - Move to pane in direction
 <prefix> + o - Cycle through panes based on their numbers
+<prefix> + ; - Focus last active pane
 <prefix> + q - Show pane numbers
 <prefix> + q + <num> - Move to pane via number
 <prefix> + ! - Convert current pane to window
@@ -97,6 +102,7 @@ Esc + q - Exit out of commands
 -- Help
 <prefix> + ? / tmux list-keys - Show Keybindings
 tmux info - Show basic tmux info
+<prefix> + t - View current time
 
 -- Resurrect sessions
 
@@ -164,12 +170,24 @@ Alt + c       - cd to a folder with fzf
 nvim/command ** <Tab> - get relevant fzf search
 
 # Custom functions
+## fzf functions
 Ctrl + f - fzf nvim open a file
 Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
 Ctrl + x d - search a process with fzf
 
 Ctrl + p/n    - cycle through results
 Esc / Ctrl + (g|c)  - cancel fzf search
+
+## fzf syntax
+| Token     | Match type                 |
+| --------- | -------------------------- |
+| `sbtrkt`  | fuzzy-match                |
+| `'wild`   | exact-match (quoted)       |
+| `^music`  | prefix-exact-match         |
+| `.mp3$`   | suffix-exact-match         |
+| `!fire`   | inverse-exact-match        |
+| `!^music` | inverse-prefix-exact-match |
+| `!.mp3$`  | inverse-suffix-exact-match |
 
 # aliases
 lss - exa ls - better ls
@@ -563,6 +581,7 @@ Ctrl + q - Open any telescope search in quickfix menu
 Ctrl + u - erase all search text
 Ctrl + a - paste last line written in insert mode into telescope search
 <Esc> Ctrl + i - select multiple items in telescope in normal mode
+Ctrl + h - In insert mode same as backspace
 
 # others
 # TODO: setup keybinding and save setting for setting filetype and persist value

@@ -7,8 +7,6 @@ source ./helpers.sh
 os=
 get_os os
 
-# TODO: Enable unicode fonts
-
 # Install zsh
 install_zsh() {
     # Download and install zsh
