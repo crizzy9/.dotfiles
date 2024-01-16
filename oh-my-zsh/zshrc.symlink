@@ -187,10 +187,47 @@ export ZSH_HIGHLIGHT_STYLES[comment]='none'
 #### custom aliases ####
 # =============================================================================
 # alias rg='rg --hidden --follow --glob "!.git/*"'
+
+# ls aliases
 alias lss='exa --icons'
 alias lsa='exa -la --icons'
 alias lsag='exa -la --icons --git --header'
 alias lsat='exa -la --icons --git --header --tree -L 2 --git-ignore'
+
+# Json aliases
+## copy formatted json to clipboard
+alias jj='pbpaste | jq . | pbcopy'
+alias jjj='pbpaste | jq .'
+
+# Pomodoro timer
+# requires timer and terminal-notifier to be installed
+# https://gist.github.com/bashbunni/f6b04fc4703903a71ce9f70c58345106
+pomo () {
+    local duration=${1:-25m}
+    local ptype=${2:-work}
+    local message=
+    local image=
+    local emoji=
+
+    if [ "$ptype" = "work" ]; then
+        local message='Work Timer is up! Take a Break'
+        local image='~/Pictures/pumpkinx.png'
+        local emoji='🎃'
+    elif [ "$ptype" = "rest" ]; then
+        local message='Break is over! Get back to work'
+        local image='~/Pictures/pumpkin.jpg'
+        local emoji='👻'
+    else
+        echo "Invalid type"
+        return 1
+    fi
+
+    timer $duration -n "Pomodoro for ${ptype}" && say $message && terminal-notifier -title 'Pomodoro Timer'\
+        -subtitle "${message} ${emoji}"\
+        -message "Nice you ${ptype}ed for ${duration}"\
+        --appIcon $image\
+        -sound Crystal
+}
 
 #### fzf / fd / ripgrep keybindings ####
 # =============================================================================

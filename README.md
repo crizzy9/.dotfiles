@@ -37,10 +37,11 @@ Perform the following steps as per your operating system then install via the sc
 ### MacOs
 
 - Install **xcode** by running `$ xcode-select --install`
-- Install **homebrew**
+- Install **homebrew** and add the following to zprofile https://github.com/orgs/Homebrew/discussions/446
 - install **unicode fonts** - Nerd Fonts
 - Install Firefox with Tridactyl for vim like browser
 - Install favorite terminal Wezterm/Kitty/Alacritty
+
 
 ### Linux
 **N.B.**: Only supported Debian/Ubuntu for now
@@ -65,7 +66,7 @@ chmod +x ./install
 ./install
 ```
 
-# Supported Plugins
+# Plugins
 
 Below is a list of all the plugins supported by this repository, more to come...
 
@@ -116,7 +117,13 @@ https://github.com/alacritty/alacritty/issues/4673#issuecomment-771291615
 ### Kitty
 
 ## Tmux
-TODO
+Installs tpm via install script
+```sh
+tmux source ~/.config/tmux/.tmux.conf
+# install plugins
+<prefix> I - Install plugins
+<prefix> U - Update plugins
+```
 
 ## Neovim
 
