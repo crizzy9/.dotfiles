@@ -1,1 +1,0 @@
-/Users/exmachina/.dotfiles/vim/vimrc.symlink
