@@ -209,6 +209,7 @@ pomo () {
     local image=
     local emoji=
 
+    # appIcon not working
     if [ "$ptype" = "work" ]; then
         local message='Work Timer is up! Take a Break'
         local image='~/Pictures/pumpkinx.png'
@@ -224,7 +225,7 @@ pomo () {
 
     timer $duration -n "Pomodoro for ${ptype}" && say $message && terminal-notifier -title 'Pomodoro Timer'\
         -subtitle "${message} ${emoji}"\
-        -message "Nice you ${ptype}ed for ${duration}"\
+        -message "Nice! You ${ptype}ed for ${duration}"\
         --appIcon $image\
         -sound Crystal
 }
@@ -372,7 +373,7 @@ function nvimGoToLine {
     else
         filename=$(echo $selection | awk -F: '{print $1}')
         line=$(echo $selection | awk -F: '{print $2}')
-        nvim $(printf "+%s %s" $line $filename)
+        nvim $(printf "+%s %s" $line $filename) +"normal zz";
     fi
 }
 

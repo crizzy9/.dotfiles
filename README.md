@@ -128,6 +128,8 @@ tmux source ~/.config/tmux/.tmux.conf
 # install plugins
 <prefix> I - Install plugins
 <prefix> U - Update plugins
+<prefix> Alt + u - Uninstall plugins
+```
 ```
 
 ## Neovim

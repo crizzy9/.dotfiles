@@ -435,6 +435,11 @@ Space + Space - Open list of active buffers (Telescope)
 :vert sbnext / :vert sbprev (:vsp | bnext / :vsp | bprev) - open next/prev buffer in vertical split
 Ctrl + ^ - switch between last 2 buffers
 
+# search
+/ - search forward
+? - search forward
+* / # - search word under cursor
+
 # changing themes/highlighting etc
 # update colorscheme in init.lua and update lualine with said colorscheme
 ## show tab in a different way with x? (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
@@ -546,6 +551,9 @@ S" - surround a pre visual selection with given character
 [m - move to previous function
 ]] - move to next class
 [[ - move to previous class
+
+# nvim tree
+Ctrl + i - open file as a temporary buffer
 
 # telescope
 
