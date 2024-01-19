@@ -199,6 +199,9 @@ alias lsat='exa -la --icons --git --header --tree -L 2 --git-ignore'
 alias jj='pbpaste | jq . | pbcopy'
 alias jjj='pbpaste | jq .'
 
+# lazygit
+alias lg='lazygit'
+
 # Pomodoro timer
 # requires timer and terminal-notifier to be installed
 # https://gist.github.com/bashbunni/f6b04fc4703903a71ce9f70c58345106
@@ -352,7 +355,7 @@ function fzfLiveGrepRg {
     rm -f /tmp/rg-fzf-{r,f}
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case --glob '!{.git,node_modules,__pycache__}/*' "
     INITIAL_QUERY="${*:-}"
-    : | fzf --ansi --disabled --query "$INITIAL_QUERY" \
+    : | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --ansi --disabled --query "$INITIAL_QUERY" \
         --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
         --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
         --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+rebind(ctrl-r)+transform-query(echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f)" \

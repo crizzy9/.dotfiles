@@ -1,0 +1,11 @@
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    unstagedChangesColor:
+      - "#e65757"
+os:
+  edit: nvim {{filename}}
+  editInTerminal: true

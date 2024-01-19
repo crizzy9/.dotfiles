@@ -331,7 +331,10 @@ require('lazy').setup({
         --   -- custom mappings
         --   vim.keymap.set('n', '<leader>tn', api.tree.toggle, opts('Toggle Directory Tree'))
         --
-        -- end
+        -- end,
+        update_focused_file = {
+          enable = true,
+        },
       }
     end,
   },
@@ -598,6 +601,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -619,6 +635,11 @@ require('telescope').setup {
     dynamic_preview_title = true,
     -- included by default
     -- file_ignore_patterns = { 'node_modules', '.git' },
+    -- sort results by line number, might cause slowness
+    -- https://github.com/nvim-telescope/telescope.nvim/issues/1080
+    tiebreak = function(entry1, entry2, _)
+      return entry1.index < entry2.index
+    end,
   },
 }
 

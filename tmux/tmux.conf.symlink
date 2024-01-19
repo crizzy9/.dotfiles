@@ -62,9 +62,13 @@ set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
 # set -g @catppuccin_window_current_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)#{?window_zoomed_flag,(),}"
 # set -g @catppuccin_window_current_text "#(echo '#{b:pane_current_path}')#{?window_zoomed_flag,(),}"
-set -g @catppuccin_status_modules_right "directory session date_time"
+set -g @catppuccin_status_left_separator  "█"
+set -g @catppuccin_status_modules_left "session"
+set -g @catppuccin_status_modules_right "directory date_time"
+# set -g @catppuccin_status_modules_right "directory condaenv date_time"
 set -g @catppuccin_directory_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)"
 set -g @catppuccin_date_time_text "%H:%M"
+# set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
 
 # =================
 # plugin settings
