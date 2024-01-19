@@ -8,4 +8,5 @@ gui:
       - "#e65757"
 os:
   edit: nvim {{filename}}
+  editAtLine: nvim {{filename}} +{{line}}
   editInTerminal: true

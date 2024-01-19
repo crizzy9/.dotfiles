@@ -162,18 +162,21 @@ unset __conda_setup
 
 # additional path setup - modify per user
 export PATH="/Users/spadia/.local/bin:$PATH"
+export PATH="/Users/spadia/.config/tmux/plugins/tmuxifier/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # additional exports
 export LANG=en_US.UTF-8
 
 # set defaults
-nvim_exists=$(command -v "nvim" >/dev/null 2>&1)
-if [[ $nvim_exists ]]; then
+nvim_exists=$(command -v "nvim")
+if [ -n $nvim_exists ]; then
   export EDITOR='nvim'
 else
   export EDITOR='vim'
 fi
+
+eval "$(tmuxifier init -)"
 
 ### additional settings ####
 # =============================================================================
@@ -289,7 +292,7 @@ export FZF_CTRL_R_OPTS="
 
 
 ##### Ctrl+T commands #####
-# paste selected file path into command line 
+# paste selected file path into command line
 
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules,__pycache__}"'
@@ -410,6 +413,23 @@ bindkey -s '^f' 'nvimGoToFile\n'
 # bindkey -s '^f' 'nvim $(fzf)\n'
 # bindkey '^F' fzf-file-widget
 ###########################################
+
+##### tmux sesh #####
+#####################
+function tmuxSeshList {
+    echo $(sesh list -tz | fzf-tmux -p 55%,60% --no-sort --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
+}
+
+function tmuxSeshConnect {
+    selection=$(tmuxSeshList)
+    if [ -z "$selection" ]; then
+        echo "No session selected"
+    else
+        sesh connect $selection
+    fi
+}
+bindkey -s '^g' 'tmuxSeshConnect\n'
+#####################
 
 
 #### zsh keybindings ####

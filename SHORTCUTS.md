@@ -109,6 +109,27 @@ tmux info - Show basic tmux info
 -- Custom configuration
 ```
 
+# Plugins
+
+```txt
+<prefix> e - sesssionx
+
+# brew install joshmedeski/sesh/sesh
+<C-g> - sesh , zoxide fuzzy sessionizer
+
+# tmuxifier
+# format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
+tmux ns dotfiles - tmuxifier create new session config
+tmux es dotfiles - tmuxifier edit session config
+tmux s dotfiles - load session config
+tmux ls - list all session configs
+<C-g> <C-s> - switch to looking up tmuxifier configs from sesh lookup
+
+tmux-resserect
+tmux-continuum
+vim-tmux-navigator
+```
+
 ## terminator shortcuts
 
 ```text
