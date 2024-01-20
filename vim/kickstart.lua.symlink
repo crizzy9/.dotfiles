@@ -239,6 +239,13 @@ require('lazy').setup({
         'fugitive',
         'nvim-tree',
         -- 'fzf',
+        {
+          sections = {
+            lualine_a = { 'filename' },
+            lualine_z = { 'filetype' },
+          },
+          filetypes = { 'undotree', 'undotreeDiff' },
+        },
       },
     },
   },
@@ -497,6 +504,17 @@ require('lazy').setup({
       { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
+
+  -- undo tree
+  {
+    "jiaoshijie/undotree",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+    keys = {
+      -- load the plugin only when using its keybindings
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "[U]ndo Tree" },
     },
   },
 

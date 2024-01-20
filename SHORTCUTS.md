@@ -59,6 +59,7 @@ tmux popup - create a popup window
 <prefix> + $ - rename session
 <prefix> + s - list sessions and switch between
 <prefix> + (/) - Move between subsequent sessions
+<prefix> + L|<C-b> - Move to last session
 
 -- Windows/Tabs
 <prefix> + c - New window/tab
@@ -74,7 +75,7 @@ tmux popup - create a popup window
 <prefix> + " - Horizontal split
 <prefix> + % - Vertical split
 <prefix> + z - zoom into a pane
-<prefix> + Up/Down/Left/Right - Move to pane in direction
+<prefix> + h/j/k/l | Up/Down/Left/Right - Move to pane in direction
 <prefix> + o - Cycle through panes based on their numbers
 <prefix> + ; - Focus last active pane
 <prefix> + q - Show pane numbers
@@ -82,11 +83,12 @@ tmux popup - create a popup window
 <prefix> + ! - Convert current pane to window
 <prefix> + x - Close current pane
 
-<prefix> + <meta> + Up/Down/Left/Right - Resize current pane
+<meta> + h/j/k/l (<prefix> + <meta> + Up/Down/Left/Right) - Resize current pane
 <prefix> + E - Spread panes evenly
 
 <prefix> + space - Cycle through default layouts
 <prefix> + Ctrl + o - Rotate through pane locations
+<meta> + 1/2/3/4/5 - Change pane layouts
 <prefix> + {/} - Switch the current pane with left/right
 
 -- Copy mode - Used for movement also, mouse disabled by default
@@ -104,18 +106,14 @@ Esc + q - Exit out of commands
 tmux info - Show basic tmux info
 <prefix> + t - View current time
 
--- Resurrect sessions
-
--- Custom configuration
-```
-
-# Plugins
-
-```txt
+-- Plugins
+# sessionx - session manager with preview
 <prefix> e - sesssionx
 
+# sesh - zoxide based fuzzy finder tmux session creator
 # brew install joshmedeski/sesh/sesh
-<C-g> - sesh , zoxide fuzzy sessionizer
+<C-g> - zoxide fuzzy sessionizer from sesh lookup
+<C-g> <C-t> - switch to looking up existing tmux sessions from sesh lookup
 
 # tmuxifier
 # format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
@@ -123,11 +121,43 @@ tmux ns dotfiles - tmuxifier create new session config
 tmux es dotfiles - tmuxifier edit session config
 tmux s dotfiles - load session config
 tmux ls - list all session configs
-<C-g> <C-s> - switch to looking up tmuxifier configs from sesh lookup
 
-tmux-resserect
-tmux-continuum
-vim-tmux-navigator
+#tmux thumbs - quick history selector - requires cargo
+<prefix> + space - open tmux thumbs
+glgg <prefix>+space - select sha
+a-z - quick select with numbers
+<prefix> + ] - paste
+
+# tmux fzf
+# requires sed, fzf, CopyQ(clipboard), pstree(processes)
+<prefix> + F | <C-f> - fzf search tmux action commands
+
+# tmux fzf-urls - can work with .txt files as well?
+<prefix> + u - search urls in current tmux buffer
+
+# tmux-resserect and tmux-continuum
+<prefix> + <C-s> - save session
+<prefix> + <C-r> - restore session
+
+# lazygit
+
+# tmux-nerd-font-window-name
+edit `~/.config/tmux/tmux-nerd-font-window-name.yml` to update settings
+
+# tmux yank
+use vim keybindings in copy mode
+
+# catppuccin tmux
+
+# vim-tmux-navigator - Works in vim as well
+<C-hjkl> - Move between panes
+<C-\> - Move to last pane
+
+# harpoon
+
+# cht.sh
+
+# custom compiler/runner
 ```
 
 ## terminator shortcuts
@@ -195,6 +225,7 @@ nvim/command ** <Tab> - get relevant fzf search
 Ctrl + f - fzf nvim open a file
 Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
 Ctrl + x d - search a process with fzf
+Ctrl + b Ctrl + f - search a process with fzf while in tmux
 
 Ctrl + p/n    - cycle through results
 Esc / Ctrl + (g|c)  - cancel fzf search
@@ -351,6 +382,17 @@ zf - view folding options via which-key
 za - toggle folds
 zR - expand all folds
 zM - close all folds
+
+# undo tree
+<leader> u - toggle undo tree for current buffer with preview
+j 	jump to next undo node
+gj 	jump to the parent node of the node under the cursor
+k 	jump to prev undo node
+J 	jump to next undo node and undo to this state
+K 	jump to prev undo node and undo to this state
+q 	quit undotree
+p 	jump into the undotree diff window
+Enter 	undo to this state
 
 # commands for vim commandline
 :norm ... - execute normal mode commands work on visual selection as well

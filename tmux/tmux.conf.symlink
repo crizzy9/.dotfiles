@@ -35,14 +35,41 @@ set -g pane-border-style 'fg=brightblack,bg=default'
 bind '"' split-window -v -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 
+# resize panes using Alt-arrow without prefix
+bind -n M-h resize-pane -L 5
+bind -n M-l resize-pane -R 5
+bind -n M-k resize-pane -U 5
+bind -n M-j resize-pane -D 5
+
+# switch pane layouts with numbers
+bind -n M-1 select-layout even-horizontal
+bind -n M-2 select-layout even-vertical
+bind -n M-3 select-layout main-horizontal
+bind -n M-4 select-layout main-vertical
+bind -n M-5 select-layout tiled
+
+# switch pane to other ones
+# default <prefix> { }
+# cycle through pane locations
+# default <prefix> <C-o>
+
+# cycle through pane layouts
+bind -n M-Tab next-layout
+
+# skip "kill-pane 1? (y/n)" prompt (cmd+w)
+bind-key x kill-pane
+
 # =====================
 # additional settings
 # =====================
 
-# bind-key -r B run-shell "~/.config/tmux/scripts/sessionizer.sh ~/omerxx/omerxx.com"
+# clear history
+bind-key -T prefix C-t send-keys "clear" \; send-keys "Enter"
 
-# set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
-# set -g @fzf-url-history-limit '2000'====
+# switch to last session
+bind-key -T prefix C-b switch-client -l
+
+# lazygit popup
 
 # =========
 # plugins
@@ -52,15 +79,17 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'fcsonline/tmux-thumbs'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'wfxr/tmux-fzf-url'
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @plugin 'jimeh/tmuxifier'
-# set -g @plugin 'joshmedeski/t-smart-tmux-session-manager'
 set -g @plugin 'crizzy9/catppuccin-tmux'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+set -g @plugin 'fcsonline/tmux-thumbs'
 
-# set -g @plugin 'tmux-plugins/tmux-yank'
+# use brew install joshmedeski/sesh/sesh
+# set -g @plugin 'joshmedeski/t-smart-tmux-session-manager'
 
 # =======
 # theme
@@ -78,16 +107,44 @@ set -g @catppuccin_directory_text "#(echo '#{pane_current_path}' | rev | cut -d'
 set -g @catppuccin_date_time_text "%H:%M"
 # set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
 
+# add window process icons
+
 # =================
 # plugin settings
 # =================
+
+# sessionx
 set -g @sessionx-bind 'e'
 set -g @sessionx-x-path '~/.dotfiles'
 set -g @sessionx-window-height '85%'
 set -g @sessionx-window-width '75%'
 set -g @sessionx-zoxide-mode 'on'
+
+# tmux restore/continuum
 # set -g @continuum-restore 'on'
 set -g @resurrect-strategy-nvim 'session'
+
+# tmux fzf
+TMUX_FZF_LAUNCH_KEY="C-f"
+TMUX_FZF_OPTIONS='-p -w 62% -h 38% -m --prompt="🔎  " --border-label=" Tmux Action Finder "'
+TMUX_FZF_ORDER="session|window|pane|command|keybinding|clipboard|process"
+TMUX_FZF_PANE_FORMAT="[#{window_name}] #{pane_current_command}  [#{pane_width}x#{pane_height}] [history #{history_size}/#{history_limit}, #{history_bytes} bytes] #{?pane_active,[active],[inactive]}"
+
+# custom menu - can execute any shell command
+TMUX_FZF_MENU=\
+"foo\necho 'Hello!'\n"\
+"bar\nls ~\n"\
+"sh\nsh ~/test.sh\n"
+
+# tmux fzf url
+set -g @fzf-url-extra-filter 'grep -oE "\b[a-zA-Z]+\.txt\b"'
+# add binding for ping
+set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+set -g @fzf-url-history-limit '2000'
+
+# tmux thumbs
+# default key is <prefix> + Space
+# set -g @thumbs-key 'C-t'
 
 # set -g @catppuccin_window_left_separator ""
 # set -g @catppuccin_window_right_separator " "
