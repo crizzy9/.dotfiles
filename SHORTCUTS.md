@@ -29,6 +29,16 @@ Alt + up/down - cycle through search engines
 Ctrl + p/n - Cycle through suggestions in address bar
 Cmd + [ ] - Back/Forward
 ```
+## Tridactyl shortcuts
+
+[default keybindings](https://github.com/tridactyl/tridactyl/blob/master/src/lib/config.ts#L184)
+>`:viewconfig --default`
+
+| keymap    | Action    | Comments    |
+|---------------- | --------------- | --------------- |
+| `b`    | Search tabs in current group    | 1    |
+| `w`    | Search history and bookmarks    | 2    |
+
 
 ## Tmux Shortcuts
 Sessions = Traditional window type thigs
@@ -57,7 +67,7 @@ tmux popup - create a popup window
 -- Sessions
 <prefix> + d - detach current session
 <prefix> + $ - rename session
-<prefix> + s - list sessions and switch between
+<prefix> + s - list sessions and switch between #man tmux choose-tree, use right click on mouse to view options
 <prefix> + (/) - Move between subsequent sessions
 <prefix> + L|<C-b> - Move to last session
 
@@ -608,6 +618,8 @@ csth1<CR> - change html tag <b>text</b> -> <h1>text</h1>
 dsf - delete function call func(abc) -> abc
 ds[ - delete surrounding brackets [abc] -> abc
 S" - surround a pre visual selection with given character
+
+# mini.nvim - alignment and other things such as surround, splitjoin, jump2d
 
 ## move to keymapings. might work to extend visual selection
 ]m - move to next function

@@ -28,6 +28,11 @@ symbol_map U+23FB-U+23FE,U+2b58 Symbols Nerd Font
 symbol_map U+F300-U+F313 Symbols Nerd Font
 # Pomicons
 symbol_map U+E000-U+E00D Symbols Nerd Font
+# Powerline Symbols
+symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 Symbols Nerd Font
+narrow_symbols U+E0A0-U+E0A3,U+E0C0-U+E0C7 1
+# Other symbols
+symbol_map U+F900-U+FAFF Symbols Nerd Font
 
 # symbol_map U+f101-U+f208 nonicon
 
@@ -37,6 +42,9 @@ symbol_map U+E000-U+E00D Symbols Nerd Font
 # remap opt to alt
 macos_option_as_alt yes
 cursor_blink_interval 0
+
+# colorscheme
+theme
 
 # ==================================================
 

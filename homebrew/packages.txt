@@ -1,4 +1,4 @@
-exa
+eza
 btop
 bat
 fd-find

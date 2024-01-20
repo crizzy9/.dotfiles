@@ -66,6 +66,10 @@ chmod +x ./install
 ./install
 ```
 
+### Nerd fonts
+[nerd-font-downloads](https://www.nerdfonts.com/font-downloads)
+[nerd-font-cheatsheet](https://www.nerdfonts.com/cheat-sheet)
+
 # Plugins
 
 Below is a list of all the plugins supported by this repository, more to come...
@@ -115,11 +119,16 @@ TODO
 ### Wezterm
 Install wezterm from source: https://wezfurlong.org/wezterm/install/linux.html#installing-on-ubuntu-and-debian-based-systems
 
+All latest nerd fonts should automatically be installed
+
+use `Ctrl+Shift+U` - to find icons
+
 ### Alacritty
 Install using brew `brew install --cask alacritty --no-quarantine`
 https://github.com/alacritty/alacritty/issues/4673#issuecomment-771291615
 
 ### Kitty
+Nerd fonts installed via the kitty.conf file
 
 ## Tmux
 Installs tpm via install script

@@ -193,10 +193,10 @@ export ZSH_HIGHLIGHT_STYLES[comment]='none'
 # alias rg='rg --hidden --follow --glob "!.git/*"'
 
 # ls aliases
-alias lss='exa --icons'
-alias lsa='exa -la --icons'
-alias lsag='exa -la --icons --git --header'
-alias lsat='exa -la --icons --git --header --tree -L 2 --git-ignore'
+alias lss='eza --icons'
+alias lsa='eza -la --icons'
+alias lsag='eza -la --icons --git --header'
+alias lsat='eza -la --icons --git --header --tree -L 2 --git-ignore'
 
 # Json aliases
 ## copy formatted json to clipboard
