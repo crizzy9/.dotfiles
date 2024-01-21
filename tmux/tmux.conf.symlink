@@ -19,6 +19,9 @@ set -g set-clipboard on
 set -g history-limit 100000
 set -g detach-on-destroy off
 
+# clashes with go to beginning of line in zsh
+# set -g prefix2 C-a
+
 # ==========================
 # window and pane settings
 # ==========================
@@ -70,6 +73,7 @@ bind-key -T prefix C-t send-keys "clear" \; send-keys "Enter"
 bind-key -T prefix C-b switch-client -l
 
 # lazygit popup
+bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
 
 # =========
 # plugins
@@ -94,20 +98,30 @@ set -g @plugin 'fcsonline/tmux-thumbs'
 # =======
 # theme
 # # =======
+
+# catppuccin theme settings
 set -g @catppuccin_flavour 'mocha'
 set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
 # set -g @catppuccin_window_current_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)#{?window_zoomed_flag,(),}"
 # set -g @catppuccin_window_current_text "#(echo '#{b:pane_current_path}')#{?window_zoomed_flag,(),}"
-set -g @catppuccin_status_left_separator  "█"
-set -g @catppuccin_status_modules_left "session"
-set -g @catppuccin_status_modules_right "directory date_time"
+# set -g @catppuccin_status_left_separator  "█"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator " "
+# set -g @catppuccin_status_modules_left "session"
+# set -g @catppuccin_status_modules_right "directory date_time"
+set -g @catppuccin_status_modules_right "session directory date_time"
 # set -g @catppuccin_status_modules_right "directory condaenv date_time"
 set -g @catppuccin_directory_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)"
 set -g @catppuccin_date_time_text "%H:%M"
 # set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
 
-# add window process icons
+# transparent background
+# set-option -g status-style 'bg=default'
+
+# pane borders
+# set -g pane-active-border-style 'fg=magenta,bg=default'
+# set -g pane-border-style 'fg=brightblack,bg=default'
 
 # =================
 # plugin settings

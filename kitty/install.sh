@@ -8,7 +8,6 @@ os=
 get_os os
 
 # - Install kitty terminal
-# - Install nerd fonts (Symbols Nerd Font)
 
 main() {
     # check if kitty is installed

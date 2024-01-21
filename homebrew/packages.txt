@@ -10,5 +10,7 @@ timer # sudo tee /etc/apt/sources.list.d/caarlos0.list
 CopyQ
 pstree
 yq
+icalBuddy
+trash
 
 # terminal-notifier (macOS only) - use say for linux?

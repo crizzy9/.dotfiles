@@ -1,6 +1,6 @@
 --  Pull in wezterm API
 local wezterm = require 'wezterm';
-local act = wezterm.action
+-- local act = wezterm.action
 
 -- This table will hold the configuration
 local config = {}
@@ -11,30 +11,31 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
--- config.color_scheme = 'Catppuccin Mocha (Gogh)'
--- config.color_scheme = 'Argonaut (Gogh)'
-config.color_scheme = 'Neutron (Gogh)'
--- config.color_scheme = 'Dracula'
--- config.color_scheme = 'Classic Dark (base16)'
-
--- hide tab bar if only one tab
-config.hide_tab_bar_if_only_one_tab = true
+-- colorscheme
+-- config.color_scheme = 'Catppuccin Mocha'
+-- config.color_scheme = 'Neutron (Gogh)'
+config.color_scheme = 'Tokyo Night'
 
 -- set padding
 config.window_padding = {
-  left = 2,
-  right = 2,
-  top = 2,
+  left = 0,
+  right = 0,
+  top = 5,
   bottom = 0,
 }
 
+-- set window background opacity
+config.window_background_opacity = 0.95
+
+-- remove title bar but allow resizing - options: NONE, FULL, TITLE, default TITLE | RESIZE
+config.window_decorations = 'RESIZE'
+-- hide tab bar if only one tab
+config.hide_tab_bar_if_only_one_tab = true
+
 -- set font
--- config.font = wezterm.font("JetBrainsMono Nerd Font Mono", {weight="Bold"})
+config.font = wezterm.font("JetBrains Mono", { weight="Regular" })
 -- set font size
-config.font_size = 15.0
+config.font_size = 16.0
 
 -- set default window size
 -- config.initial_rows = 30

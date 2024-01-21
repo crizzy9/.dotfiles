@@ -9,18 +9,22 @@ Author: @crizzy9
 - Supported Plugins
   - nvim/vim
   - zsh
-  - ripgrep/fd/fzf
+  - tmux
   - bat
-  - homebrew/apt
+  - ranger
+  - zoxide/fzf/rg/fd/eza
+  - alacritty/kitty/wezterm
+  - lazygit
 - TODO:
+  - btop/htop/tiptop
   - git
-  - ranger/broot/zoxide
-  - iterm/termintor/alacritty/tmux/kitty/wezterm
+  - homebrew/apt
+  - zellij
   - yabai
   - btop
   - zathura
   - entr/cron
-  - ~~ctags~~
+  - broot
 - Custom Keybidings
 
 # Installation
@@ -70,6 +74,78 @@ chmod +x ./install
 [nerd-font-downloads](https://www.nerdfonts.com/font-downloads)
 [nerd-font-cheatsheet](https://www.nerdfonts.com/cheat-sheet)
 
+Convert unicode escape notation to utf-8 icon and copy it do the following
+> in shell
+```sh
+echo -e "\uf002" | pbcopy
+printf "%b" "\uf002" | pbcopy
+```
+Add a space after the font to allow full width
+
+> in vim use the [following](https://stackoverflow.com/questions/71577981/how-to-convert-visual-selection-from-unicode-to-the-corresponding-character-in-v)
+
+#### Setup
+To install nerd fonts on each terminal use this [guide](https://www.youtube.com/watch?v=mQdB_kHyZn8)
+
+NOTE: use [nerdfix](https://github.com/loichyan/nerdfix) to fix unsupported or old icons in newer versions of nerd fonts
+NOTE: if nerd fonts v3 works no need to do nerdfix, just switch to use v3 icons
+
+*Installation* 
+refer to [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) for additional instructions
+
+**MacOS**
+  Option 1:
+    Use brew directly install nerd fonts
+    - Tap into cask-fonts: `brew tap homebrew/cask-fonts`
+    - Search fonts: `brew search font- | grep jetbrains`
+    - Install a regular/patched font via: `brew install --cask font-jetbrains-mono-nerd-font`
+
+  Option 2:
+    Manual Installation
+    - Download Symbols Nerd Font and your Chosen Text Font from nerd-font-downloads website
+    - Extract the downloaded fonts and copy it to `~/Library/Fonts`
+    - Verify installation via the Font Book application
+
+**Linux**
+  - Download Symbols Nerd Font and your Chosen Text Font from nerd-font-downloads website
+  - Extract the downloaded fonts and copy it to `~/.local/share/fonts`
+  - Verify installation using `fc-list | grep "3270"`
+
+**Windows**
+[Use this method](https://nerdschalk.com/how-to-install-fonts-on-windows-11/)
+
+*Terminal settings*
+NOTE: with advanced installation methods on terminals usually you dont need a directly set a patched nerd font and a regular font with fallback for nerd font should work better
+
+**iTerm2**
+  - Go to iTerm2 Preferences > Profiles > Text > Font > Choose Regular Font / Patched Font
+  - Allow ligatures by clicking on `Use ligatures`
+  - Setup fallback for nerd fonts if choosing regular font by clicking on `Use a different font for non-ASCII text` and select Symbols Nerd Font
+
+**Wezterm**
+  - Wezterm by default supports Symbols Nerd Font v3 via fallback without needing to add it explicitly
+  - Add the Regular font in your wezterm config as shown in `wezterm/wezterm.lua.symlink`
+    `config.font = wezterm.font("JetBrains Mono", { weight="Regular" })`
+  - Set custom fallback fonts for icon scaling and other languages with as per the following
+    `config.font = wezterm.font_with_fallback { 'JetBrains Mono', { 'Symbols Nerd Font Mono', scale = 0.75 } }`
+  - You can also use patched fonts directly as the font but it is not recommended
+
+**Kitty**
+  - Kitty allows both Regular with fallback and patched fonts
+  - For patched fonts set the font family to the patched font like `font_family JetBrains Mono Nerd Font`
+  - For Regular fonts with fallback use the following set the symbol maps as described in this [article](https://erwin.co/kitty-and-nerd-fonts/) or [kitty docs](https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font) or refer to `kitty/kitty.conf.symlink`
+  - Refer to [test-fonts-script-by-nerd-fonts](https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/bin/scripts/test-fonts.sh#L110) for more detailed symbol maps
+  - run kitty --debug-font-fallback if you see issues
+
+**Alacritty**
+  - Alacritty doesnt support ligatures and fallback as of now
+  - Add the patched nerd font as font family in alacritty config as shown in `alacritty/alacritty.toml.symlink`
+    `normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }`
+  - On Linux fallback is supported by updating `~/.config/fontconfig/fonts.conf` as per [this doc](https://wiki.archlinux.org/title/Font_configuration/Examples)
+
+*Test*
+Use the script `smoke-test.sh` included in this repo to test all nerd fonts and ligatures with `./smoke-test.sh`
+
 # Plugins
 
 Below is a list of all the plugins supported by this repository, more to come...
@@ -100,6 +176,11 @@ iTerm > Preferences > Profile > Text > Font > Hack Nerd Font
 
 TODO: fix hanging on up arrow key in macos
 
+### zoxide
+```sh
+zoxide init zsh #copy contents to zshrc
+```
+
 ## Bat
 Enhanced cat to view files at a glance. Useful with fzf and ranger
 
@@ -121,14 +202,17 @@ Install wezterm from source: https://wezfurlong.org/wezterm/install/linux.html#i
 
 All latest nerd fonts should automatically be installed
 
-use `Ctrl+Shift+U` - to find icons
+use `Ctrl+Shift+U` - to find icons via the unicode picker
 
 ### Alacritty
 Install using brew `brew install --cask alacritty --no-quarantine`
 https://github.com/alacritty/alacritty/issues/4673#issuecomment-771291615
 
 ### Kitty
+Install from Kitty website
 Nerd fonts installed via the kitty.conf file
+
+use `Ctrl+Shift+U` or `Ctrl+Cmd+Space` - to find icons via the unicode picker
 
 ## Tmux
 Installs tpm via install script

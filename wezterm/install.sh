@@ -8,7 +8,6 @@ os=
 get_os os
 
 # - Install Wezterm terminal
-# - Install nerd fonts if not already installed with wezterm
 
 main() {
     # check if wezterm is installed

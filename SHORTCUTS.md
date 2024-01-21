@@ -36,8 +36,8 @@ Cmd + [ ] - Back/Forward
 
 | keymap    | Action    | Comments    |
 |---------------- | --------------- | --------------- |
-| `b`    | Search tabs in current group    | 1    |
-| `w`    | Search history and bookmarks    | 2    |
+| `b`    | Switch to tab in current window    | 1    |
+| `t`    | Search open history and bookmarks in new tab    | 2    |
 
 
 ## Tmux Shortcuts
@@ -124,6 +124,7 @@ tmux info - Show basic tmux info
 # brew install joshmedeski/sesh/sesh
 <C-g> - zoxide fuzzy sessionizer from sesh lookup
 <C-g> <C-t> - switch to looking up existing tmux sessions from sesh lookup
+<C-g> <C-s> - switch to looking up tmuxifier configs from sesh lookup - allow editing?
 
 # tmuxifier
 # format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
@@ -150,6 +151,7 @@ a-z - quick select with numbers
 <prefix> + <C-r> - restore session
 
 # lazygit
+<prefix> + K - open lazygit in tmux popup
 
 # tmux-nerd-font-window-name
 edit `~/.config/tmux/tmux-nerd-font-window-name.yml` to update settings
@@ -182,10 +184,11 @@ Ctrl + Shift + f - search in terminal backlog
 ## Kitty shortcuts
 
 ```text
-Ctrl + Shift + <F5> - Reload Kitty config
-Ctrl + Shift + <F6> - Open current kitty config
+Ctrl + Shift + <F5> (Ctrl + Cmd + ,) - Reload Kitty config
+Ctrl + Shift + <F6> (Alt + Cmd + ,) - Show current kitty config
+Ctrl + Shift + <F2> (Cmd + ,) - Open current kitty config in editor
 Cmd + Enter - Open a horizontal pane
-# Does not work - Ctrl + Shift + Enter - Open a Vertical pane
+Cmd + Enter + Ctrl + Shift + L - Open a horizontal pane then change to vertical - find a better way?
 Cmd + Shift + d (Ctrl + Shift + w) - Close a window
 Ctrl + Shift + ] [ - Cycle through panes
 Ctrl + Shift + L - Change Layout
@@ -203,6 +206,12 @@ Ctrl + Shift + left | right - Cycle through panes
 Cmd + t - New tab
 Ctrl + Shift + Z - Maximize pane - TODO: show it is maximized
 Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing current buffer?
+```
+
+## Lazygit shortcuts
+```text
+lg - open lazygit
+space - stage a line
 ```
 
 ## zsh shortcuts
@@ -466,16 +475,16 @@ Space + t d - toggle git blame delete line in current changes
 # conda environments in vim using swenv and dressing
 :lua require('swenv.nvim').pick_venv()
 
-# nvim-tree (Working with folder structure and opened files)
-## netrw is turned off - enable if needed - more info in nvim-tree readme
+# NVIM TREE
 ## TODO: create full side bar with git, active buffers as shown in (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 ## TODO: Update to open the split next to the current window not in current window and move existing next to it
 ## TODO: open the same nvim tree in different tabs (https://github.com/nvim-tree/nvim-tree.lua/discussions/2244) (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 ## more info on floating preview (https://github.com/nvim-tree/nvim-tree.lua/issues/135) (https://github.com/JMarkin/mynvim/blob/d733abb2ec72654211dafb089f237df9c2745758/lua/plugins/nvimtree.lua#L5) (https://github.com/JMarkin/nvim-tree.lua-float-preview)
-(:NvimTreeToggle) - open file explorer
+
+<leader> tn (:NvimTreeToggle) - open file explorer
 (:NvimTreeFindFileToggle) - Search in file explorer - TODO: Not finding file ?
-Tab - open preview for a file
-- exit preview?
+Tab|Ctrl +i - open preview for a file
+H I | U - show hidden and gitignore files (FIX: U shortcut not working)
 a <filename> <CR> - create a new file/folder (while in nvimtree)
 Ctrl + r - Rename a file in nvimtree (does not updated references with lsp) (TODO: update references, use telescope file browser maybe?, use https://github.com/nvim-tree/nvim-tree.lua/wiki/Extension-Plugins)
 d - remove selected file (confirm with y)
@@ -594,6 +603,14 @@ Ctrl + s - increment highlight on scoped regions
 Space + c n - Split / Condense code block using ts-node-action and treesitter
 
 ## text objects
+### move to keymapings. might work to extend visual selection
+]m - move to next function
+[m - move to previous function
+]] - move to next class
+[[ - move to previous class
+]s - move to next scope item
+<leader>a - swap current parameter with next
+<leader>A - swap current parameter with previous
 p - paragraph
 
 ## visual selection bindings - start with v
@@ -620,15 +637,6 @@ ds[ - delete surrounding brackets [abc] -> abc
 S" - surround a pre visual selection with given character
 
 # mini.nvim - alignment and other things such as surround, splitjoin, jump2d
-
-## move to keymapings. might work to extend visual selection
-]m - move to next function
-[m - move to previous function
-]] - move to next class
-[[ - move to previous class
-
-# nvim tree
-Ctrl + i - open file as a temporary buffer
 
 # telescope
 
