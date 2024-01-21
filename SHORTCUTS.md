@@ -256,6 +256,7 @@ C-d | C-u - Scroll main panel on right
 z - undo last action
 C-z - redo last action
 : - run custom command
+@ - show command log menu
 
 # advanced functions
 ## ammend
