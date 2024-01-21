@@ -62,21 +62,22 @@ tmux lsp - list all panes
 tmux a/at/attach/attach-session - attach to last known session
 tmux a -t <session-name> - attach to a specific session
 tmux kill-session -t <session-name> - kill a specific session
-tmux popup - create a popup window
+tmux popup - create a popup/floating window terminal
+tmux display-popup - run a shell command into a tmux popup and only persist it for that one command
 
 -- Sessions
 <prefix> + d - detach current session
 <prefix> + $ - rename session
 <prefix> + s - list sessions and switch between #man tmux choose-tree, use right click on mouse to view options
-<prefix> + (/) - Move between subsequent sessions
-<prefix> + L|<C-b> - Move to last session
+<prefix> + (/) - Switch between subsequent sessions
+<prefix> + L - Switch to last session
 
 -- Windows/Tabs
 <prefix> + c - New window/tab
 <prefix> + , - Rename window/tab
 <prefix> + & - Close current window
 <prefix> + w - List windows/tabs
-<prefix> + p/n - Cycle through windows/tabs
+<prefix> + p/n | <C-p/n> - Cycle through windows/tabs
 <prefix> + <num> - Activate specific tab
 <prefix> + l - Activate last window/tab
 <prefix> + w - Select and switch session or window from preview list
@@ -107,6 +108,12 @@ q - Exit copy mode
 Enter - Copy selection
 <prefix> + ] - pase contents to buffer
 
+-- Custom keybindings
+<prefix> + <C-c> - Clear console
+<prefix> + <C-b> - Move to last session
+<prefix> + b - Move to last session - set via tmux-sensible
+<prefix> + R - source tmux.conf
+
 -- Command mode
 <prefix> + : - Enter command mode
 Esc + q - Exit out of commands
@@ -127,24 +134,17 @@ tmux info - Show basic tmux info
 <C-g> <C-s> - switch to looking up tmuxifier configs from sesh lookup - allow editing?
 
 # tmuxifier
-# format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
-tmux ns dotfiles - tmuxifier create new session config
-tmux es dotfiles - tmuxifier edit session config
-tmux s dotfiles - load session config
-tmux ls - list all session configs
-
-#tmux thumbs - quick history selector - requires cargo
-<prefix> + space - open tmux thumbs
-glgg <prefix>+space - select sha
-a-z - quick select with numbers
-<prefix> + ] - paste
+## project file format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
+## needs to be added to path to run commands
+tmuxifier ns dotfiles - tmuxifier create new session config
+tmuxifier es dotfiles - tmuxifier edit session config
+tmuxifier s dotfiles - load session config
+tmuxifier ls - list all session configs
 
 # tmux fzf
-# requires sed, fzf, CopyQ(clipboard), pstree(processes)
+## requires sed, fzf, CopyQ(clipboard), pstree(processes)
+## Provides custom menu to run additional scripts from finder
 <prefix> + F | <C-f> - fzf search tmux action commands
-
-# tmux fzf-urls - can work with .txt files as well?
-<prefix> + u - search urls in current tmux buffer
 
 # tmux-resserect and tmux-continuum
 <prefix> + <C-s> - save session
@@ -159,17 +159,29 @@ edit `~/.config/tmux/tmux-nerd-font-window-name.yml` to update settings
 # tmux yank
 use vim keybindings in copy mode
 
-# catppuccin tmux
-
 # vim-tmux-navigator - Works in vim as well
 <C-hjkl> - Move between panes
 <C-\> - Move to last pane
+
+# catppuccin tmux
+Forked repo with condaenv script
+For meetings script check https://github.com/omerxx/catppuccin-tmux/commit/e30336b79986e87b1f99e6bd9ec83cffd1da2017
 
 # harpoon
 
 # cht.sh
 
 # custom compiler/runner
+
+# Disabled unused plugins
+## tmux fzf-urls - can work with .txt files as well?
+<prefix> + u - search urls in current tmux buffer
+
+## tmux thumbs - quick history selector - requires cargo
+<prefix> + space - open tmux thumbs
+glgg <prefix>+space - select sha
+a-z - quick select with numbers
+<prefix> + ] - paste
 ```
 
 ## terminator shortcuts
@@ -209,9 +221,58 @@ Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing cur
 ```
 
 ## Lazygit shortcuts
+TODO: learn how to do interactive reabsing, cherry-picking, bisect, worktrees
+Find more keybindings [here](https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md)
+
 ```text
 lg - open lazygit
-space - stage a line
+C-b K - open lazy git in tmux popup
+a - in file menu stage unstage all
+<enter> - view selected file diff in main menu
+a - select hunk when in main diff menu
+space - stage a line/hunk in diff menu
+d - discard a line/hunk in diff menu
+W - in commit menu and press enter on another diff to compare diff between commits
+j/k - Move cursor up and down
+h/l - Move between menus or hunks in main diff menu
+Tab - switch to other pane (Stage/Unstaged) in main diff menu
+g - git reset options
+p - git pull current branch
+P - git push to current branch
+s - in file menu stash all changes
+S - in file menu view stash options
+space - in stash menu apply stash
+g - in stash menu pop stash
+d - in stash menu drop stash
+n - in stash menu convert stash to new branch
+/ - filter in any menu
+` - toggle file tree view
+c - commit changes
++ in commits - View commit graph
++ | _ - Cycle zoom in/out to current menu
+< | > - Scroll to top or bottom in current menu
+C-d | C-u - Scroll main panel on right
+<esc> - cancel any action
+z - undo last action
+C-z - redo last action
+: - run custom command
+
+# advanced functions
+## ammend
+a - while in commit menu to reset author for a commit
+A - while in commit menu ammend staged changes to the selected commit
+
+## cherry picking - not working properly
+c - pick one or multiple commits
+v - paste commit
+
+## interactive rebasing
+s - squash commit to the one below without interactive session
+Press e on a commit to start an interactive rebase on it: causing all above commits to become part of the TODO file. Then squash (s), fixup (f), drop (d), edit (e), move up (ctrl+i) or move down (ctrl+j) any of TODO commits, before continuing the rebase by bringing up the rebase options menu with m and then selecting continue.
+
+## bisect
+
+## worktrees
 ```
 
 ## zsh shortcuts

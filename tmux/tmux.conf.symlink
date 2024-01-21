@@ -1,11 +1,11 @@
 # ===================
 # terminal settings
 # ===================
-# set -g default-terminal "screen-256color"
 set-option -g default-terminal "screen-256color"
+set-option -sa terminal-overrides ",xterm*:Tc"
+# set -g default-terminal "screen-256color"
 # set -g default-terminal "tmux-256color"
 # set -ga terminal-overrides ",screen-256color*:Tc"
-set-option -sa terminal-overrides ",xterm*:Tc"
 # set-option -g terminal-overrides ',xterm-256color:RGB'
 
 # ==================
@@ -25,18 +25,15 @@ set -g detach-on-destroy off
 # ==========================
 # window and pane settings
 # ==========================
+
 # Start windows and panes at 1, not 0
 set -g base-index 1
 set -g pane-base-index 1
 set-window-option -g pane-base-index 1
 set-option -g renumber-windows on
 
+# Use vim keybindings in copy mode
 set-window-option -g mode-keys vi
-
-set -g pane-border-style 'fg=brightblack,bg=default'
-
-bind '"' split-window -v -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
 
 # resize panes using Alt-arrow without prefix
 bind -n M-h resize-pane -L 5
@@ -53,6 +50,7 @@ bind -n M-5 select-layout tiled
 
 # switch pane to other ones
 # default <prefix> { }
+
 # cycle through pane locations
 # default <prefix> <C-o>
 
@@ -63,17 +61,23 @@ bind -n M-Tab next-layout
 bind-key x kill-pane
 
 # =====================
-# additional settings
+# Custom keybindings
 # =====================
 
 # clear history
-bind-key -T prefix C-t send-keys "clear" \; send-keys "Enter"
+bind-key -T prefix C-c send-keys "clear" \; send-keys "Enter"
 
 # switch to last session
 bind-key -T prefix C-b switch-client -l
 
 # lazygit popup
 bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
+
+# sesh popup
+
+# Split panes
+bind-key -T prefix v split-window -v -c "#{pane_current_path}"
+bind-key -T prefix h split-window -h -c "#{pane_current_path}"
 
 # =========
 # plugins
@@ -84,13 +88,15 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'sainnhe/tmux-fzf'
-set -g @plugin 'wfxr/tmux-fzf-url'
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @plugin 'jimeh/tmuxifier'
 set -g @plugin 'crizzy9/catppuccin-tmux'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
-set -g @plugin 'fcsonline/tmux-thumbs'
+
+# unused
+# set -g @plugin 'wfxr/tmux-fzf-url'
+# set -g @plugin 'fcsonline/tmux-thumbs'
 
 # use brew install joshmedeski/sesh/sesh
 # set -g @plugin 'joshmedeski/t-smart-tmux-session-manager'
@@ -99,29 +105,38 @@ set -g @plugin 'fcsonline/tmux-thumbs'
 # theme
 # # =======
 
-# catppuccin theme settings
+# staus bar theme - catppuccin mocha
 set -g @catppuccin_flavour 'mocha'
+
 set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
-# set -g @catppuccin_window_current_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)#{?window_zoomed_flag,(),}"
+# set -g @catppuccin_window_default_fill "number"
+# set -g @catppuccin_window_current_fill "number"
 # set -g @catppuccin_window_current_text "#(echo '#{b:pane_current_path}')#{?window_zoomed_flag,(),}"
+
 # set -g @catppuccin_status_left_separator  "█"
 set -g @catppuccin_status_left_separator  " "
 set -g @catppuccin_status_right_separator " "
-# set -g @catppuccin_status_modules_left "session"
-# set -g @catppuccin_status_modules_right "directory date_time"
+# set -g @catppuccin_status_right_separator_inverse "no"
+# set -g @catppuccin_status_connect_separator "no"
+# set -g @catppuccin_status_fill "icon"
+
 set -g @catppuccin_status_modules_right "session directory date_time"
+
+# conda env script resides in catppuccin fork
+# set -g @catppuccin_status_modules_left "session"
 # set -g @catppuccin_status_modules_right "directory condaenv date_time"
+# set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
+
 set -g @catppuccin_directory_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)"
 set -g @catppuccin_date_time_text "%H:%M"
-# set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
+
+# pane borders - need to override via catppuccin
+# set -g pane-active-border-style 'fg=magenta'
+# set -g pane-border-style 'fg=brightblack,bg=default'
 
 # transparent background
 # set-option -g status-style 'bg=default'
-
-# pane borders
-# set -g pane-active-border-style 'fg=magenta,bg=default'
-# set -g pane-border-style 'fg=brightblack,bg=default'
 
 # =================
 # plugin settings
@@ -136,6 +151,7 @@ set -g @sessionx-zoxide-mode 'on'
 
 # tmux restore/continuum
 # set -g @continuum-restore 'on'
+# set -g @resurrect-capture-pane-contents 'on'
 set -g @resurrect-strategy-nvim 'session'
 
 # tmux fzf
@@ -159,25 +175,6 @@ set -g @fzf-url-history-limit '2000'
 # tmux thumbs
 # default key is <prefix> + Space
 # set -g @thumbs-key 'C-t'
-
-# set -g @catppuccin_window_left_separator ""
-# set -g @catppuccin_window_right_separator " "
-# set -g @catppuccin_window_middle_separator " █"
-# set -g @catppuccin_window_number_position "right"
-# set -g @catppuccin_window_default_fill "number"
-# set -g @catppuccin_window_default_text "#W"
-# set -g @catppuccin_window_current_fill "number"
-# set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
-# set -g @catppuccin_status_modules_right "directory meetings date_time"
-# set -g @catppuccin_status_modules_left "session"
-# set -g @catppuccin_status_left_separator  " "
-# set -g @catppuccin_status_right_separator " "
-# set -g @catppuccin_status_right_separator_inverse "no"
-# set -g @catppuccin_status_fill "icon"
-# set -g @catppuccin_status_connect_separator "no"
-# set -g @catppuccin_directory_text "#{b:pane_current_path}"
-# set -g @catppuccin_date_time_text "%H:%M"
-# set -g @catppuccin_meetings_text "#($HOME/.config/tmux/scripts/cal.sh)"
 
 # =========
 # run tpm

@@ -92,7 +92,7 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'antosha417/nvim-lsp-file-operations', config = true },
+      -- { 'antosha417/nvim-lsp-file-operations', config = true },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -325,6 +325,9 @@ require('lazy').setup({
     -- event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "<leader>tn" ,"<cmd>NvimTreeToggle<cr>", desc = "[T]oggle [N]vim-tree" },
     },
     config = function()
       require("nvim-tree").setup {
@@ -799,7 +802,8 @@ vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { des
 -- vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
 -- nvim tree keymaps, TODO: update to use common nvim-tree
-vim.keymap.set('n', '<leader>tn', require('nvim-tree.api').tree.toggle, { desc = '[T]oggle [N]vim-tree' })
+-- setting in lazy config with keys
+-- vim.keymap.set('n', '<leader>tn', require('nvim-tree.api').tree.toggle, { desc = '[T]oggle [N]vim-tree' })
 
 -- set filetype for symlink files
 -- doesnt work with files like zshrc.symlink - needs to have extension within filename

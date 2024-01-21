@@ -91,20 +91,22 @@ NOTE: use [nerdfix](https://github.com/loichyan/nerdfix) to fix unsupported or o
 NOTE: if nerd fonts v3 works no need to do nerdfix, just switch to use v3 icons
 
 *Installation* 
+
 refer to [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) for additional instructions
 
 **MacOS**
-  Option 1:
-    Use brew directly install nerd fonts
-    - Tap into cask-fonts: `brew tap homebrew/cask-fonts`
-    - Search fonts: `brew search font- | grep jetbrains`
-    - Install a regular/patched font via: `brew install --cask font-jetbrains-mono-nerd-font`
 
-  Option 2:
-    Manual Installation
-    - Download Symbols Nerd Font and your Chosen Text Font from nerd-font-downloads website
-    - Extract the downloaded fonts and copy it to `~/Library/Fonts`
-    - Verify installation via the Font Book application
+Option 1:
+  - Use brew directly install nerd fonts
+  - Tap into cask-fonts: `brew tap homebrew/cask-fonts`
+  - Search fonts: `brew search font- | grep jetbrains`
+  - Install a regular/patched font via: `brew install --cask font-jetbrains-mono-nerd-font`
+
+Option 2:
+  - Manual Installation
+  - Download Symbols Nerd Font and your Chosen Text Font from nerd-font-downloads website
+  - Extract the downloaded fonts and copy it to `~/Library/Fonts`
+  - Verify installation via the Font Book application
 
 **Linux**
   - Download Symbols Nerd Font and your Chosen Text Font from nerd-font-downloads website
@@ -112,9 +114,11 @@ refer to [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) for additional in
   - Verify installation using `fc-list | grep "3270"`
 
 **Windows**
+
 [Use this method](https://nerdschalk.com/how-to-install-fonts-on-windows-11/)
 
 *Terminal settings*
+
 NOTE: with advanced installation methods on terminals usually you dont need a directly set a patched nerd font and a regular font with fallback for nerd font should work better
 
 **iTerm2**
