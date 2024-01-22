@@ -25,7 +25,7 @@ Author: @crizzy9
   - zathura
   - entr/cron
   - broot
-- Custom Keybidings
+- Keybidings
 
 # Installation
 
@@ -335,6 +335,40 @@ hyperfine "nvim --clean --headless +qa"
 # measure with vscode using
 code --prof-startup
 ```
+### Terminal Benchmarks
 
-# Custom Keybindings
+More details [here](https://github.com/anarcat/terms-benchmarks#resources)
+
+Measure performance using the following script
+
+```sh
+time seq -f "the quick brown fox jumps over the lazy dog %g" 1000000
+```
+NOTE: Some of these had varying results over multiple runs this is averaged over 10 runs
+
+>Without Tmux
+
+| Terminal    | User    | System    | CPU    | Total Time    |
+|---------------- | --------------- | --------------- | --------------- | --------------- |
+| Alacritty    | 0.33s    | 0.66s    | 96%    | 1.024s   |
+| Wezterm   | 0.33s   | 0.61s   | 50%   | 1.867s   |
+| Kitty   | 0.33s   | 0.66s   | 55%   | 1.787s   |
+| iTerm2   | 0.36s   | 0.56s   | 27%   | 3.373s   |
+
+>With Tmux
+
+| Terminal    | User    | System    | CPU    | Total Time    |
+|---------------- | --------------- | --------------- | --------------- | --------------- |
+| Alacritty    | 0.72s    | 0.61s    | 50%    | 2.617s   |
+| Wezterm   | 0.73s   | 0.65s   | 46%   | 2.951s   |
+| Kitty   | 0.74s   | 0.67s   | 43%   | 3.213s   |
+| iTerm2   | 0.72s   | 0.68s   | 43%   | 3.249s   |
+
+**My thoughts**
+1. Wezterm - Best Overall and super easy to configure with lua, also unicode is supported by default
+2. Alacritty - Really fast on its own and similar performance to Wezterm with tmux, but configurigation options are limited
+3. Kitty - Good performance both with and without tmux, but configuration is not at all intuitive
+4. iTerm2 - Slower than top 3 rust based terminals, configuration is also limited
+
+# Keybindings
 Refer to [SHORTCUTS](SHORTCUTS.md)

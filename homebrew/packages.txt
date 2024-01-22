@@ -12,5 +12,5 @@ pstree
 yq
 icalBuddy
 trash
-
+# sesh (needs brew or download using go)
 # terminal-notifier (macOS only) - use say for linux?
