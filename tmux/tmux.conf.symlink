@@ -48,17 +48,14 @@ bind -n M-3 select-layout main-horizontal
 bind -n M-4 select-layout main-vertical
 bind -n M-5 select-layout tiled
 
+# cycle through pane layouts
+bind -n M-Tab next-layout
+
 # switch pane to other ones
 # default <prefix> { }
 
 # cycle through pane locations
 # default <prefix> <C-o>
-
-# cycle through pane layouts
-bind -n M-Tab next-layout
-
-# skip "kill-pane 1? (y/n)" prompt (cmd+w)
-bind-key x kill-pane
 
 # =====================
 # Custom keybindings
@@ -70,14 +67,17 @@ bind-key -T prefix C-c send-keys "clear" \; send-keys "Enter"
 # switch to last session
 bind-key -T prefix C-b switch-client -l
 
-# lazygit popup
-bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
-
-# sesh popup
+# skip "kill-pane 1? (y/n)" prompt
+bind-key x kill-pane
 
 # Split panes
 bind-key -T prefix v split-window -v -c "#{pane_current_path}"
 bind-key -T prefix h split-window -h -c "#{pane_current_path}"
+
+# lazygit popup
+bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
+
+# sesh popup
 
 # =========
 # plugins
@@ -93,6 +93,8 @@ set -g @plugin 'jimeh/tmuxifier'
 set -g @plugin 'crizzy9/catppuccin-tmux'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+# set -g @plugin 'tmux-plugins/tmux-battery'
 
 # unused
 # set -g @plugin 'wfxr/tmux-fzf-url'
@@ -108,35 +110,38 @@ set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 # staus bar theme - catppuccin mocha
 set -g @catppuccin_flavour 'mocha'
 
+# window status
 set -g @catppuccin_window_default_text "#W"
 set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+# set -g @catppuccin_window_status_enable "yes"
 # set -g @catppuccin_window_default_fill "number"
 # set -g @catppuccin_window_current_fill "number"
 # set -g @catppuccin_window_current_text "#(echo '#{b:pane_current_path}')#{?window_zoomed_flag,(),}"
 
+# status bar
+set -g @catppuccin_status_left_separator  ""
 # set -g @catppuccin_status_left_separator  "█"
-set -g @catppuccin_status_left_separator  " "
-set -g @catppuccin_status_right_separator " "
+# set -g @catppuccin_status_right_separator ""
 # set -g @catppuccin_status_right_separator_inverse "no"
 # set -g @catppuccin_status_connect_separator "no"
 # set -g @catppuccin_status_fill "icon"
 
-set -g @catppuccin_status_modules_right "session directory date_time"
-
-# conda env script resides in catppuccin fork
-# set -g @catppuccin_status_modules_left "session"
-# set -g @catppuccin_status_modules_right "directory condaenv date_time"
-# set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
+# status bar modules
+set -g @catppuccin_status_modules_right "session directory cpu date_time"
 
 set -g @catppuccin_directory_text "#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev)"
 set -g @catppuccin_date_time_text "%H:%M"
 
-# pane borders - need to override via catppuccin
-# set -g pane-active-border-style 'fg=magenta'
-# set -g pane-border-style 'fg=brightblack,bg=default'
+## conda env script resides in catppuccin fork
+# set -g @catppuccin_status_modules_left "session"
+# set -g @catppuccin_status_modules_right "directory condaenv date_time"
+# set -g status-right '#(echo $CONDA_DEFAULT_ENV)'
 
-# transparent background
-# set-option -g status-style 'bg=default'
+# pane borders and status
+set -g @catppuccin_pane_active_border_style 'fg=#89b4fa'
+# set -g @catppuccin_pane_border_style 'fg=brightblack,bg=default'
+# set -g @catppuccin_pane_status_enabled "yes"
+# set -g @catppuccin_pane_border_status "bottom"
 
 # =================
 # plugin settings

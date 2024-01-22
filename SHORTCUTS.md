@@ -14,11 +14,14 @@ Cmd + Shift + . - Show hidden files in finder
 ## Firefox shortcuts
 [link1](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#firefox:mac:fx118)
 [link2](https://support.mozilla.org/en-US/kb/search-firefox-address-bar)
+Tab Management: Simple Tab Groups
+
 ```text
 about:about
+Cmd + , - Preferences
 Ctrl + Tab - Cycle through Tabs
 Ctrl + Alt + p/n - Cycle through Tab groups
-Ctrl + Alt + c - Goto custom tab group
+Ctrl + Shift + f - Goto custom tab group
 Cmd + L - Focus address bar
 Cmd + K - Focus address bar with default search engine
 Alt + up/down - cycle through search engines
@@ -28,17 +31,60 @@ Alt + up/down - cycle through search engines
 ^ in address bar - Search History
 Ctrl + p/n - Cycle through suggestions in address bar
 Cmd + [ ] - Back/Forward
+Cmd + Opt + K/I - Open Devloper Console
+Cmd + Opt + C - Open Devloper Console Inspector
+Cmd + Opt + E - Open Devloper Console Network
 ```
 ## Tridactyl shortcuts
 
-[default keybindings](https://github.com/tridactyl/tridactyl/blob/master/src/lib/config.ts#L184)
->`:viewconfig --default`
+View keybindings with `:viewconfig` check defaults with `--default` flag
+View help using `:help <subject>`
+Learn Basics with `:tutor`
 
-| keymap    | Action    | Comments    |
-|---------------- | --------------- | --------------- |
-| `b`    | Switch to tab in current window    | 1    |
-| `t`    | Search open history and bookmarks in new tab    | 2    |
+** Resources **
+- [Readme](https://github.com/tridactyl/tridactyl#default-normal-mode-bindings)
+- [Default keybindings](https://github.com/tridactyl/tridactyl/blob/master/src/lib/config.ts#L184)
+- [Help Page](https://tridactyl.xyz/build/static/docs/modules/_src_excmds_.html)
 
+By default Tridactyl will be in **Normal** mode as shown bottom right corner
+
+Switch to **Ignore** mode using `<Shift-Esc>` to work with webpage keybindings
+While in **Ignore** mode use `<C-o>` to execute a single **Normal** mode command
+
+Go back to **Normal** mode use `<Shift-Esc>/<Esc>`
+While in **Normal** mode execute a single **Ignore** mode command using `<C-v>`
+
+
+### Normal Mode keybindings
+
+| Keymap    | Action    |
+|---------------- | --------------- |
+| `b`    | Search and Switch to tab in current window    |
+| `t`    | Search open history and bookmarks in new tab in foreground   |
+| `/`    | Search in current tab |
+| `d`    | Close current tab |
+| `H`    | Go back a page |
+| `L`    | Go forward a page |
+| `J`    | Focus previous tab |
+| `K`    | Focus next tab|
+| `yy`    | Yank current page url to clipboard |
+| `>>`/`<<`    | Move tab +1/-1 |
+
+### Hint Mode keybindings
+
+> More details on hints can be found using `:h hint`
+
+| Keymap    | Action    |
+|---------------- | --------------- |
+| `f` hk   | open in current tab, can also be used to click buttons |
+| `F` hk   | open in new tab in background |
+| `;t` hk   |  open in new tab in foreground |
+| `;d` hk   |  open in new tab in foreground but dont load it |
+| `v` hk   | select a line - then h/j/k/l to select more and y to yank |
+| `;y` hk   | yank link target if it exists |
+| <Esc>/<C-[> | exit hint mode |
+| Tab/S-Tab   | focus next/previous hint |
+| Enter/Space | select focused hint |
 
 ## Tmux Shortcuts
 Sessions = Traditional window type thigs
@@ -64,6 +110,8 @@ tmux a -t <session-name> - attach to a specific session
 tmux kill-session -t <session-name> - kill a specific session
 tmux popup - create a popup/floating window terminal
 tmux display-popup - run a shell command into a tmux popup and only persist it for that one command
+tmux -f /dev/null - run tmux with default/alternate config file
+tmux setw synchronize-panes - sync all panes in current window and run command in all
 
 -- Sessions
 <prefix> + d - detach current session
@@ -107,6 +155,17 @@ tmux display-popup - run a shell command into a tmux popup and only persist it f
 q - Exit copy mode
 Enter - Copy selection
 <prefix> + ] - pase contents to buffer
+
+-- Choose Tree View
+<prefix> + w/s - to bring up choose tree view
+h/l - collapse/expand tree in list windows/session/pane view
+Enter - enter selection
+t - tag an item
+C-t - tag all items
+T - tag none
+x - kill selected item
+X - kill tagged items
+m - mark item
 
 -- Custom keybindings
 <prefix> + <C-c> - Clear console
@@ -158,6 +217,7 @@ edit `~/.config/tmux/tmux-nerd-font-window-name.yml` to update settings
 
 # tmux yank
 use vim keybindings in copy mode
+<prefix> + Y - Copy current pane working directory
 
 # vim-tmux-navigator - Works in vim as well
 <C-hjkl> - Move between panes
@@ -377,6 +437,7 @@ Ctrl + t - move forward to next item in tag list (Works like a stack so only pop
 vt - select till - f for inclusive
 vT - select back - F for inclusive
 ~ - Convert letter to upper case
+g; - jump to last edit in file
 
 fn + Backspace - Delete forward during normal/insert mode
 :sp(:split|:hor) <file|command|terminal> - open in horizontal pane
