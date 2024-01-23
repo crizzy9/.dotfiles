@@ -163,14 +163,10 @@ Plugin setup. TODO setup [2 gitconfigs](https://blog.hao.dev/how-to-use-differen
 
 After installation run the following to get the latest znap dependencies
 If znap is not working with error, upgrade zsh version to 5.8+
+znap is recommended and reduced by startup time from 2s to 0.3s
 
 ```sh
 znap pull
-```
-Aliases 
-```txt
-jj - take json from clipboard and format it
-pomo 20m work - create a terminal based pomodoro timer
 ```
 
 Remove old `~/.zshrc.zwc` file if changes not taking effect

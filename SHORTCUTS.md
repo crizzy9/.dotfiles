@@ -392,7 +392,7 @@ z <dir shortcut> - zoxide
 zi - fzf search through zoxide db
 jj - pretty print json from clipboard
 jjj - pretty print json from clipboard and add it back to clipboard
-lg - lazygit
+pomo 20m work/rest - run a pomodoro timer for 20m in work or rest mode
 jupyter-lab-bg - runs jupyter lab as a background task
 
 # working with foreground and background tasks
