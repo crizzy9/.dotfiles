@@ -1,11 +1,11 @@
 #### Oh My ZSH ####
 # =============================================================================
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git nvm vi-mode)
+# plugins=(git nvm vi-mode)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 #### Show your logo ####
 # =============================================================================
@@ -60,10 +60,17 @@ source ~/.oh-my-zsh/plugins/znap/znap.zsh  # Start Znap
 # znap source ohmyzsh/ohmyzsh \
 #     'lib/(*~(git|theme-and-appearance).zsh)' plugins/git
 
+# znap source ohmyzsh/ohmyzsh plugins/{git,vi-mode,nvm}
+zstyle ':omz:plugins:nvm' lazy yes
+# znap source ohmyzsh/ohmyzsh plugins/nvm
+# znap prompt powerlevel10k/powerlevel10k
+
 # install plugins
 znap source marlonrichert/zsh-autocomplete
 znap source marlonrichert/zsh-edit
-znap source marlonrichert/zsh-hist
+WORDCHARS=''
+zle -N reverse-yank-pop .edit.visual-yank # temp fix for zsh-edit to avoid warning
+# znap source marlonrichert/zsh-hist
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
@@ -74,7 +81,7 @@ typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=1
 znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-ZSH_AUTOSUGGEST_STRATEGY=( history )
+ZSH_AUTOSUGGEST_STRATEGY=( history completion )
 znap source zsh-users/zsh-autosuggestions
 
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -89,8 +96,14 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # ZSH_HIGHLIGHT_STYLES[double-hypen-option]=fg=yellow,bold
 # ZSH_HIGHLIGHT_STYLES[path]=fg=cyan
 # ZSH_HIGHLIGHT_STYLES[globbing]='none'
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
-znap source zsh-users/zsh-syntax-highlighting
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+# znap source zsh-users/zsh-syntax-highlighting
+# FAST_HIGHLIGHT[use_brackets]=1
+znap source zdharma-continuum/fast-syntax-highlighting
+
+# znap source zsh-users/zsh-history-substring-search
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 
 # `znap eval` makes evaluating generated command output up to 10 times faster.
 znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
@@ -107,6 +120,9 @@ znap eval kitty 'curl -fsSL https://raw.githubusercontent.com/kovidgoyal/kitty/m
 znap eval omz-git 'curl -fsSL \
     https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh'
 
+znap eval omz-nvm 'curl -fsSL \
+    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/nvm/nvm.plugin.zsh'
+
 ##
 # Defer initilization code with lazily loaded functions created by
 # `znap function`.
@@ -114,16 +130,18 @@ znap eval omz-git 'curl -fsSL \
 znap function _pyenv pyenv              'eval "$( pyenv init - --no-rehash )"'
 compctl -K    _pyenv pyenv
 
-znap function _pip_completion pip       'eval "$( pip completion --zsh )"'
-compctl -K    _pip_completion pip
+znap function _conda conda              'eval "$( "${HOME}/anaconda3/bin/conda" shell.zsh hook 2> /dev/null)"'
+compctl -K    _conda conda
 
-znap function _python_argcomplete pipx  'eval "$( register-python-argcomplete pipx  )"'
-complete -o nospace -o default -o bashdefault \
-           -F _python_argcomplete pipx
+znap function _pip_completion pip3       'eval "$( pip completion --zsh )"'
+compctl -K    _pip_completion pip3
 
-znap function _pipenv pipenv            'eval "$( pipenv --completion )"'
-compdef       _pipenv pipenv
-
+# znap function _python_argcomplete pipx  'eval "$( register-python-argcomplete pipx  )"'
+# complete -o nospace -o default -o bashdefault \
+#            -F _python_argcomplete pipx
+#
+# znap function _pipenv pipenv            'eval "$( pipenv --completion )"'
+# compdef       _pipenv pipenv
 
 #### Package Managers ####
 # =============================================================================
@@ -142,18 +160,18 @@ compdef       _pipenv pipenv
 # only include if installed with brew or apt
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("${HOME}/anaconda3/bin/conda" shell.zsh hook 2> /dev/null)"
-
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$("${HOME}/anaconda3/bin/conda" shell.zsh hook 2> /dev/null)"
+#
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
 #### Additional Setup ####
@@ -180,8 +198,8 @@ eval "$(tmuxifier init -)"
 
 ### additional settings ####
 # =============================================================================
-## setup vim mode -- using vi-mode plugin instead
-# bindkey -v
+## setup vim mode
+bindkey -v
 
 #### custom exports ####
 # =============================================================================
@@ -193,10 +211,11 @@ export ZSH_HIGHLIGHT_STYLES[comment]='none'
 # alias rg='rg --hidden --follow --glob "!.git/*"'
 
 # ls aliases
-alias lss='eza --icons'
-alias lsa='eza -la --icons'
-alias lsag='eza -la --icons --git --header'
-alias lsat='eza -la --icons --git --header --tree -L 2 --git-ignore'
+# EZA_COLORS="da=32"
+alias lss='eza --icons auto'
+alias lsa='eza -la --icons auto'
+alias lsag='eza -la --icons auto --git --header'
+alias lsat='eza -la --icons auto --git --header --tree -L 2 --git-ignore'
 
 # Json aliases
 ## copy formatted json to clipboard
@@ -267,8 +286,8 @@ pomo () {
 # if not found from root / do `fd "key-bindings.zsh"` or `dpkg -L fzf | grep bindings`
 # location depends on installation method and os, there might be symlinks also like with brew
 #
-source /usr/local/opt/fzf/shell/key-bindings.zsh
-source /usr/local/opt/fzf/shell/completion.zsh
+# source /usr/local/opt/fzf/shell/key-bindings.zsh
+# source /usr/local/opt/fzf/shell/completion.zsh
 #####################################
 
 
@@ -356,7 +375,8 @@ function search_process {
     (date; ps -ef) | fzf-tmux -d -- --bind="ctrl-r:reload(date; ps -ef)" --header="Press CTRL-R to reload" --header-lines=2 --preview="echo {}" --preview-window=down,3,wrap --layout=reverse --height=80% | awk '{print $2}'
 }
 
-bindkey -s '^Xd' 'search_process\n'
+# bindkey -s '^Xd' 'search_process\n'
+bind '^[x' search_process
 #####################################
 
 
@@ -393,7 +413,8 @@ function nvimGoToLine {
     fi
 }
 
-bindkey -s '^X' 'nvimGoToLine\n'
+# bindkey -s '^X' 'nvimGoToLine\n'
+bind '^x' nvimGoToLine
 
 #########################
 
@@ -413,7 +434,9 @@ function nvimGoToFile {
     fi
 }
 
-bindkey -s '^f' 'nvimGoToFile\n'
+bind '^f' nvimGoToFile
+# bindkey -s '^f' 'nvimGoToFile\n'
+
 # search file and open in neovim - uses fzf default command and opts for file search using fd and bat
 # bindkey -s '^f' 'nvim $(fzf)\n'
 # bindkey '^F' fzf-file-widget

@@ -9,6 +9,7 @@ Ctrl + Down Arrow - Quick change for same application
 Ctrl + Tab - Cycle through native tabs
 Cmd + Shift + O - Open tick tick todo
 Cmd + Shift + . - Show hidden files in finder
+Cmd + ` - Focus other window of same app
 ```
 
 ## Firefox shortcuts
@@ -342,15 +343,17 @@ Press e on a commit to start an interactive rebase on it: causing all above comm
 > TODO: write macro to convert keymaps into tables
 
 ### basic keybindings
-| Keymap            | Action                                                                    |
-|:------------------|:--------------------------------------------------------------------------|
-| `Ctrl + a`        | `Move cursor to beginning of line`                                        |
-| `Ctrl + e`        | `Move cursor to end of line`                                              |
-| `Alt + b`         | `Move back one word`                                                      |
-| `Alt + f`         | `Move forward one word`                                                   |
-| `Ctrl + w`        | `Delete previous word`                                                    |
-| `Ctrl + Space`    | `Accept suggestion from auto suggest`                                     |
-| `Tab`             | `Accept first suggestion from auto complete`                              |
+| Keymap            | Action                                       |
+|:------------------|:---------------------------------------------|
+| `Ctrl + a`        | `Move cursor to beginning of line`           |
+| `Ctrl + e`        | `Move cursor to end of line`                 |
+| `Alt + b`         | `Move back one word`                         |
+| `Alt + f`         | `Move forward one word`                      |
+| `Ctrl + u`        | `Kill line backward`                         |
+| `Ctrl + k`        | `Kill line forward`                          |
+| `Ctrl + w`        | `Delete previous word`                       |
+| `Ctrl + Space`    | `Accept suggestion from auto suggest`        |
+| `Tab`             | `Accept first suggestion from auto complete` |
 
 ```text
 
@@ -365,10 +368,10 @@ nvim/command ** <Tab> - get relevant fzf search
 ## fzf functions
 Ctrl + f - fzf nvim open a file
 Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
-Ctrl + x d - search a process with fzf
-Ctrl + b Ctrl + f - search a process with fzf while in tmux
+Alt + x - search a process with fzf
+Ctrl + b Ctrl + f - search a process with fzf while in tmux and take action
 
-Ctrl + p/n    - cycle through results
+Ctrl + p/n    - cycle through results in fzf
 Esc / Ctrl + (g|c)  - cancel fzf search
 
 ## fzf syntax
@@ -387,6 +390,10 @@ lss - exa ls - better ls
 lsa - exa la - better ls
 z <dir shortcut> - zoxide
 zi - fzf search through zoxide db
+jj - pretty print json from clipboard
+jjj - pretty print json from clipboard and add it back to clipboard
+lg - lazygit
+jupyter-lab-bg - runs jupyter lab as a background task
 
 # working with foreground and background tasks
 ps aux | fzf (ps -e | fzf) (Ctrl+x+d) - fzf search current tasks
@@ -399,8 +406,39 @@ fg %<num> - bring task to foreground
 # useful plugins/commands
 w - shows list of all active terminals
 
+# zsh plugin manager znap
+znap source <plugin> - source a plugin
+znap uninstall <plugin> - uninstall a plugin
+znap eval <plugin> - lazy load a function
+
+# zsh edit - check readme for more
+bind -d - view duplicate keybindings
+bind -u - view unused keybindings
+bind -n "^[[2C" - View keymap for a keycode
+cat -v - observe keycodes by typing
+requires WORDCHARS = ''
+Ctrl + Alt + f - forward subword in emacs mode - works with autosuggestions
+Ctrl + Alt + b - backward subword in emacs mode
+Ctrl + Alt + h - backward kill subword in emacs mode
+Ctrl + Alt + d - backward kill subword in emacs mode
+
+# zsh profiling
+add `zmodload/zprof` to the beggining of .zshrc
+add `zprof` to the end of the .zshrc
+then load a new terminal session or run `time zsh -i -c exit`
+
+# zsh fast syntax highlighting
+fast-theme -l - list themes for fsh
+fast-theme spa - change theme
+
+# zsh autosuggestions
+Ctrl + Space - accept autosuggestion
+
+# zsh autocomplete
+Tab - take first suggestion
+
 # ZLE widgets and keybindings
-bindkey -L - view all existing keybindings
+bindkey -L | fzf - view all existing keybindings
 zle -la - show all widgets
 man zshall - view full man page
 man zshzle -> /reset-prompt - view builtin widgets descriptions
@@ -409,7 +447,7 @@ manually run widgets
   tetris
   M-x (Alt-x) | : (in vi mode) - write zle function name and trigger it
 
-# bash functions
+# other bash functions - uninstalled from zsh-autocomplete somehow - check forward-word-match
 Ctrl + s - fwd-i-search search forward and jump cursor
 Ctrl + r (in fwd-i-search mode to go back instead) - bck-i-search search forward and jump cursor
 ```
@@ -597,6 +635,7 @@ Space + t d - toggle git blame delete line in current changes
 
 # conda environments in vim using swenv and dressing
 :lua require('swenv.nvim').pick_venv()
+<leader>ce - Choose conda environment while in a python file. Triggers a LspRestart
 
 # NVIM TREE
 ## TODO: create full side bar with git, active buffers as shown in (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
@@ -704,6 +743,23 @@ Space + w r - Workspace Remove Folder
 ## lsp suggestion/autocomplete mappings
 K - hover documentation , K again to go inside the hover
 ctrl + k - signature documentation
+
+# nvim-cmp
+<C-e> - Dismiss Popup
+<C-p> - Go to previous suggestion
+<C-n> - Go to next suggestion
+<Enter> - Accept suggestion
+
+#Copilot
+Tab/<C-e> - Accept suggestion
+
+# Snippets - luasnip
+## Choose a snippet from suggestions
+<C-h> - Jump to previous parameter in a snippet : ls.jump(-1)
+<C-l> - Jump to next parameter in a snippet : ls.jump(1)
+TODO: verify these
+<C-space>|<C-j> - lua snip expand current with additional snippets (opens snippet popup) : ls.expand()
+<C-h> - lua snip choice node : ls.choice_active() -> ls.change_choice(1)
 
 # tree-sitter
 
