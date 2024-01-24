@@ -436,6 +436,9 @@ Ctrl + Space - accept autosuggestion
 
 # zsh autocomplete
 Tab - take first suggestion
+<typesomething> Ctrl + p - Scroll back through history suggestions that go with your initital string
+<typesomething> Ctrl + n - Scroll through the autocomplete suggestions
+Once inside a list scroll using Ctrl + p/n
 
 # ZLE widgets and keybindings
 bindkey -L | fzf - view all existing keybindings

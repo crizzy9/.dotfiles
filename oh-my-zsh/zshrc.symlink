@@ -101,6 +101,8 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # FAST_HIGHLIGHT[use_brackets]=1
 znap source zdharma-continuum/fast-syntax-highlighting
 
+# znap source jeffreytse/zsh-vi-mode
+
 # znap source zsh-users/zsh-history-substring-search
 # bindkey '^[[A' history-substring-search-up
 # bindkey '^[[B' history-substring-search-down
@@ -199,7 +201,7 @@ eval "$(tmuxifier init -)"
 ### additional settings ####
 # =============================================================================
 ## setup vim mode
-bindkey -v
+# bindkey -v
 
 #### custom exports ####
 # =============================================================================
@@ -286,8 +288,8 @@ pomo () {
 # if not found from root / do `fd "key-bindings.zsh"` or `dpkg -L fzf | grep bindings`
 # location depends on installation method and os, there might be symlinks also like with brew
 #
-# source /usr/local/opt/fzf/shell/key-bindings.zsh
-# source /usr/local/opt/fzf/shell/completion.zsh
+source /usr/local/opt/fzf/shell/key-bindings.zsh
+source /usr/local/opt/fzf/shell/completion.zsh
 #####################################
 
 
