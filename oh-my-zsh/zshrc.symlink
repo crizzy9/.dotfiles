@@ -51,7 +51,10 @@ znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
 
 #### oh-my-zsh ####
 zstyle ':omz:plugins:nvm' lazy yes
-znap source ohmyzsh/ohmyzsh lib/{git,directories,completion} plugins/{git,vi-mode,zoxide,nvm}
+znap source ohmyzsh/ohmyzsh lib/{git,directories,completion} plugins/{git,zoxide,nvm}
+
+# enable vi mode
+bindkey -v
 
 #### zsh autocomplete ####
 znap source marlonrichert/zsh-autocomplete
@@ -102,6 +105,8 @@ ZSH_HIGHLIGHT_STYLES[function]=fg=cyan,underline
 ZSH_HIGHLIGHT_STYLES[alias]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=#f59042,bold
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=#f59042,bold
 ZSH_HIGHLIGHT_STYLES[path]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[globbing]='none'
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
@@ -192,10 +197,6 @@ else
   export EDITOR='vim'
 fi
 
-### additional settings ####
-# =============================================================================
-## setup vim mode
-# bindkey -v
 
 #### custom exports ####
 # =============================================================================
@@ -450,4 +451,3 @@ bindkey -r '^Q' '^[Q'
 
 #### additional sources ####
 # =============================================================================
-

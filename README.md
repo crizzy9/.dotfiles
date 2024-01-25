@@ -226,7 +226,6 @@ tmux source ~/.config/tmux/.tmux.conf
 Plugins
 ```text
 tmux ressurect
-tmuxifier - tmux project definition
 sessionx - in tmux session manager
 sesh - zoxide based tmux sessionizer #https://github.com/joshmedeski/sesh
 ```

@@ -191,15 +191,9 @@ tmux info - Show basic tmux info
 # brew install joshmedeski/sesh/sesh
 <C-g> - zoxide fuzzy sessionizer from sesh lookup
 <C-g> <C-t> - switch to looking up existing tmux sessions from sesh lookup
-<C-g> <C-s> - switch to looking up tmuxifier configs from sesh lookup - allow editing?
 
-# tmuxifier
-## project file format https://github.com/jimeh/tmuxifier/blob/master/README.md#example
-## needs to be added to path to run commands
-tmuxifier ns dotfiles - tmuxifier create new session config
-tmuxifier es dotfiles - tmuxifier edit session config
-tmuxifier s dotfiles - load session config
-tmuxifier ls - list all session configs
+# tmuxinator
+# TODO
 
 # tmux fzf
 ## requires sed, fzf, CopyQ(clipboard), pstree(processes)
@@ -446,6 +440,7 @@ Once inside a menu list for zsh-autocomplete scroll using Ctrl + p/n or Tab
 Tab to start fzf-tab
 gco Tab - open all checkoutable things
 , . - switch groups in fzf menu
+/ - trigger continuous completion
 
 # ZLE widgets and keybindings
 bindkey -L | fzf - view all existing keybindings
