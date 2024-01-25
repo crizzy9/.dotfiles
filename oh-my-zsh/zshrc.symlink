@@ -1,12 +1,3 @@
-#### Oh My ZSH ####
-# =============================================================================
-# export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# plugins=(git nvm vi-mode)
-
-# source $ZSH/oh-my-zsh.sh
-
 #### Show your logo ####
 # =============================================================================
 RB_RED=$(printf '\033[38;5;196m')
@@ -30,16 +21,17 @@ printf '%s   \  \:\      %s   \  \:\         %s        \  \:\/:/   %s    \  \::/
 printf '%s    \  \:\     %s    \  \:\        %s         \  \::/    %s     \__\/     %s    \  \:\     %s    \  \::/    %s    \  \:\     %s\n' $RB_RED $RB_ORANGE $RB_YELLOW $RB_GREEN $RB_BLUE $RB_INDIGO $RB_VIOLET $RB_RESET
 printf '%s     \__\/     %s     \__\/        %s          \__\/     %s               %s     \__\/     %s     \__\/     %s     \__\/     %s\n' $RB_RED $RB_ORANGE $RB_YELLOW $RB_GREEN $RB_BLUE $RB_INDIGO $RB_VIOLET $RB_RESET
 
+# =============================================================================
 #### ZSH Snap - Znap ####
 # =============================================================================
 
 # Download Znap, if it's not there yet.
-# [[ -r ~/.oh-my-zsh/plugins/znap/znap.zsh ]] ||
-#     git clone --depth 1 -- \
-#         https://github.com/marlonrichert/zsh-snap.git ~/.oh-my-zsh/plugins/znap
-source ~/.oh-my-zsh/plugins/znap/znap.zsh  # Start Znap
+[[ -r ~/zsh-plugins/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/zsh-plugins/znap
+source ~/zsh-plugins/znap/znap.zsh  # Start Znap
 
-# Powerlevel10k
+#### Powerlevel10k ####
 # enable powerlevel10k instant prompt
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -49,29 +41,6 @@ source ~/.oh-my-zsh/plugins/znap/znap.zsh  # Start Znap
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# other themes dont add with powerlevl10k
-# `znap prompt` makes your prompt visible in just 15-40ms!
-# znap prompt agnoster/agnoster-zsh-theme
-# znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
-# znap prompt ohmyzsh/ohmyzsh robbyrussell
-# PS1=$'%(?,%F{g},%F{r})%#%f '
-# znap prompt
-# znap source sorin-ionescu/prezto modules/{environment,history}
-# znap source ohmyzsh/ohmyzsh \
-#     'lib/(*~(git|theme-and-appearance).zsh)' plugins/git
-
-# znap source ohmyzsh/ohmyzsh plugins/{git,vi-mode,nvm}
-zstyle ':omz:plugins:nvm' lazy yes
-# znap source ohmyzsh/ohmyzsh plugins/nvm
-# znap prompt powerlevel10k/powerlevel10k
-
-# install plugins
-znap source marlonrichert/zsh-autocomplete
-znap source marlonrichert/zsh-edit
-WORDCHARS=''
-zle -N reverse-yank-pop .edit.visual-yank # temp fix for zsh-edit to avoid warning
-# znap source marlonrichert/zsh-hist
-
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
 typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
@@ -80,52 +49,84 @@ typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=1
 znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
 
+#### oh-my-zsh ####
+zstyle ':omz:plugins:nvm' lazy yes
+znap source ohmyzsh/ohmyzsh lib/{git,directories,completion} plugins/{git,vi-mode,zoxide,nvm}
+
+#### zsh autocomplete ####
+znap source marlonrichert/zsh-autocomplete
+bindkey '^N' down-line-or-select
+bindkey '^P' up-line-or-search
+
+#### zsh edit ####
+znap source marlonrichert/zsh-edit
+WORDCHARS=''
+zle -N reverse-yank-pop .edit.visual-yank # temp fix for zsh-edit to avoid warning
+
+#### fzf-tab ####
+znap source Aloxaf/fzf-tab
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 -a --icons=auto --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# fix needed for if scrolled with ^N or ^P
+my-fzf-tab() {
+  functions[compadd]=$functions[-ftb-compadd]
+  zle fzf-tab-complete
+}
+zle -N my-fzf-tab
+bindkey "^I" my-fzf-tab
+
+#### zsh autosuggestions ####
+# TODO: not taking completion into account
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 ZSH_AUTOSUGGEST_STRATEGY=( history completion )
 znap source zsh-users/zsh-autosuggestions
 
+bindkey '^ ' autosuggest-accept
+
+#### zsh syntax highlighting ####
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 # change highlights as per https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
-# ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
-# ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-# ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan,bold
-# ZSH_HIGHLIGHT_STYLES[command]=fg=blue
-# ZSH_HIGHLIGHT_STYLES[function]=fg=red
-# ZSH_HIGHLIGHT_STYLES[alias]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[double-hypen-option]=fg=yellow,bold
-# ZSH_HIGHLIGHT_STYLES[path]=fg=cyan
-# ZSH_HIGHLIGHT_STYLES[globbing]='none'
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
-# znap source zsh-users/zsh-syntax-highlighting
-# FAST_HIGHLIGHT[use_brackets]=1
-znap source zdharma-continuum/fast-syntax-highlighting
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[command]=fg=blue
+ZSH_HIGHLIGHT_STYLES[function]=fg=cyan,underline
+ZSH_HIGHLIGHT_STYLES[alias]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[path]=fg=cyan
+ZSH_HIGHLIGHT_STYLES[globbing]='none'
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+znap source zsh-users/zsh-syntax-highlighting
 
-# znap source jeffreytse/zsh-vi-mode
-
-# znap source zsh-users/zsh-history-substring-search
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
-
+#### terminal eval ####
 # `znap eval` makes evaluating generated command output up to 10 times faster.
 znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
 znap eval wezterm 'curl -fsSL https://raw.githubusercontent.com/wez/wezterm/main/assets/shell-integration/wezterm.sh'
 znap eval kitty 'curl -fsSL https://raw.githubusercontent.com/kovidgoyal/kitty/master/shell-integration/zsh/kitty-integration'
 
-# Colors not working properly with zsh-syntax-highlighting
-# znap eval trapd00r/LS_COLORS "$( whence -a dircolors gdircolors ) -b LS_COLORS"
-# PS1=$'%{\e['$zcolor[di]$'m%}%~%{\e[m%}/ %#'
-# znap source marlonrichert/zcolors
-# znap eval   marlonrichert/zcolors "zcolors ${(q)LS_COLORS}"
 
+#### cache load plugins ####
 # Combine `znap eval` with `curl` or `wget` to download, cache and source
-znap eval omz-git 'curl -fsSL \
-    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh'
 
-znap eval omz-nvm 'curl -fsSL \
-    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/nvm/nvm.plugin.zsh'
+# znap eval omz-git-lib 'curl -fsSL \
+#     https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh'
+#
+# znap eval omz-git 'curl -fsSL \
+#     https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh'
+#
+# znap eval omz-nvm 'curl -fsSL \
+#     https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/nvm/nvm.plugin.zsh'
 
-##
+#### lazy loading ####
 # Defer initilization code with lazily loaded functions created by
 # `znap function`.
 #
@@ -138,15 +139,11 @@ compctl -K    _conda conda
 znap function _pip_completion pip3       'eval "$( pip completion --zsh )"'
 compctl -K    _pip_completion pip3
 
-# znap function _python_argcomplete pipx  'eval "$( register-python-argcomplete pipx  )"'
-# complete -o nospace -o default -o bashdefault \
-#            -F _python_argcomplete pipx
-#
-# znap function _pipenv pipenv            'eval "$( pipenv --completion )"'
-# compdef       _pipenv pipenv
+# =============================================================================
 
 #### Package Managers ####
 # =============================================================================
+# loaded via znap and omz plugins
 
 # only include if installed with brew or apt
 # works via zsh plugin
@@ -182,7 +179,6 @@ compctl -K    _pip_completion pip3
 
 # additional path setup - modify per user
 export PATH="/Users/spadia/.local/bin:$PATH"
-export PATH="/Users/spadia/.config/tmux/plugins/tmuxifier/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # additional exports
@@ -195,8 +191,6 @@ if [ -n $nvim_exists ]; then
 else
   export EDITOR='vim'
 fi
-
-eval "$(tmuxifier init -)"
 
 ### additional settings ####
 # =============================================================================
@@ -348,24 +342,6 @@ export FZF_ALT_C_OPTS='--preview "tree -C {}"'
 ###########################
 
 
-##### test widget #####
-_my_function() {
-    echo "hello world function"
-}
-
-_my_widget() {
-    # local selection
-    # selection=$(fzf <"$TTY") || return
-    # LBUFFER+="$selection"
-    echo "hello world widget"
-    zle .kill-whole-line
-    zle -U "git diff $CUTBUFFER"
-}
-# zle -N _my_widget
-# bindkey '^Xd' _my_widget
-#######################
-
-
 ##### search processes and kill #####
 # (date; ps -ef) |
 # fzf --bind='ctrl-r:reload(date; ps -ef)' \
@@ -377,8 +353,8 @@ function search_process {
     (date; ps -ef) | fzf-tmux -d -- --bind="ctrl-r:reload(date; ps -ef)" --header="Press CTRL-R to reload" --header-lines=2 --preview="echo {}" --preview-window=down,3,wrap --layout=reverse --height=80% | awk '{print $2}'
 }
 
-# bindkey -s '^Xd' 'search_process\n'
 bind '^[x' search_process
+# bindkey -s '^Xd' 'search_process\n'
 #####################################
 
 
@@ -415,9 +391,8 @@ function nvimGoToLine {
     fi
 }
 
+bind '^[i' nvimGoToLine
 # bindkey -s '^X' 'nvimGoToLine\n'
-bind '^x' nvimGoToLine
-
 #########################
 
 
@@ -438,11 +413,8 @@ function nvimGoToFile {
 
 bind '^f' nvimGoToFile
 # bindkey -s '^f' 'nvimGoToFile\n'
-
-# search file and open in neovim - uses fzf default command and opts for file search using fd and bat
-# bindkey -s '^f' 'nvim $(fzf)\n'
-# bindkey '^F' fzf-file-widget
 ###########################################
+
 
 ##### tmux sesh #####
 #####################
@@ -466,128 +438,16 @@ bindkey -s '^g' 'tmuxSeshConnect\n'
 # =============================================================================
 bindkey '^[q' push-line-or-edit
 bindkey -r '^Q' '^[Q'
-bindkey '^ ' autosuggest-accept
 
-#### ranger keybindings ####
+
+#### zoxide ####
 # =============================================================================
-
-#### ranger-zoxide ####
-# =============================================================================
-
-
-# =============================================================================
-#### zoxide configuration and keybindings ####
-# =============================================================================
-
-
-#### Utility functions for zoxide ###
-# =============================================================================
-
-# pwd based on the value of _ZO_RESOLVE_SYMLINKS.
-function __zoxide_pwd() {
-    \builtin pwd -L
-}
-
-# cd + custom logic based on the value of _ZO_ECHO.
-function __zoxide_cd() {
-    # shellcheck disable=SC2164
-    \builtin cd -- "$@"
-}
-
-# =============================================================================
-#
-# Hook configuration for zoxide.
-#
-
-# Hook to add new entries to the database.
-function __zoxide_hook() {
-    # shellcheck disable=SC2312
-    \command zoxide add -- "$(__zoxide_pwd)"
-}
-
-# Initialize hook.
-# shellcheck disable=SC2154
-if [[ ${precmd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]] && [[ ${chpwd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]]; then
-    chpwd_functions+=(__zoxide_hook)
-fi
-
-# =============================================================================
-#
-# When using zoxide with --no-cmd, alias these internal functions as desired.
-#
-
-__zoxide_z_prefix='z#'
-
-# Jump to a directory using only keywords.
-function __zoxide_z() {
-    # shellcheck disable=SC2199
-    if [[ "$#" -eq 0 ]]; then
-        __zoxide_cd ~
-    elif [[ "$#" -eq 1 ]] && { [[ -d "$1" ]] || [[ "$1" = '-' ]] || [[ "$1" =~ ^[-+][0-9]$ ]]; }; then
-        __zoxide_cd "$1"
-    elif [[ "$@[-1]" == "${__zoxide_z_prefix}"?* ]]; then
-        # shellcheck disable=SC2124
-        \builtin local result="${@[-1]}"
-        __zoxide_cd "${result:${#__zoxide_z_prefix}}"
-    else
-        \builtin local result
-        # shellcheck disable=SC2312
-        result="$(\command zoxide query --exclude "$(__zoxide_pwd)" -- "$@")" &&
-            __zoxide_cd "${result}"
-    fi
-}
-
-# Jump to a directory using interactive search.
-function __zoxide_zi() {
-    \builtin local result
-    result="$(\command zoxide query --interactive -- "$@")" && __zoxide_cd "${result}"
-}
-
-# Completions.
-if [[ -o zle ]]; then
-    function __zoxide_z_complete() {
-        # Only show completions when the cursor is at the end of the line.
-        # shellcheck disable=SC2154
-        [[ "${#words[@]}" -eq "${CURRENT}" ]] || return 0
-
-        if [[ "${#words[@]}" -eq 2 ]]; then
-            _files -/
-        elif [[ "${words[-1]}" == '' ]] && [[ "${words[-2]}" != "${__zoxide_z_prefix}"?* ]]; then
-            \builtin local result
-            # shellcheck disable=SC2086,SC2312
-            if result="$(\command zoxide query --exclude "$(__zoxide_pwd)" --interactive -- ${words[2,-1]})"; then
-                result="${__zoxide_z_prefix}${result}"
-                # shellcheck disable=SC2296
-                compadd -Q "${(q-)result}"
-            fi
-            \builtin printf '\e[5n'
-        fi
-        return 0
-    }
-
-    \builtin bindkey '\e[0n' 'reset-prompt'
-    [[ "${+functions[compdef]}" -ne 0 ]] && \compdef __zoxide_z_complete __zoxide_z
-fi
-
-# =============================================================================
-#
-# Commands for zoxide. Disable these using --no-cmd.
-#
-
-\builtin alias z=__zoxide_z
-\builtin alias zi=__zoxide_zi
-
-# =============================================================================
-#
+# loaded via omz
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
 # eval "$(zoxide init zsh)"
 # =============================================================================
-# =============================================================================
-
 
 #### additional sources ####
 # =============================================================================
 
-# source broot config
-# source /Users/spadia/.config/broot/launcher/bash/br

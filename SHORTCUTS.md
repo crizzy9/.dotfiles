@@ -367,7 +367,7 @@ nvim/command ** <Tab> - get relevant fzf search
 # Custom functions
 ## fzf functions
 Ctrl + f - fzf nvim open a file
-Ctrl + x - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
+Alt + i - fzf nvim live grep and go to line (allows switching between ripgrep and fzf mode)
 Alt + x - search a process with fzf
 Ctrl + b Ctrl + f - search a process with fzf while in tmux and take action
 
@@ -423,7 +423,7 @@ Ctrl + Alt + h - backward kill subword in emacs mode
 Ctrl + Alt + d - backward kill subword in emacs mode
 
 # zsh profiling
-add `zmodload/zprof` to the beggining of .zshrc
+add `zmodload zsh/zprof` to the beggining of .zshrc
 add `zprof` to the end of the .zshrc
 then load a new terminal session or run `time zsh -i -c exit`
 
@@ -435,10 +435,17 @@ fast-theme spa - change theme
 Ctrl + Space - accept autosuggestion
 
 # zsh autocomplete
-Tab - take first suggestion
+Tab - Open fzf tab search on zsh autocomplete suggestions
+kill Tab - Works via fzf tab
+kill ** Tab - Works via fzf completion
 <typesomething> Ctrl + p - Scroll back through history suggestions that go with your initital string
 <typesomething> Ctrl + n - Scroll through the autocomplete suggestions
-Once inside a list scroll using Ctrl + p/n
+Once inside a menu list for zsh-autocomplete scroll using Ctrl + p/n or Tab
+
+# fzf tab
+Tab to start fzf-tab
+gco Tab - open all checkoutable things
+, . - switch groups in fzf menu
 
 # ZLE widgets and keybindings
 bindkey -L | fzf - view all existing keybindings
