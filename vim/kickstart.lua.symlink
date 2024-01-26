@@ -123,6 +123,17 @@ require('lazy').setup({
     },
   },
 
+  {
+    'onsails/lspkind-nvim',
+    lazy = true,
+    config = function()
+      require('lspkind').init({
+        mode = "symbol_text",
+        preset = "codicons",
+      })
+    end,
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
@@ -1122,6 +1133,33 @@ cmp.setup {
   completion = {
     completeopt = 'menu,menuone,noinsert',
   },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function (entry, vim_item)
+      local menu
+      local kind = require("lspkind").symbol_map[vim_item.kind]
+
+      local alias = {
+        buffer = "[B]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        luasnip = "[LS]",
+        path = "[P]",
+        nvim_lsp_signature = "[Sig]",
+      }
+
+      if entry.source.name == "nvim_lsp" then
+        menu = entry.source.source.client.name
+      else
+        menu = alias[entry.source.name] or entry.source.name
+      end
+
+      -- vim_item.menu = vim_item.kind
+      vim_item.menu = menu
+      vim_item.kind = kind
+      return vim_item
+    end
+  },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -1161,7 +1199,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'luasnip' },
-    { name = 'buffer', keyword_length = 5 },
+    -- { name = 'buffer', keyword_length = 5 },
   },
   -- not required for copilot, on by default
   -- experimental = {

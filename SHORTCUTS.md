@@ -9,7 +9,7 @@ Ctrl + Down Arrow - Quick change for same application
 Ctrl + Tab - Cycle through native tabs
 Cmd + Shift + O - Open tick tick todo
 Cmd + Shift + . - Show hidden files in finder
-Cmd + ` - Focus other window of same app
+Cmd + ` - Focus other window of same app if not fullscreen
 ```
 
 ## Firefox shortcuts
@@ -191,7 +191,7 @@ tmux info - Show basic tmux info
 
 -- Plugins
 # sessionx - session manager with preview - uninstalled - using sesh now
-<prefix> e - sesssionx
+# <prefix> e - sesssionx
 
 # sesh - zoxide based fuzzy finder tmux session creator
 # brew install joshmedeski/sesh/sesh
@@ -201,8 +201,9 @@ tmux info - Show basic tmux info
 ## when a directory is selected if a session startup script exists run that else use the default startup script
 ## ignore startup script with -c command
 ## create a toml file in $XDG_CONFIG_HOME/sesh/sesh.toml
-## add a default startupscript and path specific startup scripts
-## then create a script folder with tmux commands that will get executed on startup
+## add a default startupscript and path specific startup scripts in the toml file in `[[startup_scripts]]` array
+## then create a script folder with tmux commands that will get executed on startup and link them in the toml file
+## execute terminal commands with send-keys by navigating to the respective pane/window using selectp or selectw
 ## more details on formatting at https://github.com/joshmedeski/sesh#configuration
 
 # tmux fzf

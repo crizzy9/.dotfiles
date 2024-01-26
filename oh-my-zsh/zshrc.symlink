@@ -420,7 +420,7 @@ bind '^f' nvimGoToFile
 ##### tmux sesh #####
 #####################
 function tmuxSeshList {
-    echo $(sesh list -tz | fzf-tmux -p 55%,60% --reverse --no-sort --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
+    echo $(sesh list -tz | fzf-tmux -p 55%,60% --reverse --no-sort --height 60% --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
 }
 
 function tmuxSeshConnect {
