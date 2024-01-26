@@ -87,6 +87,11 @@ While in **Normal** mode execute a single **Ignore** mode command using `<C-v>`
 | Tab/S-Tab   | focus next/previous hint |
 | Enter/Space | select focused hint |
 
+## Obsidian
+Cmd + Opt + I - View Source
+For custom CSS - Goto Vault > .obsidian > snippets > snippet.css - then Goto Obsidian Settings > Appearance > CSS Snippets
+
+
 ## Tmux Shortcuts
 Sessions = Traditional window type thigs
 Windows = Traditional Tabs
@@ -113,6 +118,7 @@ tmux popup - create a popup/floating window terminal
 tmux display-popup - run a shell command into a tmux popup and only persist it for that one command
 tmux -f /dev/null - run tmux with default/alternate config file
 tmux setw synchronize-panes - sync all panes in current window and run command in all
+tmux -v - run tmux in verbose mode and store in a tmux log file for debugging
 
 -- Sessions
 <prefix> + d - detach current session
@@ -184,25 +190,32 @@ tmux info - Show basic tmux info
 <prefix> + t - View current time
 
 -- Plugins
-# sessionx - session manager with preview
+# sessionx - session manager with preview - uninstalled - using sesh now
 <prefix> e - sesssionx
 
 # sesh - zoxide based fuzzy finder tmux session creator
 # brew install joshmedeski/sesh/sesh
 <C-g> - zoxide fuzzy sessionizer from sesh lookup
 <C-g> <C-t> - switch to looking up existing tmux sessions from sesh lookup
-
-# tmuxinator
-# TODO
+## create session config scripts
+## when a directory is selected if a session startup script exists run that else use the default startup script
+## ignore startup script with -c command
+## create a toml file in $XDG_CONFIG_HOME/sesh/sesh.toml
+## add a default startupscript and path specific startup scripts
+## then create a script folder with tmux commands that will get executed on startup
+## more details on formatting at https://github.com/joshmedeski/sesh#configuration
 
 # tmux fzf
 ## requires sed, fzf, CopyQ(clipboard), pstree(processes)
 ## Provides custom menu to run additional scripts from finder
 <prefix> + F | <C-f> - fzf search tmux action commands
 
-# tmux-resserect and tmux-continuum
+# tmux-resurrect and tmux-continuum
+## sessions are stored in $XDG_DATA_HOME/tmux/resurrect/
+## last file is symlinked to last session and that is what is restored by default
 <prefix> + <C-s> - save session
-<prefix> + <C-r> - restore session
+<prefix> + <C-r> - restore last session
+## uncomment the line `set -g @continuum-restore 'on'` to automatically restored last saved session on reboot
 
 # lazygit
 <prefix> + K - open lazygit in tmux popup

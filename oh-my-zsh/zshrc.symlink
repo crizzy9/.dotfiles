@@ -99,15 +99,15 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # change highlights as per https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[command]=fg=blue
 ZSH_HIGHLIGHT_STYLES[function]=fg=cyan,underline
-ZSH_HIGHLIGHT_STYLES[alias]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[alias]=fg=blue,bold,underline
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=#f59042,bold
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=#f59042,bold
-ZSH_HIGHLIGHT_STYLES[path]=fg=cyan
+ZSH_HIGHLIGHT_STYLES[path]=fg=magenta
 ZSH_HIGHLIGHT_STYLES[globbing]='none'
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 znap source zsh-users/zsh-syntax-highlighting
@@ -141,7 +141,7 @@ compctl -K    _pyenv pyenv
 znap function _conda conda              'eval "$( "${HOME}/anaconda3/bin/conda" shell.zsh hook 2> /dev/null)"'
 compctl -K    _conda conda
 
-znap function _pip_completion pip3       'eval "$( pip completion --zsh )"'
+znap function _pip_completion pip3       'eval "$( pip3 completion --zsh )"'
 compctl -K    _pip_completion pip3
 
 # =============================================================================
@@ -420,7 +420,7 @@ bind '^f' nvimGoToFile
 ##### tmux sesh #####
 #####################
 function tmuxSeshList {
-    echo $(sesh list -tz | fzf-tmux -p 55%,60% --no-sort --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
+    echo $(sesh list -tz | fzf-tmux -p 55%,60% --reverse --no-sort --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
 }
 
 function tmuxSeshConnect {
@@ -431,7 +431,8 @@ function tmuxSeshConnect {
         sesh connect $selection
     fi
 }
-bindkey -s '^g' 'tmuxSeshConnect\n'
+bind '^g' tmuxSeshConnect
+# bindkey -s '^g' 'tmuxSeshConnect\n'
 #####################
 
 

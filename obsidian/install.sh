@@ -4,7 +4,7 @@
 source ./helpers.sh
 
 main() {
-    apply_symlink "obsidian" ".obsidian.vimrc" "" "Work/Sesame" ".obsidian.vimrc"
+    apply_symlink "obsidian" "obsidian.vimrc" "" "Work/Sesame" ".obsidian.vimrc"
 }
 
 main
