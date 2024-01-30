@@ -64,6 +64,7 @@ While in **Normal** mode execute a single **Ignore** mode command using `<C-v>`
 | `t`    | Search open history and bookmarks in new tab in foreground   |
 | `/`    | Search in current tab |
 | `d`    | Close current tab |
+| `u`    | Reopen last closed tab |
 | `H`    | Go back a page |
 | `L`    | Go forward a page |
 | `J`    | Focus previous tab |

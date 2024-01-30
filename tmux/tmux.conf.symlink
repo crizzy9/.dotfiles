@@ -77,6 +77,9 @@ bind-key -T prefix h split-window -h -c "#{pane_current_path}"
 # lazygit popup
 bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
 
+# ranger popup
+bind-key -T prefix F display-popup -h 80% -w 80% -E "ranger"
+
 # sesh popup
  bind-key "g" run-shell "sesh connect $(
 	sesh list -tz | fzf-tmux -p 55%,60% \
@@ -102,6 +105,7 @@ set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 set -g @plugin 'crizzy9/catppuccin-tmux'
 set -g @plugin 'tmux-plugins/tmux-cpu' # adding this before catppuccin causes cpu to not show up
+# set -g @plugin 'olimorris/tmux-pomodoro-plus'
 
 # unused
 # set -g @plugin 'wfxr/tmux-fzf-url'
@@ -115,7 +119,7 @@ set -g @plugin 'tmux-plugins/tmux-cpu' # adding this before catppuccin causes cp
 
 # =======
 # theme
-# # =======
+# =======
 
 # staus bar theme - catppuccin mocha
 set -g @catppuccin_flavour 'mocha'
@@ -187,6 +191,13 @@ set -g @fzf-url-extra-filter 'grep -oE "\b[a-zA-Z]+\.txt\b"'
 # add binding for ping
 set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
 set -g @fzf-url-history-limit '2000'
+
+# pomodoro
+# set -g status-left "#{pomodoro_status}"
+# set -g @pomodoro_toggle 't'
+# set -g @pomodoro_cancel 'T'
+# set -g @pomodoro_skip '_'
+# toggle automatically sets menu to C-t and custom to M-t
 
 # tmux thumbs
 # default key is <prefix> + Space

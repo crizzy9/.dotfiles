@@ -44,7 +44,8 @@ source ~/zsh-plugins/znap/znap.zsh  # Start Znap
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
 typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+# typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
 typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=1
 znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
@@ -54,6 +55,7 @@ zstyle ':omz:plugins:nvm' lazy yes
 znap source ohmyzsh/ohmyzsh lib/{git,directories,completion} plugins/{git,zoxide,nvm}
 
 # enable vi mode
+# p10k transient prompt doesnt work with omz vi mode
 bindkey -v
 
 #### zsh autocomplete ####
@@ -193,8 +195,10 @@ export LANG=en_US.UTF-8
 nvim_exists=$(command -v "nvim")
 if [ -n $nvim_exists ]; then
   export EDITOR='nvim'
+  export VISUAL='nvim'
 else
   export EDITOR='vim'
+  export VISUAL='vim'
 fi
 
 

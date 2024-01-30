@@ -414,13 +414,13 @@ require('lazy').setup({
       })
       require("lualine").setup({
         sections = {
-          lualine_y = {
-            "progress",
+          lualine_z = {
+            "location",
             {
               "swenv",
-              icon='',
+              icon=' ',
               -- custom color not working
-              -- use_mode_colors = true,
+              use_mode_colors = true,
               on_click=require("swenv.api").pick_venv,
               cond = function()
                 return vim.bo.filetype == "python"
@@ -450,7 +450,7 @@ require('lazy').setup({
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-cmdline",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
@@ -700,6 +700,9 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- add other extensions
+-- require('telescope').load_extension('noice')
+
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
@@ -920,7 +923,10 @@ vim.defer_fn(function()
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           [']m'] = '@function.outer',
-          [']]'] = '@class.outer',
+          -- [']]'] = '@class.outer',
+          -- [']]'] = '@parameter.inner',
+          [']s'] = { query ='@scope', query_group = 'locals', desc = 'Next [S]cope' },
+          [']z'] = { query ='@fold', query_group = 'locals', desc = 'Next Fold' },
         },
         goto_next_end = {
           [']M'] = '@function.outer',
@@ -928,7 +934,8 @@ vim.defer_fn(function()
         },
         goto_previous_start = {
           ['[m'] = '@function.outer',
-          ['[['] = '@class.outer',
+          -- ['[['] = '@class.outer',
+          -- ['[['] = '@parameter.inner',
         },
         goto_previous_end = {
           ['[M'] = '@function.outer',
@@ -947,6 +954,19 @@ vim.defer_fn(function()
     },
   }
 end, 0)
+
+-- tree sitter keymaps (doing directly since not supported with nvim-treesitter-textobjects
+vim.keymap.set("n", "]]", function()
+  local t = require("nvim-treesitter.ts_utils")
+  t.goto_node(t.get_next_node(t.get_node_at_cursor(), true, true), false, true)
+  -- t.goto_node(t, goto_end, avoid_set_jump)
+end)
+
+vim.keymap.set("n", "[[", function()
+  local t = require("nvim-treesitter.ts_utils")
+  t.goto_node(t.get_previous_node(t.get_node_at_cursor(), true, true), false, true)
+end)
+
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -1123,6 +1143,15 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
+vim.keymap.set({"i"}, "<C-k>", function() luasnip.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-l>", function() luasnip.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-h>", function() luasnip.jump(-1) end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-j>", function()
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
+	end
+end, {silent = true})
 
 cmp.setup {
   snippet = {
@@ -1135,6 +1164,13 @@ cmp.setup {
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
+    window = {
+      completion = {
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        col_offset = -3,
+        side_padding = 0,
+      },
+    },
     format = function (entry, vim_item)
       local menu
       local kind = require("lspkind").symbol_map[vim_item.kind]
@@ -1163,8 +1199,8 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -1196,16 +1232,61 @@ cmp.setup {
     { name = 'tsserver' },
     { name = 'pyright' },
     -- { name = 'nvim_lua' },
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+      -- TODO: not working need to map kind to lsp item kind
+      entry_filter = function(entry, ctx)
+        local kind = entry:get_kind()
+        if kind == "Text" then return false end
+        return true
+      end
+    },
     { name = 'path' },
     { name = 'luasnip' },
     -- { name = 'buffer', keyword_length = 5 },
   },
+  -- formatting = {
+  --   format = require('lspkind').cmp_format({
+  --     mode = 'symbol',
+  --     maxwidth = 50,
+  --     ellipsis_cahr = '…',
+  --     show_labelDetails = true,
+  --     before = function(entry, vim_item)
+  --       return vim_item
+  --     end
+  --   }),
+  -- },
   -- not required for copilot, on by default
   -- experimental = {
   --   ghost_text = true,
   -- }
 }
+
+
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' },
+  },
+})
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' },
+  },
+    {
+      {
+        name = 'cmdline',
+        option = {
+          ignore_cmds = { 'Man', '!' }
+        }
+      },
+    })
+})
+
+-- vim.api.nvim_create_autocmd({ 'BufEnter' }, { callback = trim_whitespace })
+-- autocmd BufEnter *.py :setlocal tabstop=4 shiftwidth=4 expandtab
+-- autocmd BufEnter *.py :setlocal tabstop=4 shiftwidth=4 expandtab
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
