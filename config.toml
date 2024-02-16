@@ -1,0 +1,76 @@
+title = "dotfiles"
+version = "0.0.1"
+
+[ globals ]
+author = "Shyam Padia"
+DOTFILES_DIR = "$HOME/.dotfiles"
+
+[test]
+
+[test.hello]
+src = "test/.testfile.yml"
+dst = "$XDG_CONFIG_HOME/test/testfile.yml"
+
+[ nvim]
+
+[ nvim.custom ]
+src = "./vim/custom/"
+dst = "$XDG_CONFIG_HOME/nvim/"
+[ nvim.nvchad ]
+src = "./vim/custom/"
+dst = "$XDG_CONFIG_HOME/nvim/"
+
+[ shell ]
+[ shell.zsh ]
+src = "oh-my-zsh/.zshrc"
+dst = "$HOME/.zshrc"
+
+# [ dependencies ]
+# src= "./deps"
+# [ dependencies.macos ]
+# dst = "./deps"
+# [ dependencies.linux ]
+# dst = "./deps"
+
+# [[ terminals.alacritty ]]
+# src= alacritty/custom/alacritty.yml
+# dst= "$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+# [[ terminals.kitty ]]
+# src= kitty/custom/kitty.conf
+# dst= "$XDG_CONFIG_HOME/kitty/kitty.conf"
+# [[ terminals.wezterm ]]
+# src= wezterm/custom/wezterm.lua
+# dst= "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
+# [[ plex.tmux ]]
+# src= tmux/custom/.tmux.conf
+# dst= "$XDG_CONFIG_HOME/tmux/tmux.conf"
+# [[ ranger ]]
+# src= ranger/custom/rc.conf
+# dst= "$XDG_CONFIG_HOME/ranger/rc.conf"
+# [[ bat ]]
+# src= "./bat/bat.conf"
+# dst= "$XDG_CONFIG_HOME/bat/bat.conf"
+# [[ lazygit ]]
+# src= lazygit/custom/config.yml
+# dst= "$XDG_CONFIG_HOME/lazygit/config.yml"
+
+
+
+# [[ starship ]]
+# src= starship/custom/starship.toml
+# dst= "$XDG_CONFIG_HOME/starship/starship.toml"
+# [[ eza ]]
+# src= exa/custom/.eza.toml
+# dst= "$XDG_CONFIG_HOME/exa/eza.toml"
+# [[ shell.bash ]]
+# src= bash/custom/.bashrc
+# dst= "$HOME/.bashrc"
+# [[ shell.nushell ]]
+# src= nushell/custom/config.toml
+# dst= "$XDG_CONFIG_HOME/nu/config.toml"
+# [[ git ]]
+# src= git/custom/.gitconfig
+# dst= "$HOME/.gitconfig"
+# [[ plex.zellij ]]
+# src= zellij/custom/zellij.yml
+# dst= "$XDG_CONFIG_HOME/zellij/zellij.yml"

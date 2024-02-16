@@ -81,7 +81,7 @@ bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
 bind-key -T prefix F display-popup -h 80% -w 80% -E "ranger"
 
 # sesh popup
- bind-key "g" run-shell "sesh connect $(
+ bind -n C-g run-shell "sesh connect $(
 	sesh list -tz | fzf-tmux -p 55%,60% \
 		--reverse --no-sort --border-label ' sesh ' --prompt '⚡  ' \
 		--header '  ^a all ^t tmux ^x zoxide ^f find' \

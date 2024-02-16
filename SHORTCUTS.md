@@ -497,6 +497,22 @@ vT - select back - F for inclusive
 ~ - Convert letter to upper case
 g; - jump to last edit in file
 
+# insert mode bindings
+# :h ins-special-keys
+Ctrl + o ysiw"" - in insert mode run a single command in normal mode and go back to insert mode
+Ctrl + d - indent back
+Ctrl + t - indent forward
+Ctrl + u - delete current line
+Ctrl + w - backward delete 1 word
+Ctrl + r <reg> - insert contents from a register
+Home - go to start of line
+C-Home - go to start of file
+C-End - go to end of file
+Del - delete character after the cursor
+Ctrl + z - insert new line above curosr
+Ctrl + a - Go to start of line
+Ctrl + s - Go to end of line
+
 fn + Backspace - Delete forward during normal/insert mode
 :sp(:split|:hor) <file|command|terminal> - open in horizontal pane
 :vsp(:vsplit|:vert) <file|command|terminal> - open in vertical pane
@@ -657,6 +673,9 @@ Space + t d - toggle git blame delete line in current changes
 :lua require('swenv.nvim').pick_venv()
 <leader>ce - Choose conda environment while in a python file. Triggers a LspRestart
 
+# autopairs
+Alt + e - in normal mode presents options for adding (auto pairs) based on the text inside
+
 # NVIM TREE
 ## TODO: create full side bar with git, active buffers as shown in (https://github.com/nvim-tree/nvim-tree.lua/issues/2255)
 ## TODO: Update to open the split next to the current window not in current window and move existing next to it
@@ -747,8 +766,8 @@ gf - Go to file under cursor?
 [d - Go to previous error (diagnostic)
 ]d - Go to next error (diagnostic)
 Space + e - Open error in floating block
-(Space + q) (+ Ctrl + q - to go quickfix) - Open list of all errors in quickfix menu ( Switched to using telescope diagnostics )
-Space + q (:Telescope diagnostics) - List of all errors in telescope (REMAP)
+(Space + wd) (+ Ctrl + q - to go quickfix) - Open list of all errors in quickfix menu ( Switched to using telescope diagnostics )
+Space + wd (:Telescope diagnostics) - List of all errors in telescope (REMAP)
 Space + D - Type Definition (Goes into packages also)
 Space + d s - Search Document Symbols
 Space + w s - Search Workspace Symbols

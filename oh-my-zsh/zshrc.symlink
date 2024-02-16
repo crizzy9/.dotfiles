@@ -185,7 +185,7 @@ compctl -K    _pip_completion pip3
 ## TODO: Convert to common keybindings file
 
 # additional path setup - modify per user
-export PATH="/Users/spadia/.local/bin:$PATH"
+export PATH="/Users/spadia/.local/bin:/Users/spadia/go/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # additional exports
@@ -404,7 +404,7 @@ bind '^[i' nvimGoToLine
 ##### search files and open in neovim #####
 function fzfFindFileFd {
     # uses fzf-tmux to display files in preview window
-    echo $(fd --type f --hidden --follow --exclude '{.git,node_modules,__pycache__}' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
+    echo $(fd --type f --hidden --follow --exclude '{.git,node_modules,__pycache__}' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --cycle --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
 }
 
 function nvimGoToFile {

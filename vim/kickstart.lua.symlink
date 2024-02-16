@@ -81,7 +81,8 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth',
+  -- 'tpope/vim-rsi',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -541,6 +542,13 @@ require('lazy').setup({
       { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "[U]ndo Tree" },
     },
   },
+  
+  -- autopairs
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}
+  },
 
   -- startup - for fancy screen as dashboard
   -- TODO: fix error cursor outside buffer??
@@ -801,13 +809,12 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [M]arks' })
 vim.keymap.set('n', '<leader>sj', require('telescope.builtin').jumplist, { desc = '[S]earch [J]umplist' })
 vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
-vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>wd', require('telescope.builtin').diagnostics, { desc = '[W]orkspace [D]iagnostics' })
 
 -- ********************** CUSTOM *************************
 
@@ -1231,6 +1238,7 @@ cmp.setup {
     { name = 'lua_ls' },
     { name = 'tsserver' },
     { name = 'pyright' },
+    -- { name = 'gopls', keyword_length = 3 },
     -- { name = 'nvim_lua' },
     {
       name = 'nvim_lsp',
@@ -1284,9 +1292,36 @@ cmp.setup.cmdline(':', {
     })
 })
 
--- vim.api.nvim_create_autocmd({ 'BufEnter' }, { callback = trim_whitespace })
+require('nvim-autopairs').setup({
+  -- enable_check_bracket_line = true,
+  fast_wrap = {},
+})
+
+-- vim sleuth set tabstops for different filetypes
 -- autocmd BufEnter *.py :setlocal tabstop=4 shiftwidth=4 expandtab
 -- autocmd BufEnter *.py :setlocal tabstop=4 shiftwidth=4 expandtab
+local function setIndentation(filetype, width)
+  vim.api.nvim_create_autocmd({ 'FileType' }, {
+    callback = function()
+      if vim.bo.filetype == filetype then
+        vim.bo.tabstop = width
+        vim.bo.softtabstop = width
+        vim.bo.shiftwidth = width
+        vim.bo.expandtab = true
+      end
+    end,
+    pattern = filetype,
+  })
+end
+
+setIndentation('python', 4)
+setIndentation('lua', 2)
+setIndentation('go', 4)
+
+-- mappings for insert mode go to start of line and end of line
+vim.keymap.set('i', '<C-a>', '<C-o>^', { silent = true })
+vim.keymap.set('i', '<C-s>', '<C-o>$', { silent = true })
+vim.keymap.set('i', '<C-z>', '<C-o>O', { silent = true })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
