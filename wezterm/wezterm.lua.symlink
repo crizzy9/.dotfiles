@@ -66,6 +66,29 @@ config.font_size = 16.0
 --     action = act.AdjustPaneSize { 'Right', 5 },
 --   },
 -- }
+--
+config.keys = {
+  {
+    key="LeftArrow",
+    mods="CTRL|SHIFT",
+    action=wezterm.action{SendString="\x1b[1;6D"},
+  },
+  {
+    key="RightArrow",
+    mods="CTRL|SHIFT",
+    action=wezterm.action{SendString="\x1b[1;6C"},
+  },
+  -- {
+  --   key=".",
+  --   mods="CTRL|SHIFT",
+  --   action=wezterm.action{SendString="\x1b."},
+  -- },
+  -- {
+  --   key=",",
+  --   mods="CTRL|SHIFT",
+  --   action=wezterm.action{SendString="\x1b,"},
+  -- },
+}
 
 -- and finally, return the configuration to wezterm
 return config

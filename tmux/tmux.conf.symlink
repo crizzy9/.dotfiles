@@ -42,14 +42,39 @@ bind -n M-k resize-pane -U 5
 bind -n M-j resize-pane -D 5
 
 # switch pane layouts with numbers
-bind -n M-1 select-layout even-horizontal
-bind -n M-2 select-layout even-vertical
-bind -n M-3 select-layout main-horizontal
-bind -n M-4 select-layout main-vertical
-bind -n M-5 select-layout tiled
+# bind -n M-1 select-layout even-horizontal
+# bind -n M-2 select-layout even-vertical
+# bind -n M-3 select-layout main-horizontal
+# bind -n M-4 select-layout main-vertical
+# bind -n M-5 select-layout tiled
 
 # cycle through pane layouts
 bind -n M-Tab next-layout
+
+# jump to tab
+bind -n M-1 select-window -t :=1
+bind -n M-2 select-window -t :=2
+bind -n M-3 select-window -t :=3
+bind -n M-4 select-window -t :=4
+bind -n M-5 select-window -t :=5
+
+# cycle through tabs with Ctrl+Tab and Ctrl+Shift+Tab
+# bind-key -n C-S-Right next-window
+# bind-key -n C-S-Left previous-window
+# reorder tabs with Ctrl + Shift + , or .
+bind-key -n C-S-Right swap-window -t +1
+bind-key -n C-S-Left swap-window -t -1
+
+# fix copy mode scrolling reset
+# unbind -T copy-mode MouseDragEnd1Pane
+# unbind -T copy-mode-vi MouseDragEnd1Pane
+
+# bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel \; send-keys -X copy-pipe-and-cancel "pbcopy"
+unbind-key -T copy-mode-vi MouseDragEnd1Pane
+# bind-key -t copy-mode-vi MouseDragEnd1Pane copy-selection -x
+# bind-key -t copy-mode MouseDragEnd1Pane copy-selection -x
+# bind-key -t vi-copy MouseDragEnd1Pane copy-selection -x
+# bind-key -t emacs-copy MouseDragEnd1Pane copy-selection -x
 
 # switch pane to other ones
 # default <prefix> { }
@@ -78,19 +103,23 @@ bind-key -T prefix h split-window -h -c "#{pane_current_path}"
 bind-key -T prefix K display-popup -h 80% -w 80% -E "lazygit"
 
 # ranger popup
+# TODO: switch to yati and send back to tmux
 bind-key -T prefix F display-popup -h 80% -w 80% -E "ranger"
 
+# Remap Copy Mode to Shift + Enter
+# bind -n C-[ copy-mode
+
 # sesh popup
- bind -n C-g run-shell "sesh connect $(
+ bind -n C-g run-shell "sesh connect \"$(
 	sesh list -tz | fzf-tmux -p 55%,60% \
-		--reverse --no-sort --border-label ' sesh ' --prompt '⚡  ' \
+		--no-sort --border-label ' sesh ' --prompt '⚡  ' \
 		--header '  ^a all ^t tmux ^x zoxide ^f find' \
 		--bind 'tab:down,btab:up' \
 		--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' \
 		--bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' \
 		--bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' \
 		--bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)'
-)"
+)\""
 
 # =========
 # plugins

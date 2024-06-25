@@ -71,13 +71,30 @@ zle -N reverse-yank-pop .edit.visual-yank # temp fix for zsh-edit to avoid warni
 #### fzf-tab ####
 znap source Aloxaf/fzf-tab
 # disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
+# zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:complete:git-checkout:argument-rest' sort false
+# zstyle ':completion:complete:git-revert:argument-rest' sort false
+# no sort for all git commands
+# zstyle ':completion:*:git:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 -a --icons=auto --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
+# preview file content with bat when completing with fzf-tab
+# zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range :600 {}'
+
+# change continous trigger
+# zstyle ':fzf-tab:*' continous-trigger '/'
+
+# enable fzf tmux popup with fzf-tab
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:complete:cd*' popup-min-size 50 8
 
 # fix needed for if scrolled with ^N or ^P
 my-fzf-tab() {
@@ -114,6 +131,8 @@ ZSH_HIGHLIGHT_STYLES[globbing]='none'
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 znap source zsh-users/zsh-syntax-highlighting
 
+# znap source zdharma-continuum/fast-syntax-highlighting
+
 #### terminal eval ####
 # `znap eval` makes evaluating generated command output up to 10 times faster.
 znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
@@ -145,6 +164,12 @@ compctl -K    _conda conda
 
 znap function _pip_completion pip3       'eval "$( pip3 completion --zsh )"'
 compctl -K    _pip_completion pip3
+
+# znap function _atuin atuin              'eval "$( atuin gen-completions --shell zsh)"'
+# compctl -K    _atuin atuin
+
+znap function _fzf fzf		  'source <(fzf --zsh)'
+compctl -K    _fzf fzf
 
 # =============================================================================
 
@@ -186,6 +211,7 @@ compctl -K    _pip_completion pip3
 
 # additional path setup - modify per user
 export PATH="/Users/spadia/.local/bin:/Users/spadia/go/bin:$PATH"
+# get java home version /usr/libexec/java_home -v
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # additional exports
@@ -213,14 +239,16 @@ export ZSH_HIGHLIGHT_STYLES[comment]='none'
 
 # ls aliases
 # EZA_COLORS="da=32"
-alias lss='eza --icons auto'
-alias lsa='eza -la --icons auto'
-alias lsag='eza -la --icons auto --git --header'
+alias lss='eza --icons auto --group-directories-first'
+alias lsa='eza -la --icons auto --group-directories-first'
+alias lsag='eza -la --icons auto --git --header --group-directories-first'
 alias lsat='eza -la --icons auto --git --header --tree -L 2 --git-ignore'
 
 # Json aliases
 ## copy formatted json to clipboard
 alias jj='pbpaste | jq . | pbcopy'
+## copy formatted json to clipboard and paste in neovim
+alias jjn='pbpaste | jq . | nvim - +"set syntax=json"'
 alias jjj='pbpaste | jq .'
 
 # lazygit
@@ -230,10 +258,31 @@ alias lg='lazygit'
 alias jupyter-bg='jupyter notebook > /dev/null 2>&1 &'
 alias jupyter-lab-bg='jupyter-lab > /dev/null 2>&1 &'
 
+# git aliases
+
+# colored man pages
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 # tmux clear
 if [[ $TMUX ]]; then
   alias clear='clear && tmux clear-history'
 fi
+
+# jest test
+alias jtest='yarn test:jest --silent --no-prelint --coverage=false'
+alias jtestc='yarn test:jest --no-prelint --coverage=false'
+
+# mvn clean install
+alias mci='mvn clean install -Dspring.profiles.active=local -Dmaven.test.skip=true'
+
+# cm clean install
+alias cmi='cd app && mvn clean install -Dspring.profiles.active=local -Dmaven.test.skip=true && cd campaign-manager && mvn clean install -Dspring.profiles.active=local -Dmaven.test.skip=true && cd ../..'
 
 # Pomodoro timer
 # requires timer and terminal-notifier to be installed
@@ -277,7 +326,7 @@ pomo () {
 
 
 ##### existing keybindings in key-bindings.zsh #####
-# bindkey '^R' fzf-history-widget
+# bindkey '^[h' fzf-history-widget
 # bindkey '^T' fzf-file-widget
 # bindkey 'Alt-C' fzf-cd-widget
 ####################################################
@@ -287,8 +336,8 @@ pomo () {
 # if not found from root / do `fd "key-bindings.zsh"` or `dpkg -L fzf | grep bindings`
 # location depends on installation method and os, there might be symlinks also like with brew
 #
-source /usr/local/opt/fzf/shell/key-bindings.zsh
-source /usr/local/opt/fzf/shell/completion.zsh
+# source /usr/local/opt/fzf/shell/key-bindings.zsh
+# source /usr/local/opt/fzf/shell/completion.zsh
 #####################################
 
 
@@ -306,13 +355,13 @@ source /usr/local/opt/fzf/shell/completion.zsh
 ##### Ctrl+R commands #####
 # export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 # export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)+abort'"
-export FZF_CTRL_R_OPTS="
-    --prompt='Command> '
-    --preview='echo {}' --preview-window up:3:hidden:wrap
-    --bind='ctrl-/:toggle-preview'
-    --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-    --color=header:italic
-    --header='CTRL-/: toggle preview | CTRL-Y: copy command'"
+# export FZF_CTRL_R_OPTS="
+#     --prompt='Command> '
+#     --preview='echo {}' --preview-window up:3:hidden:wrap
+#     --bind='ctrl-/:toggle-preview'
+#     --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+#     --color=header:italic
+#     --header='CTRL-/: toggle preview | CTRL-Y: copy command'"
 ###########################
 
 
@@ -371,7 +420,7 @@ function fzfLiveGrepRg {
     rm -f /tmp/rg-fzf-{r,f}
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case --glob '!{.git,node_modules,__pycache__}/*' "
     INITIAL_QUERY="${*:-}"
-    : | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --ansi --disabled --query "$INITIAL_QUERY" \
+    : | fzf-tmux -p 55%,60% -- --height=60% --layout=reverse --ansi --disabled --query "$INITIAL_QUERY" \
         --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
         --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
         --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+rebind(ctrl-r)+transform-query(echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f)" \
@@ -404,7 +453,7 @@ bind '^[i' nvimGoToLine
 ##### search files and open in neovim #####
 function fzfFindFileFd {
     # uses fzf-tmux to display files in preview window
-    echo $(fd --type f --hidden --follow --exclude '{.git,node_modules,__pycache__}' | fzf-tmux -h 50 -w 150 -- --height=80% --layout=reverse --cycle --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
+    echo $(fd --type f --hidden --follow --exclude '{.git,node_modules,__pycache__}' | fzf-tmux -p 70%,60% -- --height=60% --layout=reverse --cycle --border --margin=1 --padding=1 --prompt='Files> ' --preview='bat --line-range :500 {}' --bind='ctrl-/:change-preview-window(down|hidden|)' --color=header:italic --header='Ctrl-/: toggle preview')
 }
 
 function nvimGoToFile {
@@ -424,7 +473,7 @@ bind '^f' nvimGoToFile
 ##### tmux sesh #####
 #####################
 function tmuxSeshList {
-    echo $(sesh list -tz | fzf-tmux -p 55%,60% --reverse --no-sort --height 60% --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
+    echo $(sesh list -tz | fzf-tmux -p 55%,60% --no-sort --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^x zoxide ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)')
 }
 
 function tmuxSeshConnect {
@@ -456,3 +505,9 @@ bindkey -r '^Q' '^[Q'
 
 #### additional sources ####
 # =============================================================================
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
+
+znap eval atuin 'atuin init zsh'

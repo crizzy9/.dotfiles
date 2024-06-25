@@ -329,7 +329,7 @@ require('lazy').setup({
   -- ********************** CUSTOM *************************
   -- nvim tree
   {
-    -- WHAT IS THE POINT OF IMPORT _ READ LAZY INSTRUCTIONS
+    -- IMPORT ALLOWS to import a file for configuration
     -- import = 'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-tree.lua',
     version = "*",
@@ -366,7 +366,13 @@ require('lazy').setup({
         },
         view = {
           adaptive_size = true,
+          preserve_window_proportions = true
         },
+        -- actions = {
+        --   open_file = {
+        --     resize_window = false,
+        --   }
+        -- }
       }
     end,
   },
@@ -542,12 +548,48 @@ require('lazy').setup({
       { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "[U]ndo Tree" },
     },
   },
-  
+
   -- autopairs
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {}
+  },
+
+  -- treesitter_context
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  -- }
+  --
+  -- bekaboo dropbar
+  {
+    "Bekaboo/dropbar.nvim"
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    config=function()
+      require("harpoon").setup()
+    end,
+    keys={
+      { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon [H]ome" },
+      { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[H]arpoon [F]ile" },
+      { "<leader>n", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Harpoon [n]ext" },
+      { "<leader>N", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Harpoon [N]prev" },
+    }
+  },
+
+  -- vim easy align for aligning text
+  {
+    "junegunn/vim-easy-align",
+    keys = {
+      { "ga", "<Plug>(EasyAlign)" },
+    },
+  },
+
+  -- vim test
+  {
+    "vim-test/vim-test",
   },
 
   -- startup - for fancy screen as dashboard
@@ -709,7 +751,9 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- add other extensions
--- require('telescope').load_extension('noice')
+require('telescope').load_extension('noice')
+-- require('telescope').load_extension('fugitive')
+-- require('telescope').load_extension('harpoon')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -808,6 +852,7 @@ vim.keymap.set('n', '<leader>sf', telescope_search_project_files, { desc = '[S]e
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+-- vim.keymap.set('n', '<leader>sa', require('telescope').extensions.live_grep_args.live_grep_args, { desc = '[S]earch by Grep with [A]ctions' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [M]arks' })
@@ -885,7 +930,7 @@ local function trim_whitespace()
   vim.cmd [[%s/\s\+$//e]]
 end
 vim.keymap.set('n', '<leader>tw', trim_whitespace, { desc = '[T]rim [W]hitespace' })
--- vim.api.nvim_create_autocmd({ 'BufWritePre' }, { callback = trim_whitespace })
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, { callback = trim_whitespace })
 
 -- *******************************************************
 
@@ -1057,6 +1102,15 @@ local servers = {
   -- rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   pyright = {
+    -- before_init = function(params, config)
+    --   local Path = require "plenary.path"
+    --   local venv = Path:new((config.root_dir:gsub("/", Path.path.sep)), ".venv")
+    --   if venv:joinpath("bin"):is_dir() then
+    --     config.settings.python.pythonPath = tostring(venv:joinpath("bin", "python"))
+    --   else
+    --     config.settings.python.pythonPath = tostring(venv:joinpath("Scripts", "python.exe"))
+    --   end
+    -- end,
   --   settings = {
   --     python = {
   --       analysis = {
@@ -1161,6 +1215,7 @@ vim.keymap.set({"i", "s"}, "<C-j>", function()
 end, {silent = true})
 
 cmp.setup {
+  -- preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -1209,7 +1264,7 @@ cmp.setup {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<C-y>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
@@ -1323,6 +1378,29 @@ vim.keymap.set('i', '<C-a>', '<C-o>^', { silent = true })
 vim.keymap.set('i', '<C-s>', '<C-o>$', { silent = true })
 vim.keymap.set('i', '<C-z>', '<C-o>O', { silent = true })
 
+
+-- quickfix jump without enter
+-- Create or get the augroup with the name 'QuickFix'
+local quickfix_group = vim.api.nvim_create_augroup('QuickFix', { clear = true })
+
+-- Create autocommands within the 'QuickFix' augroup
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  group = quickfix_group,
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'j', 'j<CR><C-w>p', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', 'k', 'k<CR><C-w>p', { noremap = true, silent = true })
+  end,
+})
+
+-- Tabularize
+
+
+-- treesitter context
+-- vim.keymap.set("n", "[c", function()
+--   require("treesitter-context").go_to_context(vim.v.count1)
+-- end, { silent = true })
+--
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- https://www.reddit.com/r/neovim/comments/chlmfk/highlight_trailing_whitespaces_in_neovim/

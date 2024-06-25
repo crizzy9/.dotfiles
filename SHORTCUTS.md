@@ -58,40 +58,51 @@ While in **Normal** mode execute a single **Ignore** mode command using `<C-v>`
 
 ### Normal Mode keybindings
 
-| Keymap    | Action    |
-|---------------- | --------------- |
-| `b`    | Search and Switch to tab in current window    |
-| `t`    | Search open history and bookmarks in new tab in foreground   |
-| `/`    | Search in current tab |
-| `d`    | Close current tab |
-| `u`    | Reopen last closed tab |
-| `H`    | Go back a page |
-| `L`    | Go forward a page |
-| `J`    | Focus previous tab |
-| `K`    | Focus next tab|
-| `yy`    | Yank current page url to clipboard |
-| `>>`/`<<`    | Move tab +1/-1 |
+| Keymap           | Action                                                     |
+| ---------------- | ---------------------------------------------------------- |
+| `b`              | Search and Switch to tab in current window                 |
+| `t`              | Search open history and bookmarks in new tab in foreground |
+| `/`              | Search in current tab                                      |
+| `d`              | Close current tab                                          |
+| `u`              | Reopen last closed tab                                     |
+| `H`              | Go back a page                                             |
+| `L`              | Go forward a page                                          |
+| `J`              | Focus previous tab                                         |
+| `K`              | Focus next tab                                             |
+| `yy`             | Yank current page url to clipboard                         |
+| `>>`/`<<`        | Move tab +1/-1                                             |
 
 ### Hint Mode keybindings
 
 > More details on hints can be found using `:h hint`
 
-| Keymap    | Action    |
-|---------------- | --------------- |
-| `f` hk   | open in current tab, can also be used to click buttons |
-| `F` hk   | open in new tab in background |
-| `;t` hk   |  open in new tab in foreground |
-| `;d` hk   |  open in new tab in foreground but dont load it |
-| `v` hk   | select a line - then h/j/k/l to select more and y to yank |
-| `;y` hk   | yank link target if it exists |
-| <Esc>/<C-[> | exit hint mode |
-| Tab/S-Tab   | focus next/previous hint |
-| Enter/Space | select focused hint |
+| Keymap           | Action                                                    |
+| ---------------- | --------------------------------------------------------- |
+| `f` hk           | open in current tab, can also be used to click buttons    |
+| `F` hk           | open in new tab in background                             |
+| `;t` hk          | open in new tab in foreground                             |
+| `;d` hk          | open in new tab in foreground but dont load it            |
+| `v` hk           | select a line - then h/j/k/l to select more and y to yank |
+| `;y` hk          | yank link target if it exists                             |
+| <Esc>/<C-[>      | exit hint mode                                            |
+| Tab/S-Tab        | focus next/previous hint                                  |
+| Enter/Space      | select focused hint                                       |
 
 ## Obsidian
 Cmd + Opt + I - View Source
 For custom CSS - Goto Vault > .obsidian > snippets > snippet.css - then Goto Obsidian Settings > Appearance > CSS Snippets
 
+
+## Atuin
+```text
+Up Arrow - Move up in history (also Ctrl + r)
+Ctrl + P/N - Move up and down in history
+Ctrl + R - Change to session/directory/host options instead of global history
+Ctrl + O - View stats for the selected command
+Ctrl + Y - Copy the selected command to clipboard
+Tab to accept suggestions but dont run
+Enter to run command
+```
 
 ## Tmux Shortcuts
 Sessions = Traditional window type thigs
@@ -137,6 +148,8 @@ tmux -v - run tmux in verbose mode and store in a tmux log file for debugging
 <prefix> + <num> - Activate specific tab
 <prefix> + l - Activate last window/tab
 <prefix> + w - Select and switch session or window from preview list
+<prefix> + . + <num> - move tab to a specific number
+<prefix> + < - Show display-menu for tabs to perform actions
 
 -- Panes
 <prefix> + " - Horizontal split
@@ -288,6 +301,8 @@ Ctrl + Shift + left | right - Cycle through panes
 Cmd + t - New tab
 Ctrl + Shift + Z - Maximize pane - TODO: show it is maximized
 Ctrl + Shift + L - Open Debug pane for lua? TODO: can use this for executing current buffer?
+Ctrl + Shift + U - Unicode panel
+Ctrl + Shift + P - Command Palette
 ```
 
 ## Lazygit shortcuts
@@ -384,15 +399,18 @@ Ctrl + p/n    - cycle through results in fzf
 Esc / Ctrl + (g|c)  - cancel fzf search
 
 ## fzf syntax
-| Token     | Match type                 |
-| --------- | -------------------------- |
-| `sbtrkt`  | fuzzy-match                |
-| `'wild`   | exact-match (quoted)       |
-| `^music`  | prefix-exact-match         |
-| `.mp3$`   | suffix-exact-match         |
-| `!fire`   | inverse-exact-match        |
-| `!^music` | inverse-prefix-exact-match |
-| `!.mp3$`  | inverse-suffix-exact-match |
+| Token          | Match type                             |
+| ---------      | --------------------------             |
+| `sbtrkt`       | fuzzy-match                            |
+| `'wild`        | exact-match (quoted)                   |
+| `^music`       | prefix-exact-match                     |
+| `.mp3$`        | suffix-exact-match                     |
+| `!fire`        | inverse-exact-match                    |
+| `!^music`      | inverse-prefix-exact-match             |
+| `!.mp3$`       | inverse-suffix-exact-match             |
+| -t <extension> | search files with a specific extension |
+
+[more info](https://miguelcrespo.co/posts/using-telescope-to-find-text-inside-paths/)
 
 # aliases
 lss - exa ls - better ls
@@ -470,6 +488,10 @@ manually run widgets
 # other bash functions - uninstalled from zsh-autocomplete somehow - check forward-word-match
 Ctrl + s - fwd-i-search search forward and jump cursor
 Ctrl + r (in fwd-i-search mode to go back instead) - bck-i-search search forward and jump cursor
+
+# get hex code for a key stroke
+xxd -psd
+<Esc> - ^[
 ```
 
 ## nvim shortcuts
@@ -566,6 +588,10 @@ Shift + v (select multiple lines) :s/<motion:$>/";(your changes) - perform multi
 #### \w - remove white space, .* select the rest of the stuff in there / replace with data[0] = " \1(reference what was replaced) ";
 <visual selection>:s/\(\w.*\)/data[0] = "\1";
 
+# registers
+"kyy - yank to register k
+"kp - paste from register k
+
 # macros
 ## macros and marks are stored as registers, marks to move, macros to repeat action
 " - view all registers in which key
@@ -575,6 +601,10 @@ q <register: a-z> {do stuff} q - record macro
 . - repeat previous action (does not repeat motion keys)
 " - Check existing macros/registers
 :cdo execute "norm! @a" | update - run macro on a quickfix menu after recording for @a (update saves the file)
+:'<,'>norm! @a - run macro on visual selection
+:5,10norm! @a - run macro on a set of lines
+:%norm! @a - run macro on the entire file
+:g/pattern/norm! @a - run macro on a pattern
 qa <record macro> q -> "ap <paste to buffer and change macro> "ayy <update> - update existing recorded macro with new changes
 
 # marks (used as bookmarks) - use harpoon?
@@ -739,6 +769,7 @@ print("print something") - execute and print something in lua script
 -- vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics list' })
 
 # Other useful info and commands
+# For mason errors installing language servers, if the issue is with npm edit the ~/.npmrc file comment the registery to use the global registery
 `:Telescope keymaps` - search LSP keymaps
 `:Mason` + i - To install a new LSP server for a language
 U (when in Mason) - Update lsp servers
@@ -759,6 +790,7 @@ K (in help man page) - Go to info about function while in :help pages
 ## goto mappings
 gr - Go to reference / Open lsp references
 gd - Go to definition
+Ctrl + w + Ctrl + ] - Go to definition in a new split
 gD - Go to declaration
 gI - Go to implementation
 gF - ?
@@ -779,15 +811,22 @@ Space + w l - Workspace List Folders
 Space + w a - Workspace Add Folder
 Space + w r - Workspace Remove Folder
 
+## Easy Align
+gaip= - align = in a paragraph
+gaip: - align : in a paragraph
+gaip, - align , in a paragraph
+ga2j= - align = in 2 lines
+ga= - align = in a visual selection
+
 ## lsp suggestion/autocomplete mappings
-K - hover documentation , K again to go inside the hover
-ctrl + k - signature documentation
+K        = hover documentation , K again to go inside the hover
+ctrl + k = signature documentation
 
 # nvim-cmp
-<C-e> - Dismiss Popup
-<C-p> - Go to previous suggestion
-<C-n> - Go to next suggestion
-<Enter> - Accept suggestion
+<C-e> = Dismiss Popup
+<C-p> = Go to previous suggestion
+<C-n> = Go to next suggestion
+<Enter> = Accept suggestion
 
 #Copilot
 Tab/<C-e> - Accept suggestion

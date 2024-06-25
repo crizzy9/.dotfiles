@@ -4,26 +4,79 @@ version = "0.0.1"
 [ globals ]
 author = "Shyam Padia"
 DOTFILES_DIR = "$HOME/.dotfiles"
+# package_manager = 'brew'
 
-[test]
+[ plugins ]
 
-[test.hello]
+[ plugins.test ]
+[ plugins.test.hello ]
 src = "test/.testfile.yml"
-dst = "$XDG_CONFIG_HOME/test/testfile.yml"
+dst = "$XDG_CONFIG_HOME/test/testfile2.yml"
 
-[ nvim]
 
-[ nvim.custom ]
-src = "./vim/custom/"
+[ plugins.nvim ]
+deps = ["nvim"]
+# scripts = ["git clone https://github.com/tmux-plugins/tpm.git ~/lalatest/tmp"]
+[ plugins.nvim.custom ]
+src = "./vim/custom/custom/"
 dst = "$XDG_CONFIG_HOME/nvim/"
-[ nvim.nvchad ]
-src = "./vim/custom/"
-dst = "$XDG_CONFIG_HOME/nvim/"
+scripts = ["git clone https://github.com/tmux-plugins/tpm.git ~/lalatest/temp"]
+[ plugins.nvim.lazyvim ]
+src = "./vim/custom/lazyvim/"
+dst = "$XDG_CONFIG_HOME/lazyvim/nvim/"
 
-[ shell ]
-[ shell.zsh ]
+
+[ plugins.shell ]
+[ plugins.shell.zsh ]
 src = "oh-my-zsh/.zshrc"
 dst = "$HOME/.zshrc"
+deps = ["zsh", "sd", "adsfhk"]
+
+
+[ plugins.plex ]
+[ plugins.plex.tmux ]
+src= "tmux/.tmux.conf"
+dst= "$XDG_CONFIG_HOME/tmux/tmux.conf"
+deps = ["tmux", "sesh"]
+# scripts = ["git clone https://github.com/tmux-plugins/tpm.git $XDG_CONFIG_HOME/tmux/plugins/tpm"]
+
+
+# [ terminals ]
+# [ terminals.wezterm ]
+# src= "wezterm/wezterm.lua"
+# dst= "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
+# deps = ["wezterm"]
+# [ terminals.kitty ]
+# src= kitty/kitty.conf
+# dst= "$XDG_CONFIG_HOME/kitty/kitty.conf"
+# deps = ["kitty"]
+# [ terminals.alacritty ]
+# src= alacritty/alacritty.yml
+# dst= "$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+# deps = ["alacritty"]
+
+
+# [ filemanager ]
+# [ filemanager.yazi ]
+# src = yazi/yazi.toml
+# dst = "$XDG_CONFIG_HOME/yazi/yazi.toml"
+# deps = ["yazi"]
+# [ filemanager.ranger ]
+# src= ranger/rc.conf
+# dst= "$XDG_CONFIG_HOME/ranger/rc.conf"
+# deps = ["ranger"]
+
+
+# [[ bat ]]
+# src= "./bat/bat.conf"
+# dst= "$XDG_CONFIG_HOME/bat/bat.conf"
+# deps = ["bat"]
+
+
+# [[ lazygit ]]
+# src= "lazygit/config.yml"
+# dst= "$XDG_CONFIG_HOME/lazygit/config.yml"
+# deps = ["lazygit"]
 
 # [ dependencies ]
 # src= "./deps"
@@ -38,23 +91,6 @@ dst = "$HOME/.zshrc"
 # [[ terminals.kitty ]]
 # src= kitty/custom/kitty.conf
 # dst= "$XDG_CONFIG_HOME/kitty/kitty.conf"
-# [[ terminals.wezterm ]]
-# src= wezterm/custom/wezterm.lua
-# dst= "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
-# [[ plex.tmux ]]
-# src= tmux/custom/.tmux.conf
-# dst= "$XDG_CONFIG_HOME/tmux/tmux.conf"
-# [[ ranger ]]
-# src= ranger/custom/rc.conf
-# dst= "$XDG_CONFIG_HOME/ranger/rc.conf"
-# [[ bat ]]
-# src= "./bat/bat.conf"
-# dst= "$XDG_CONFIG_HOME/bat/bat.conf"
-# [[ lazygit ]]
-# src= lazygit/custom/config.yml
-# dst= "$XDG_CONFIG_HOME/lazygit/config.yml"
-
-
 
 # [[ starship ]]
 # src= starship/custom/starship.toml
