@@ -511,3 +511,57 @@ alias j!=jbang
 export PATH="$HOME/.jbang/bin:$PATH"
 
 znap eval atuin 'atuin init zsh'
+
+
+# NVIM Switcher
+# export NVIM_APPNAME="nvim-custom"
+alias v="nvim"
+alias vc="NVIM_APPNAME=nvim-custom nvim"
+alias vz="NVIM_APPNAME=nvim-lazyvim nvim"
+alias va="NVIM_APPNAME=nvim-astrovim nvim"
+alias vn="NVIM_APPNAME=nvim-nvchad nvim"
+alias vl="NVIM_APPNAME=nvim-lunarvim nvim"
+
+
+vv() {
+  select config in custom lazyvim nvchad astrovim lunarvim
+  # if [[ $config = "lunarvim" ]]; then
+  #   do nvim-lunarvim
+  # fi
+  do NVIM_APPNAME=nvim-$config nvim $@; break; done
+}
+
+
+setnvim() {
+  select config in custom lazyvim nvchad astrovim lunarvim
+  do export NVIM_APPNAME=nvim-$config $@; break; done
+}
+
+## Lua Rocks
+znap eval luarocks 'luarocks path'
+
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+# export LDFLAGS="-L $(xcrun --show-sdk-path)/usr/lib -L brew --prefix bzip2/lib"
+# export CFLAGS="-L $(xcrun --show-sdk-path)/usr/include -L brew --prefix bzip2/include"
+
+# znap eval shellenv "/opt/homebrew/bin/brew shellenv"
+# znap eval pyenv "pyenv init -"
+# znap eval pyenv-virtualenv "pyenv virtualenv-init -"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+
+# export PATH="$HOME/.jenv/bin:$PATH"
+# znap eval jenv 'jenv init -'
+
+alias sdkinstalled='sdk list java | grep installed'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# TODO: Update to use znap
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"

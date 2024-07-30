@@ -176,8 +176,19 @@ func main() {
 
 }
 
+func getItemSettings(plugin string, item string) settings {
+    itemPath := fmt.Sprintf("plugins.%s.%s", plugin, item)
+    itemSettings := decodeSettings(getConfig(itemPath))
+    return itemSettings
+}
+
 func makePlugin(plugin string) {
     installPluginDependencies(plugin)
+    items := getConfigKeys("plugins." + plugin)
+    for _, item := range items {
+        itemSettings := getItemSettings(plugin, item)
+        createSymlink(itemSettings.Src, itemSettings.Dst)
+    }
 }
 
 func installPluginDependencies(plugin string) {
