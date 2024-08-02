@@ -1,0 +1,51 @@
+#imp dependencies for arch aur check yay instructions
+git
+base-devel
+yay
+
+# nvidia drivers
+https://wiki.archlinux.org/title/NVIDIA
+
+// hyperland stuff at the start, createa arch startup script as well
+
+# shell
+fish
+// set fish default
+
+# languages
+python
+go
+node
+# version managers
+pyenv
+nvm
+;anaconda
+# utilites
+less
+wget
+curl
+eza
+bat
+btop
+cmake
+ripgrep
+fzf
+fd-find
+tree
+pyenv
+zoxide
+atuin
+tldr
+yazi
+yq
+jq
+trash
+;sesh
+;fastfetch
+# tools
+neovim
+kitty
+tmux
+neofetch
+obsidian
+lazygit
