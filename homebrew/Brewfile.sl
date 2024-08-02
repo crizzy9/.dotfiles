@@ -23,6 +23,8 @@ tap 'zegervdv/zathura' || true
 # brew 'openssl'
 # brew 'wezterm'
 brew 'neovim'
+brew 'neofetch'
+brew 'fastfetch'
 brew 'wget'
 brew 'ranger'
 brew 'cmake'
