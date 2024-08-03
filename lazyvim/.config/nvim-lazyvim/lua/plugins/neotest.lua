@@ -1,7 +1,7 @@
 return {
   "nvim-neotest/neotest",
+  dependencies = { "nvim-neotest/nvim-nio" },
   opts = {
-    -- dependencies = { "nvim-neotest/neotest-jest" },
     adapters = {
       ["neotest-jest"] = {
         jestCommand = "yarn test",
