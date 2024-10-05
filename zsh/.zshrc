@@ -62,42 +62,62 @@ ZSH_HIGHLIGHT_STYLES[globbing]='none'
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 znap source zsh-users/zsh-syntax-highlighting
 
+# ZSH COMPLETIONS #
+znap source zsh-users/zsh-completions
+fpath=(~/zsh-plugins/zsh-users/zsh-completions/src $fpath)
+
 # ======= #
 # FZF Tab #
 # ======= #
-znap source Aloxaf/fzf-tab
-# disable sort when completing `git checkout`
+# znap source Aloxaf/fzf-tab
+# # disable sort when completing `git checkout`
 # zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:complete:git-checkout:argument-rest' sort false
-# zstyle ':completion:complete:git-revert:argument-rest' sort false
-# no sort for all git commands
-# zstyle ':completion:*:git:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
+# # set descriptions format to enable group support
+# # don't use escape sequences here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 -a --icons=auto --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-# preview file content with bat when completing with fzf-tab
-# zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range :600 {}'
+# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# zstyle ':completion:*' menu no
+# # preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# # switch group using `<` and `>`
+# zstyle ':fzf-tab:*' switch-group '<' '>'
+#
+# # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
-# change continous trigger
-# zstyle ':fzf-tab:*' continous-trigger '/'
-
-# enable fzf tmux popup with fzf-tab
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:cd*' popup-min-size 50 8
-
-# fix needed for if scrolled with ^N or ^P
-my-fzf-tab() {
-  functions[compadd]=$functions[-ftb-compadd]
-  zle fzf-tab-complete
-}
-zle -N my-fzf-tab
+# # disable sort when completing `git checkout`
+# # zstyle ':completion:*:git-checkout:*' sort false
+# zstyle ':completion:complete:git-checkout:argument-rest' sort false
+# # zstyle ':completion:complete:git-revert:argument-rest' sort false
+# # no sort for all git commands
+# # zstyle ':completion:*:git:*' sort false
+# # set descriptions format to enable group support
+# zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
+# # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# zstyle ':completion:*' menu no
+# # preview directory's content with exa when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 -a --icons=auto --color=always $realpath'
+# # switch group using `,` and `.`
+# zstyle ':fzf-tab:*' switch-group ',' '.'
+# # preview file content with bat when completing with fzf-tab
+# # zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=header,grid --line-range :600 {}'
+#
+# # change continous trigger
+# # zstyle ':fzf-tab:*' continous-trigger '/'
+#
+# # enable fzf tmux popup with fzf-tab
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:complete:cd*' popup-min-size 50 8
+#
+# # fix needed for if scrolled with ^N or ^P
+# my-fzf-tab() {
+#   functions[compadd]=$functions[-ftb-compadd]
+#   zle fzf-tab-complete
+# }
+# zle -N my-fzf-tab
 
 # ============= #
 # Znap Settings #
@@ -216,7 +236,7 @@ bindkey '^N' down-line-or-select
 bindkey '^P' up-line-or-search
 
 # custom functions
-bindkey "^I" my-fzf-tab
+# bindkey "^I" my-fzf-tab
 bindkey -s '^f' 'nvimGoToFile\n'
 bindkey -s '^g' 'tmuxSeshConnect\n'
 # bindkey -s '^i' 'nvimGoToLine\n'
@@ -226,7 +246,7 @@ bindkey -s '^g' 'tmuxSeshConnect\n'
 # ========================= #
 
 # path updates
-export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/go/bin:$HOME/.cargo/bin"
 
 # bat settings
 export BAT_CONFIG_PATH="$HOME/.config/bat/bat.conf"
@@ -257,4 +277,14 @@ alias lg='lazygit'
 # jupyter
 alias jupyter-bg='jupyter notebook > /dev/null 2>&1 &'
 alias jupyter-lab-bg='jupyter-lab > /dev/null 2>&1 &'
+
+# yazi
+alias y='yazi'
+
+# grub theme archive
+alias grub-archive='tar -cvf Sekiro.tar Sekiro'
+
+# electron support wayland
+export ELECTRON_ENABLE_WAYLAND=1
+export ELECTRON_OZONE_PLATFORM_HINT=auto
 

@@ -49,3 +49,22 @@ tmux
 neofetch
 obsidian
 lazygit
+# cargo install hyprsome
+# hyprpm(hyperland plugin manager) add https://github.coim/Duckonaut/split-monitor-workspaces
+# hyprload
+#curl -sSL https://raw.githubusercontent.com/Duckonaut/hyprload/main/install.sh | bash
+#exec-once=$HOME/.local/share/hyprload/hyprload.sh
+
+# to make hyprpm work when install headers error do
+sudo pacman -S cmake
+git clone --recursive https://github.com/hyprwm/Hyprland
+cd Hyprland
+make all && sudo make install
+
+cpu-x
+
+grub-customizer
+https://k1ng.dev/distro-grub-themes/installation#manual-installation
+https://github.com/semimqmo/sekiro_grub_theme
+
+go install github.com/spf13/cobra-cli@latest

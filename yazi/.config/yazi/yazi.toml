@@ -14,4 +14,5 @@ prepend_previewers = [
   { "name" = "*.conf", run = "bat" },
   { "name" = "*.csv", run = "bat" },
   { "name" = "*.yml", run = "bat" },
+  { "name" = "*.conf", run = "bat" },
 ]
