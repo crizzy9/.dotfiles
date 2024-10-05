@@ -1,0 +1,46 @@
+{
+  "include": "~/.config/waybar/modules",
+  "layer": "top",
+  //"mode": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "position": "top",
+  "spacing": 3,
+  "fixed-center": true,
+  "ipc": true,
+  "margin-top": 1,
+  "margin-left": 8,
+  "margin-right": 8,
+
+  "modules-left": [
+    "clock",
+    "cpu",
+    "temperature",
+    "memory",
+    // "custom/menu",
+    "wlr/taskbar"
+    // "disk"
+  ],
+
+  "modules-center": [
+    "hyprland/workspaces#ss"
+  ],
+
+  "modules-right": [
+    // "idle_inhibitor",
+    // "custom/light_dark",
+    "custom/weather",
+    // "battery", 
+    "hyprland/window",
+    "custom/swaync",
+    "mpris",
+    // "keyboard-state",
+    "bluetooth",
+    "tray",
+    "pulseaudio",
+    // "pulseaudio#microphone",
+    "custom/updater",
+    "custom/power"
+    // "custom/lock"
+  ]
+}
