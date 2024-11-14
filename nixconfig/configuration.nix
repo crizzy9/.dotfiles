@@ -4,17 +4,20 @@
 
 { config, pkgs, ... }:
 
+# { config, pkgs, inputs, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader.grub.enable = true;
-  # boot.loader.grub.device = "/dev/vda";
+  # boot.loader.grub.device = "nodev";
+  # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.useOSProber = true;
 
   networking.hostName = "nexus"; # Define your hostname.
@@ -51,6 +54,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -93,6 +97,13 @@
     ];
   };
 
+  # home-manager = {
+  #   extraSpecialArgs = { inherit inputs;};
+  #   users = {
+  #     "nightwatcher" = "./home.nix"
+  #   };
+  # };
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -120,6 +131,7 @@
     # lazygit
     # fzf
     # atuin
+
     # languages
     # gcc
     # libGL
@@ -130,6 +142,7 @@
     # rustup
     # cargo
     # go
+
     # C related
     # gmp gmp.dev
     # isl
@@ -178,6 +191,7 @@
   # bluetooth
   # hardware.bluetooth.enable = true;
   # hardware.bluetooth.powerOnBoot = true;
+  hardware.enableAllFirmware = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -198,6 +212,9 @@
   };
 
   services.blueman.enable = true; # pairing
+  systemd.services.bluetooth.serviceConfig.ConfigurationDirectoryMode = "755";
+  services.dbus.enable = true; # plugins like micp might need it
+
 
   #nvidia
   hardware.opengl = {
