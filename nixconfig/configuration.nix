@@ -48,6 +48,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Default Shell
+  # environment.shells = with pkgs; [ zsh bash fish ];
+  # users.defaultUserShell = pkgs.zsh;
+  # programs.zsh.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
