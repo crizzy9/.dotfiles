@@ -9,9 +9,11 @@
 
     shellAliases = {
       ls = "eza	--icons";
+      la = "eza -la --icons auto --group-directories-first";
       lsa = "eza -la --icons auto --group-directories-first";
       lsag = "eza -lah --icons auto --git --group-directories-first";
       lsat = "eza -lah --icons auto --git --tree -L 2 --git-ignore";
+      lg = "lazygit";
       v = "nvim";
       sv = "sudo nvim";
       # cat = "bat";
