@@ -1,26 +1,49 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
-# { config, pkgs, inputs, ... }:
+let
+  inherit (import ./settings.nix) host username keyboardLayout;
+in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./users.nix
+    # ../../modules/nvidia-drivers.nix
+  ];
 
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
+  boot = {
+    # Bootloader.
+    # loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.grub.enable = true;
+    loader.grub.device = "nodev";
+    loader.grub.efiSupport = true;
+    loader.grub.useOSProber = true;
+  };
 
-  networking.hostName = "nexus"; # Define your hostname.
+  stylix = {
+    enable = true;
+    image = ../../../wallpapers/Dynamic-Wallpapers/Light/lofi-light.jpg;
+    # base16scheme - tokyo night theme
+    polarity = "dark";
+    opacity.terminal = 0.8;
+    cursor.package = pkgs.bibata-cursors;
+    cursor.name = "Bibata-Modern-Ice";
+    cursor.size = 24;
+    fonts = {
+      monospace = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      sizes = {
+        applications = 12;
+        terminal = 15;
+        desktop = 11;
+        popups = 12;
+      };
+    };
+  };
+
+  networking.hostName = host;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -59,7 +82,7 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
+    layout = keyboardLayout;
     variant = "";
   };
 
@@ -223,10 +246,7 @@
 
 
   #nvidia
-  hardware.opengl = {
-    enable = true;
-  };
-  # hardware.graphics.enable = true;
+  hardware.graphics.enable = true;
 
   # enables nvidia drivers for both xorg and wayland
   services.xserver.videoDrivers = ["nvidia"];
