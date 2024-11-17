@@ -2,7 +2,7 @@
 {
   xdg = {
     configFile."nvim/init.lua".enable = false;
-    configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nixconfig/user/apps/neovim/lazyvim";
+    configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/user/apps/neovim/lazyvim";
     # desktopEntries."nvim" = lib.mkIf pkgs.stdenv.isLinux {
     #   name = "Neovim";
     #   comment = "Edit Text Files";

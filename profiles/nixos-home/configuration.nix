@@ -22,7 +22,7 @@ in
 
   stylix = {
     enable = true;
-    image = ../../../wallpapers/Dynamic-Wallpapers/Light/lofi-light.jpg;
+    image = ../../assets/wallpapers/light/lofi-light.jpg;
     # base16scheme - tokyo night theme
     polarity = "dark";
     opacity.terminal = 0.8;
