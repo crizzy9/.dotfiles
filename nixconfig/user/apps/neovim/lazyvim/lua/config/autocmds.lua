@@ -1,0 +1,15 @@
+-- Autocmds are automatically loaded on the VeryLazy event
+-- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Add any additional autocmds here
+
+-- autocmd for setting filetype as jsonc when inside folder ~/.config/waybar/
+-- vim.api.nvim_create_autocmd({ "BufEnter" }, {
+--   group = vim.api.nvim_create_augroup("lazyvim_waybar_configs", { clear = true }),
+--   callback = function()
+--     local path = vim.fn.expand("%:p")
+--     -- only match for files with no extension
+--     if string.match(path, "/.config/waybar/[^.]*$") then
+--       vim.bo.filetype = "jsonc"
+--     end
+--   end,
+-- })

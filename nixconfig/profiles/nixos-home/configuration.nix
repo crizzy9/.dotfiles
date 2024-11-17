@@ -143,7 +143,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-    neovim
+    # neovim
     wget
     git
     pciutils # for things like lspci
@@ -162,15 +162,20 @@ in
     # atuin
 
     # languages
-    # gcc
-    # libGL
-    # nodejs
+    # required for neovim
+    gcc
+    clang
+    go
+    python3
+    libGL
+    nodejs
+    rustup
+    cargo
+    unzip
+    gnumake
     # nvm
     # python
     # pyenv
-    # rustup
-    # cargo
-    # go
 
     # C related
     # gmp gmp.dev

@@ -10,6 +10,7 @@ in
 
   imports = [
     ../../user/shell/zsh.nix
+    ../../user/apps/neovim/neovim.nix
   ];
 
   home.packages = [
