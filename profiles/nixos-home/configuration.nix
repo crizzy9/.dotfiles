@@ -163,6 +163,7 @@ in
     spotify
     yq
     jq
+    nh
     # lazygit
     # fzf
     # atuin

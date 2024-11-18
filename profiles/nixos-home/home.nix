@@ -10,7 +10,12 @@ in
 
   imports = [
     # setup git
-    ../../user/shell/zsh.nix
+    (import ../../user/shell/zsh.nix {
+      inherit config;
+      inherit pkgs;
+      inherit host;
+      inherit username;
+    })
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
   ];

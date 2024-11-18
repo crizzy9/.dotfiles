@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, host, username, ... }:
 # TODO: add userSettings for dotfiles dir
 {
   programs.zsh = {
@@ -10,7 +10,6 @@
     shellAliases = {
       ls = "eza	--icons";
       la = "eza -la --icons auto --group-directories-first";
-      lsa = "eza -la --icons auto --group-directories-first";
       lsag = "eza -lah --icons auto --git --group-directories-first";
       lsat = "eza -lah --icons auto --git --tree -L 2 --git-ignore";
       lg = "lazygit";
@@ -18,8 +17,10 @@
       sv = "sudo nvim";
       # cat = "bat";
       ".." = "cd ..";
-      rebuild = "sudo nixos-rebuild switch --flake .";
-      update = "nix flake update";
+      # rebuild = "sudo nixos-rebuild switch --flake .";
+      rebuild = "nh os switch --hostname ${host} /home/${username}/.dotfiles";
+      # update = "nix flake update";
+      update = "nh os switch --hostname ${host} --update /home/${username}/.dotfiles";
       hsync = "home-manager switch --flake .";
     };
 
