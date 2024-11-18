@@ -11,6 +11,7 @@ in
   imports = [
     ../../user/shell/zsh.nix
     ../../user/apps/neovim/neovim.nix
+    ../../user/apps/tmux/tmux.nix
   ];
 
   home.packages = [

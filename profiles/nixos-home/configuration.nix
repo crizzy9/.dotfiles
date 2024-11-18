@@ -156,11 +156,13 @@ in
     ripgrep
     zsh
     neofetch
-    tmux
+    # tmux
     yazi
     tldr
     bat
     spotify
+    yq
+    jq
     # lazygit
     # fzf
     # atuin
