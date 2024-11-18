@@ -25,7 +25,7 @@ in
   stylix = {
     enable = true;
     image = ../../assets/wallpapers/light/lofi-light.jpg;
-    # base16scheme - tokyo night theme
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     polarity = "dark";
     opacity.terminal = 0.8;
     cursor.package = pkgs.bibata-cursors;

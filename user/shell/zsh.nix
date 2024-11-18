@@ -54,4 +54,6 @@
   
   programs.eza.enable = true;
   programs.eza.enableZshIntegration = true;
+
+  programs.yazi.enableZshIntegration = true;
 }

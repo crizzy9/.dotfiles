@@ -9,6 +9,7 @@ in
   home.stateVersion = "24.05";
 
   imports = [
+    # setup git
     ../../user/shell/zsh.nix
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
