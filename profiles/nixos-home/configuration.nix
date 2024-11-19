@@ -164,6 +164,11 @@ in
     yq
     jq
     nh
+    fd
+    trash-cli
+    xclip
+    nurl
+    glow
     # lazygit
     # fzf
     # atuin

@@ -18,6 +18,7 @@ in
     })
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
+    ../../user/apps/yazi/yazi.nix
   ];
 
   home.packages = [
