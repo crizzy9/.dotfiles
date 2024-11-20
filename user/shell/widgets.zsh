@@ -16,8 +16,6 @@ function fzf-find-and-edit-widget() {
     --layout=reverse \
     --cycle \
     --border \
-    --margin=1 \
-    --padding=1 \
     --prompt='Files> ' \
     --preview='bat --line-range :500 {}' \
     --bind='ctrl-/:change-preview-window(down|hidden|)' \
@@ -50,8 +48,6 @@ function fzf-live-grep-widget() {
     --layout=reverse \
     --cycle \
     --border \
-    --margin=1 \
-    --padding=1 \
     --ansi --disabled --query "$INITIAL_QUERY" \
     --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
     --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \

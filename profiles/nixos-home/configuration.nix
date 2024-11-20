@@ -22,12 +22,13 @@ in
   #   loader.grub.useOSProber = true;
   # };
 
+  # move to home manager
   stylix = {
     enable = true;
     image = ../../assets/wallpapers/light/lofi-light.jpg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     polarity = "dark";
-    opacity.terminal = 0.8;
+    opacity.terminal = 0.9;
     cursor.package = pkgs.bibata-cursors;
     cursor.name = "Bibata-Modern-Ice";
     cursor.size = 24;
@@ -152,7 +153,7 @@ in
     git
     pciutils # for things like lspci
     autorandr
-    kitty
+    # kitty
     ripgrep
     zsh
     neofetch

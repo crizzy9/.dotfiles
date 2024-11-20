@@ -84,11 +84,6 @@
 
       bind-key -n "C-g" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 55%,60% \
-          --layout=reverse \
-          --cycle \
-          --border \
-          --margin=1 \
-          --padding=1 \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
           --header '  ^a all ^t tmux ^c configs ^x zoxide ^d tmux kill ^f find' \
           --bind 'tab:down,btab:up' \

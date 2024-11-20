@@ -19,16 +19,20 @@ in
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
     ../../user/apps/yazi/yazi.nix
+    ../../user/apps/kitty.nix
   ];
 
   home.packages = [
     pkgs.hello
+    # pkgs.kitty
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
 
+  stylix.targets.kitty.enable = false;
+  stylix.targets.neovim.enable = false;
 
 
   # programs
