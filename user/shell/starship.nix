@@ -2,6 +2,7 @@
 {
   programs.starship.enable = true;
   programs.starship.enableTransience = true; # TODO: doesnt work
+  # programs.starship.settings = pkgs.lib.importTOML ./starship.toml;
   programs.starship.settings = {
     "$schema" = "https://starship.rs/config-schema.json";
     format = lib.concatStrings [
@@ -30,7 +31,8 @@
       "[ ](fg:purple)"
       "$line_break$characte"
     ];
-    palette = "catpuccin_mocha";
+    palette = "catppuccin_mocha";
+
     palettes.gruvbox_dark = {
       color_fg0 = "#fbf1c7";
       color_bg1 = "#3c3836";
@@ -114,7 +116,7 @@
       truncation_symbol = "…/";
     };
 
-    directory.substiutions = {
+    directory.substitutions = {
       "Documents" = "󰈙 ";
       "Downloads" = " ";
       "Music" = "󰝚 ";
@@ -200,7 +202,7 @@
       format = "[[  $time ](fg:mantle bg:purple)]($style)";
     };
 
-    linebreak.disabled = false;
+    line_break.disabled = false;
 
     character = {
       disabled = false;
