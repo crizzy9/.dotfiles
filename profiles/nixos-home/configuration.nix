@@ -27,6 +27,7 @@ in
     enable = true;
     image = ../../assets/wallpapers/light/lofi-light.jpg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";
     opacity.terminal = 0.9;
     cursor.package = pkgs.bibata-cursors;

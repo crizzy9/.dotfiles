@@ -1,4 +1,4 @@
-{ config, pkgs, host, username, ... }:
+{ config, host, username, ... }:
 # TODO: add userSettings for dotfiles dir
 {
   programs.zsh = {
@@ -25,17 +25,32 @@
       jj = "pbpaste | jq . | pbcopy";
       jjn = "pbpaste | jq . | nvim - +'set syntax=json'";
       jjj = "pbpaste | jq .";
+      gs = "git status --short";
+      gd = "git diff";
+      ga = "git add";
+      gaa = "git add --all";
+      gfa = "git fetch --all --tags --prune";
+      gcmsg = "git commit -m";
+      gopull = "git pull origin $\{git_current_branch\}";
+      gopush = "git push origin $\{git_current_branch\}";
+      gprom = "git pull origin $\{git_main_branch\} --rebase --autostash";
+      gprum = "git pull upstream $\{git_main_branch\} --rebase --autostash";
+      glom = "git pull origin $\{git_main_branch\}";
+      glum = "git pull upstream $\{git_main_branch\}";
+      gluc = "git pull upstream $\{git_current_branch\}";
+      glgg = "git log --graph --stat";
+      glo = "git log --online -graph";
     };
 
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     # TODO: remove and switch to starship and put git alias differently
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "agnoster";
-    };
+    # oh-my-zsh = {
+    #   enable = true;
+    #   plugins = [ "git" ];
+    #   theme = "agnoster";
+    # };
 
     initExtra = builtins.readFile ./widgets.zsh;
 
@@ -58,6 +73,8 @@
 
   programs.yazi.enableZshIntegration = true;
   programs.kitty.shellIntegration.enableZshIntegration = true;
+  programs.starship.enableZshIntegration = true;
+
   #
   # if test -n "$KITTY_INSTALLATION_DIR"; then
   #   export KITTY_SHELL_INTEGRATION="no-rc"

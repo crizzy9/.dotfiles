@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  # Change it to userSettings
   inherit (import ./settings.nix) username host gitUsername gitEmail;
 in
 {
@@ -9,17 +10,20 @@ in
   home.stateVersion = "24.05";
 
   imports = [
-    # setup git
-    (import ../../user/shell/zsh.nix {
+    (import ../../user/tools/git.nix {
+      inherit gitUsername;
+      inherit gitEmail;
+    })
+    (import ../../user/shell/zsh/zsh.nix {
       inherit config;
-      inherit pkgs;
       inherit host;
       inherit username;
     })
+    ../../user/shell/starship.nix
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
     ../../user/apps/yazi/yazi.nix
-    ../../user/apps/kitty.nix
+    ../../user/terminal/kitty.nix
   ];
 
   home.packages = [
