@@ -14,6 +14,8 @@ in
     plugins = {
       git = "${yazi-plugins}/git.yazi";
       smart-filter = "${yazi-plugins}/smart-filter.yazi";
+      # https://yazi-rs.github.io/docs/tips/#smart-enter
+      # smart-enter = "${yazi-plugins}/smart-enter.yazi";
       diff = "${yazi-plugins}/diff.yazi";
       glow = pkgs.fetchFromGitHub {
         owner = "Reledia";
