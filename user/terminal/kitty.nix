@@ -7,13 +7,13 @@
     # theme, opacity and font configured by stylix directly, turn off to have different/none theme, prevent shell color change atleast
     # themeFile = "kanagawa";
     extraConfig = ''
-      ###############
-      # - Font Config
-      ###############
-      bold_font        	auto
-      italic_font      	auto
-      bold_italic_font 	auto
-      font_size		16
+      ################
+      ## - Font Config
+      ################
+      #bold_font        	auto
+      #italic_font      	auto
+      #bold_italic_font 	auto
+      #font_size		16
 
       ###########################################################
       # Symbols Nerd Font complete symbol_map
@@ -21,7 +21,7 @@
       #   kitty --debug-font-fallback
       ###########################################################
 
-      symbol_map  U+03a2-U+03bd Symbols Nerd Font
+      # symbol_map  U+03a2-U+03bd Symbols Nerd Font
 
       # symbol_map  U+E000-U+E00d Symbols Nerd Font
       #

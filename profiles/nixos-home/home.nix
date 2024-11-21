@@ -28,27 +28,15 @@ in
 
   home.packages = [
     pkgs.hello
-    # pkgs.kitty
+    # pkgs.blesh
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
 
-  stylix.targets.kitty.enable = false;
+  # stylix.targets.kitty.enable = false;
   stylix.targets.neovim.enable = false;
-
-
-  # programs
-  # programs.bash = {
-  #   enable = true;
-  #   shellAliases = aliases;
-  # };
-  #
-  # programs.zsh = {
-  #   enable = true;
-  #   shellAliases = aliases;
-  # };
 
   home.file = {
     # "~/.config/nvim".source = ~/.dotfiles/lazyvim/.config/nvim-lazyvim;

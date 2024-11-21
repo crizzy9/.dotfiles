@@ -18,8 +18,8 @@ in
       ];
       shell = pkgs.${shell};
       ignoreShellProgramCheck = true;
-      packages = with pkgs; [
-      ];
+      # packages = with pkgs; [
+      # ];
     };
   };
 }

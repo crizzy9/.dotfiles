@@ -45,13 +45,6 @@
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
 
-    # TODO: remove and switch to starship and put git alias differently
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = [ "git" ];
-    #   theme = "agnoster";
-    # };
-
     initExtra = builtins.readFile ./widgets.zsh;
 
   };
@@ -71,15 +64,9 @@
   programs.eza.enable = true;
   programs.eza.enableZshIntegration = true;
 
+  # how to add these separately based on shell configuration
   programs.yazi.enableZshIntegration = true;
   programs.kitty.shellIntegration.enableZshIntegration = true;
   programs.starship.enableZshIntegration = true;
 
-  #
-  # if test -n "$KITTY_INSTALLATION_DIR"; then
-  #   export KITTY_SHELL_INTEGRATION="no-rc"
-  #   autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-  #   kitty-integration
-  #   unfunction kitty-integration
-  # fi
 }
