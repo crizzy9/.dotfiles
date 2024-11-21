@@ -112,6 +112,7 @@ in
 
     # languages
     # required for neovim
+    # neovide
     lazygit
     gcc
     clang

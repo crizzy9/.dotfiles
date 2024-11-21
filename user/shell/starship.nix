@@ -50,6 +50,10 @@
     #   color_yellow = "#d79921";
     # };
 
+    # palettes.tokyo_dark_terminal = {
+    #
+    # };
+
     palettes.catppuccin_mocha = {
       # rosewater = "#f5e0dc";
       # flamingo = "#f2cdcd";

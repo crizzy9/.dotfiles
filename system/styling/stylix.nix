@@ -1,13 +1,15 @@
 { pkgs, ... }:
+let
+  themePath = "../../themes/tokyo-night-dark.yaml";
+in
 {
   # move to home manager
   stylix = {
     enable = true;
     image = ../../assets/wallpapers/light/lofi-light.jpg;
     # https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    # base16Scheme = "./${themePath}";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark-terminal.yaml";
     polarity = "dark";
     opacity.terminal = 0.9;
     cursor.package = pkgs.bibata-cursors;
@@ -25,5 +27,15 @@
         popups = 12;
       };
     };
+  };
+
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      font-awesome
+      symbola
+      material-icons
+    ];
   };
 }

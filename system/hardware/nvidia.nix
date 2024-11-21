@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
+  # used to be opengl.enable
   hardware.graphics.enable = true;
+
+  # config.drivers.nvidia.enable = lib.mkEnableOption "Enable Nvidia Drivers";
 
   # enables nvidia drivers for both xorg and wayland
   services.xserver.videoDrivers = ["nvidia"];
