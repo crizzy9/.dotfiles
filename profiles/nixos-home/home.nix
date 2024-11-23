@@ -24,6 +24,7 @@ in
     ../../user/apps/tmux/tmux.nix
     ../../user/apps/yazi/yazi.nix
     ../../user/terminal/kitty.nix
+    ../../user/environment/wm/hyprland.nix
   ];
 
   home.packages = [
@@ -34,6 +35,13 @@ in
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  xdg = {
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
 
   # stylix.targets.kitty.enable = false;
   stylix.targets.neovim.enable = false;
