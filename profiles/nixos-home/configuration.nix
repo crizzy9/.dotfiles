@@ -12,7 +12,10 @@ in
     ../../system/hardware/audio.nix
     ../../system/services/boot.nix
     ../../system/services/misc.nix
+    ../../system/services/dbus.nix
+    ../../system/services/gnome-keyring.nix
     ../../system/styling/stylix.nix
+    ../../system/environment/wayland.nix
     ../../system/environment/hyprland.nix
   ];
 
@@ -93,7 +96,7 @@ in
     zsh
     neofetch
     trash-cli
-    xclip
+    # xclip
     nurl
 
     # user packages
