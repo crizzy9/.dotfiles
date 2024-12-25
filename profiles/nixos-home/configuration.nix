@@ -12,7 +12,11 @@ in
     ../../system/hardware/audio.nix
     ../../system/services/boot.nix
     ../../system/services/misc.nix
+    ../../system/services/dbus.nix
+    ../../system/services/gnome-keyring.nix
     ../../system/styling/stylix.nix
+    ../../system/environment/wayland.nix
+    ../../system/environment/hyprland.nix
   ];
 
   # ========== #
@@ -55,8 +59,8 @@ in
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
 
   # Configure keymap in X11
@@ -92,7 +96,7 @@ in
     zsh
     neofetch
     trash-cli
-    xclip
+    # xclip
     nurl
 
     # user packages
