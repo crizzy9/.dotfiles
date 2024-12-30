@@ -31,6 +31,7 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
+    # 560 fixes hyprland login loop issues
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.

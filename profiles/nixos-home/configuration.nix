@@ -13,6 +13,7 @@ in
     ../../system/services/boot.nix
     ../../system/services/misc.nix
     ../../system/services/dbus.nix
+    # ../../system/services/transmission.nix
     ../../system/services/gnome-keyring.nix
     ../../system/styling/stylix.nix
     ../../system/environment/wayland.nix
@@ -95,6 +96,9 @@ in
     ripgrep
     zsh
     neofetch
+    dolphin
+    mplayer
+    transmission
     trash-cli
     # xclip
     nurl

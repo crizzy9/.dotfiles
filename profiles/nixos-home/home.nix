@@ -25,6 +25,8 @@ in
     ../../user/apps/yazi/yazi.nix
     ../../user/terminal/kitty.nix
     ../../user/environment/wm/hyprland.nix
+    ../../user/environment/waybar/waybar.nix
+    ../../user/environment/launchers/rofi.nix
   ];
 
   home.packages = [
@@ -45,6 +47,8 @@ in
 
   # stylix.targets.kitty.enable = false;
   stylix.targets.neovim.enable = false;
+  stylix.targets.rofi.enable = false;
+  stylix.targets.waybar.enable = false;
 
   home.file = {
     # "~/.config/nvim".source = ~/.dotfiles/lazyvim/.config/nvim-lazyvim;
