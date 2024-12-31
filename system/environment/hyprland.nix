@@ -1,18 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs.hyprland = {
     enable = true;
-  };
-
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    # Invisible cursor fix
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # allow electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
   };
 
   # Flavor (midnight_tress): hyprland, waybar, swaync, swww, wlogout,rofi, hyprpm, widgets, tokyodark/tokyonight
@@ -21,14 +10,9 @@
     gsettings-desktop-schemas
     wlr-randr
     wtype
-    # wl-clipboard
     hyprland-protocols
-    xdg-utils
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
     pamixer
-    # pavucontrol
+    pavucontrol
     swayidle
     swaylock
     polkit_gnome
@@ -42,16 +26,18 @@
     )
     lxqt.lxqt-policykit # qt based ui for things
     hyprpicker # wayland color picker
-    # swappy # snapshot editting tool
+    # hyprpaper
+    hyprnome
+    hypridle
+    # inputs.hyprlock.packages.${pkgs.system}.default
+    swappy # snapshot editting tool
     swww # wallpaper daemon
     rofi-wayland
     grim # grab images from wayland compositor
     slurp # select region in wayland compositor
-    # swaynotificationcenter # swaync
-    # dunst
+    swaynotificationcenter # swaync
     libnotify
-    # meson # python build system
-    # ninja # build
+    ninja # build
     # greetd.tuigreet # graphical console greeter?
 
     # libvirt # virtual machine

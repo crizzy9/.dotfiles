@@ -49,13 +49,10 @@ in
   stylix.targets.neovim.enable = false;
   stylix.targets.rofi.enable = false;
   stylix.targets.waybar.enable = false;
+  stylix.targets.hyprland.enable = false;
 
   home.file = {
-    # "~/.config/nvim".source = ~/.dotfiles/lazyvim/.config/nvim-lazyvim;
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    # "hyprpm/hyprpm.toml".source = ~/.dotfiles/user/environment/wm/hyprland/hyprpm.toml;
   };
 
   home.sessionVariables = {

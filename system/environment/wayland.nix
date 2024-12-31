@@ -1,25 +1,26 @@
 { pkgs, ... }:
 {
-  # imports = [
-  #   # ./pipewire.nix
-  #   ./dbus.nix
-  #   ./gnome-keyring.nix
-  #   ./fonts.nix
-  # ];
-
   environment.systemPackages = with pkgs; [
     wayland
     xwayland
+    wlr-randr
     meson
     wayland-protocols
     wayland-utils
     wl-clipboard
     wlroots
-    # qt5.qtwayland
-    # qt6.qt6wayland
+    libsForQt5.qt5.qtwayland
+    qt5.qtwayland
+    qt6.qtwayland
+    wlsunset
+    xdg-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
     vulkan-loader
     vulkan-validation-layers
     # greetd.tuigreet
+    # sddm
     gdm
   ];
 

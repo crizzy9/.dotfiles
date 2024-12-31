@@ -1,19 +1,30 @@
-{ lib, pkgs, split-monitor-workspaces, ... }:
-with lib;
+{ config, pkgs, inputs, ... }:
 {
+  # xdg = {
+  #   configFile."hypr/hyprland.conf".enable = false;
+  #   configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/user/environment/wm/hyprland";
+  # };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    # systemd.enable = true;
+    plugins = [
+      # split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      # inputs.split-monitor-workspaces.packages.${pkgs.system}.default
+      # inputs.hyprland-plugins.packages."${pkgs.stdenv.hostPlatform.system}".split-monitor-workspaces
+    ];
     settings = {
       "$mainMod" = "SUPER";
 
-      # env = [
-      #   "MOZ_ENABLE_WAYLAND, 1"
-      # ];
-
-      plugins = [
-        split-monitor-workspaces.packages.${pkgs.system}
+      env = [
+        "LIBVA_DRIVER_NAME, nvidia"
+        "XDG_SESSION_TYPE, wayland"
+        "GBM_BACKEND, nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME, nvidia"
+        "WLR_NO_HARDWARE_CURSORS, 1" # Invisible cursor fix
+        "NIXOS_OZONE_WL, 1" # allow electron apps to use wayland
+        "MOZ_ENABLE_WAYLAND, 1"
       ];
 
       monitor = [
@@ -22,15 +33,15 @@ with lib;
       ];
 
       general = {
-        sensitivity = 1.00;
+        # sensitivity = 1.00;
         gaps_in = 5;
         gaps_out = 8;
-        apply_sens_to_raw = 1;
+        # apply_sens_to_raw = 1;
         border_size = 2;
         # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         # "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
-        no_cursor_warps = false;
+        # no_cursor_warps = false;
         resize_on_border = true;
       };
 
@@ -51,7 +62,8 @@ with lib;
       };
 
       master = {
-        new_is_master = true;
+        new_status = "master";
+        # new_is_master = true;
         new_on_top = 1;
         mfact = 0.5;
       };
@@ -66,11 +78,11 @@ with lib;
         dim_strength = 0.1;
         dim_special = 0.8;
 
-        drop_shadow = true;
-        shadow_range = 6;
-        shadow_render_power = 1;
-        col.shadow = "rgb(7C8BA1)";
-        col.shadow_inactive = "0x50000000";
+        # drop_shadow = true;
+        # shadow_range = 6;
+        # shadow_render_power = 1;
+        # col.shadow = "rgb(7C8BA1)";
+        # col.shadow_inactive = "0x50000000";
 
         blur = {
           enabled = true;
@@ -188,13 +200,24 @@ with lib;
       bind = [
         # Basics
         "CTRL ALT, Delete, exec, hyprctl dispatch exit 0"
-        "$mainMod, Q, killactive,"
+        # "$mainMod, Q, killactive,"
         "$mainMod, F, fullscreen"
         # "$mainMod SHIFT, Q, exec, $scriptsDir/KillActiveProcess.sh"
         "$mainMod SHIFT, F, togglefloating,"
         "$mainMod ALT, F, exec, hyprctl dispatch workspaceopt allfloat"
         # "CTRL ALT, L, exec, $scriptsDir/LockScreen.sh"
         # "CTRL ALT, P, exec, $scriptsDir/Wlogout.sh"
+
+        # Apps
+        "$mainMod, Q, exec, kitty"
+        "$mainMod, C, killactive,"
+        "$mainMod ALT, M, exit,"
+        "$mainMod, E, exec, thunar"
+        "$mainMod, V, togglefloating,"
+        "$mainMod, Space, exec, rofi -show drun"
+        "$mainMod, P, pseudo, # dwindle"
+        # "$mainMod, J, togglesplit, # dwindle"
+
 
         # Master Layout
         "$mainMod CTRL, D, layoutmsg, removemaster"
@@ -363,16 +386,16 @@ with lib;
       # ];
     };
 
-    extraConfig = ''
-      plugin {
-        split-monitor-workspaces {
-          count = 10
-          keep_focused = 1
-          enable_notifications = 0
-          enable_persistent_workspaces = 1
-        }
-      }
-    '';
+    # extraConfig = ''
+    #   exec-once=${split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces}/lib/lisplit-monitor-workspaces.so
+    #   plugin {
+    #     split-monitor-workspaces {
+    #       count = 10
+    #       keep_focused = true
+    #       debug_log = true
+    #     }
+    #   }
+    # '';
 
     # extraConfig =
     #   let

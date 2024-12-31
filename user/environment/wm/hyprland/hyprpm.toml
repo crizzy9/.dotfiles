@@ -1,0 +1,5 @@
+[split-monitor-workspaces]
+description = "A plugin to manager multiple monitors"
+split-monitor-workspaces = "https://github.com/Duckonaut/split-monitor-workspaces"
+output = "split-monitor-workspaces/split-monitor-workspaces.so"
+build = ["make all"]
