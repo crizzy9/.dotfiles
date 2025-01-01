@@ -6,6 +6,7 @@
     wlr-randr
     meson
     wayland-protocols
+    wlogout
     # wayland-scanner
     wayland-utils
     wl-clipboard

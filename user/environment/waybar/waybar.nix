@@ -24,6 +24,10 @@ in
 with lib;
 {
   # Configure & Theme Waybar
+    # T_val=$(awk "BEGIN {printf \"%.0f\", $A_1600 * 1600 * $hypr_scale / $resolution}")
+    # B_val=$(awk "BEGIN {printf \"%.0f\", $B_1600 * 1600 * $hypr_scale / $resolution}")
+    # echo "Setting parameters for resolution >= 2.5k and < 4k"
+    # wlogout --protocol layer-shell -b 6 -T $T_val -B $B_val &
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -85,7 +89,7 @@ with lib;
             "class<libreoffice-writer>" = " ";
             "class<libreoffice-startcenter>" = "󰏆 ";
             "class<com.obsproject.Studio>" = " ";
-            "class<obsidian>" = " ";
+            "class<obsidian>" = "📘";
             "class<spotify>" = " ";
           };
           format-icons = {
@@ -333,7 +337,7 @@ with lib;
           ignore-list = [
             "wofi"
             "rofi"
-            "kitty"
+            # "kitty"
           ];
         };
 

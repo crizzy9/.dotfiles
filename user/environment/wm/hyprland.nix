@@ -53,6 +53,7 @@
         "swaync"
         "nm-applet --indicator"
         "lxqt-policykit-agent"
+        "sleep .5 && swww img ~/.dotfiles/assets/wallpapers/dark/fantasy-dark.png"
       ];
 
       dwindle = {
@@ -209,12 +210,13 @@
         # "CTRL ALT, P, exec, $scriptsDir/Wlogout.sh"
 
         # Apps
-        "$mainMod, Q, exec, kitty"
-        "$mainMod, C, killactive,"
-        "$mainMod ALT, M, exit,"
+        "$mainMod, Return, exec, kitty"
         "$mainMod, E, exec, thunar"
-        "$mainMod, V, togglefloating,"
+        "$mainMod, B, exec, firefox"
         "$mainMod, Space, exec, rofi -show drun"
+        "$mainMod, Q, killactive,"
+        "$mainMod ALT, M, exit,"
+        "$mainMod, V, togglefloating,"
         "$mainMod, P, pseudo, # dwindle"
         # "$mainMod, J, togglesplit, # dwindle"
 
