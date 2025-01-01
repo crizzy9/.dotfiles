@@ -29,6 +29,7 @@
     vimdiffAlias = true;
     withNodeJs = true;
     extraPackages = with pkgs; [
+      lua
       lua-language-server
       gopls
       xclip

@@ -112,6 +112,7 @@ in
     nh
     fd
     glow
+    btop
     # fzf
     # atuin
 
