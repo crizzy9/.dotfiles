@@ -51,9 +51,7 @@ in
   stylix.targets.waybar.enable = false;
   stylix.targets.hyprland.enable = false;
 
-  home.file = {
-    # "hyprpm/hyprpm.toml".source = ~/.dotfiles/user/environment/wm/hyprland/hyprpm.toml;
-  };
+  home.file = {};
 
   home.sessionVariables = {
     EDITOR = "nvim";

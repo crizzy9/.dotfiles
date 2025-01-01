@@ -38,6 +38,9 @@
     swaynotificationcenter # swaync
     libnotify
     ninja # build
+    cmake
+    pkg-config
+    cpio
     # greetd.tuigreet # graphical console greeter?
 
     # libvirt # virtual machine
