@@ -58,15 +58,17 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
 
+
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
 
   programs.eza.enable = true;
   programs.eza.enableZshIntegration = true;
 
-  # how to add these separately based on shell configuration
+  # TODO: how to add these separately based on shell configuration
   programs.yazi.enableZshIntegration = true;
   programs.kitty.shellIntegration.enableZshIntegration = true;
   programs.starship.enableZshIntegration = true;
+  programs.atuin.enableZshIntegration = true;
 
 }

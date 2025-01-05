@@ -11,6 +11,7 @@ in
     ../../system/hardware/bluetooth.nix
     ../../system/hardware/audio.nix
     ../../system/services/boot.nix
+    ../../system/hardware/usb.nix
     ../../system/services/misc.nix
     ../../system/services/dbus.nix
     # ../../system/services/transmission.nix
@@ -94,6 +95,9 @@ in
     neofetch
     # dolphin
     # thunar
+    # apps
+    inkscape
+    gimp
     mplayer
     transmission
     trash-cli
@@ -126,6 +130,7 @@ in
     python3
     libGL
     nodejs
+    pnpm
     rustup
     cargo
     unzip
@@ -133,6 +138,7 @@ in
     # nvm
     # python
     # pyenv
+
 
     # C related
     # gmp gmp.dev

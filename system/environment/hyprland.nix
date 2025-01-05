@@ -29,6 +29,7 @@
     # hyprpaper
     hyprnome
     hypridle
+    hyprlock
     # inputs.hyprlock.packages.${pkgs.system}.default
     swappy # snapshot editting tool
     swww # wallpaper daemon

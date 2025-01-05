@@ -23,6 +23,7 @@ in
     ../../user/apps/neovim/neovim.nix
     ../../user/apps/tmux/tmux.nix
     ../../user/apps/yazi/yazi.nix
+    ../../user/apps/atuin.nix
     ../../user/terminal/kitty.nix
     ../../user/environment/wm/hyprland.nix
     ../../user/environment/waybar/waybar.nix
@@ -31,6 +32,8 @@ in
 
   home.packages = [
     pkgs.hello
+    pkgs.zsh-fzf-tab
+    pkgs.atuin
     # pkgs.blesh
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # (pkgs.writeShellScriptBin "my-hello" ''

@@ -140,3 +140,11 @@ function git_main_branch() {
 bindkey '^y' autosuggest-accept # binds Ctrl+y
 # bindkey '^i' yank # binds Ctrl+Shift+i - doesnt work with vi mode paste contents from to Ctrl+U (why yank tho?)
 
+# TODO: pomodoro timer
+# TODO: fzf tab
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+
+
+# export secret keys
+source ~/.config/variables.env
