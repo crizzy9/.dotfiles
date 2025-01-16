@@ -4,12 +4,17 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-    # settings = {
-    #   General = {
-    #     Enable = "Source,Sink,Media,Socket";
-    #     Experimental = true;
-    #   };
-    # };
+    settings = {
+      General = {
+        Name = "Hello";
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        Experimental = "true";
+      };
+      Policy = {
+        AutoEnable = "true";
+      };
+    };
     # package = pkgs.bluez.overrideAttrs (finalAttrs: previousAttrs: rec {
     #   version = "5.78";
     #

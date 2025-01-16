@@ -16,6 +16,8 @@ in
     ../../system/services/dbus.nix
     # ../../system/services/transmission.nix
     ../../system/services/gnome-keyring.nix
+    ../../system/services/ssh.nix
+    ../../system/services/tailscale.nix
     ../../system/styling/stylix.nix
     ../../system/environment/wayland.nix
     ../../system/environment/hyprland.nix
@@ -113,6 +115,7 @@ in
     spotify
     yq
     jq
+    ffmpeg
     nh
     fd
     glow

@@ -145,6 +145,5 @@ bindkey '^y' autosuggest-accept # binds Ctrl+y
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 
-
 # export secret keys
 source ~/.config/variables.env

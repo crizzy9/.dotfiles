@@ -57,6 +57,7 @@ with lib;
           "custom/swaync"
           "mpris"
           "bluetooth"
+          "network"
           "tray"
           "pulseaudio"
           "custom/power"

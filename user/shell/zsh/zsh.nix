@@ -30,6 +30,9 @@
       ga = "git add";
       gaa = "git add --all";
       gfa = "git fetch --all --tags --prune";
+      gco = "git checkout";
+      gcb = "git checkout -b";
+      gcd = "git checkout -D";
       gcmsg = "git commit -m";
       gopull = "git pull origin $\{git_current_branch\}";
       gopush = "git push origin $\{git_current_branch\}";

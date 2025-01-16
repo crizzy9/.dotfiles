@@ -240,17 +240,25 @@
         "ALT SHIFT, Tab, cyclenext, prev"
 
         # Move windows
+        # "$mainMod CTRL, J, movewindow, l"
+        # "$mainMod CTRL, K, movewindow, d"
+        # "$mainMod CTRL, L, movewindow, u"
+        # "$mainMod CTRL, SEMICOLON, movewindow, r"
         "$mainMod CTRL, H, movewindow, l"
-        "$mainMod CTRL, L, movewindow, r"
-        "$mainMod CTRL, K, movewindow, u"
         "$mainMod CTRL, J, movewindow, d"
+        "$mainMod CTRL, K, movewindow, u"
+        "$mainMod CTRL, L, movewindow, r"
 
         # Move focus with mainMod + arrow keys
+        # "$mainMod, J, movefocus, l"
+        # "$mainMod, K, movefocus, d"
+        # "$mainMod, L, movefocus, u"
+        # "$mainMod, SEMICOLON, movefocus, r"
         "$mainMod, H, movefocus, l"
-        "$mainMod, L, movefocus, r"
-        "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
-
+        "$mainMod, K, movefocus, u"
+        "$mainMod, L, movefocus, r"
+        #
         # Screenshot keybindings
         # NOTE: You may need to press Fn key as well
         # "$mainMod, Print, exec, $scriptsDir/ScreenShot.sh --now"
@@ -360,10 +368,14 @@
 
       binde = [
         # Resize windows
+        # "$mainMod SHIFT, J, resizeactive,-50 0"
+        # "$mainMod SHIFT, K, resizeactive,0 50"
+        # "$mainMod SHIFT, L, resizeactive,0 -50"
+        # "$mainMod SHIFT, SEMICOLON, resizeactive,50 0"
         "$mainMod SHIFT, H, resizeactive,-50 0"
-        "$mainMod SHIFT, L, resizeactive,50 0"
-        "$mainMod SHIFT, K, resizeactive,0 -50"
         "$mainMod SHIFT, J, resizeactive,0 50"
+        "$mainMod SHIFT, K, resizeactive,0 -50"
+        "$mainMod SHIFT, L, resizeactive,50 0"
       ];
       # bindl = [
       #   # media controls using keyboards
