@@ -147,3 +147,7 @@ bindkey '^y' autosuggest-accept # binds Ctrl+y
 
 # export secret keys
 source ~/.config/variables.env
+
+# TODO: move some of these outside widgets
+# direnv
+eval "$(direnv hook zsh)"

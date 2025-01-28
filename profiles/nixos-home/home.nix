@@ -25,6 +25,7 @@ in
     ../../user/apps/yazi/yazi.nix
     ../../user/apps/atuin.nix
     ../../user/terminal/kitty.nix
+    ../../user/lang/python.nix
     ../../user/environment/wm/hyprland.nix
     ../../user/environment/waybar/waybar.nix
     ../../user/environment/launchers/rofi.nix

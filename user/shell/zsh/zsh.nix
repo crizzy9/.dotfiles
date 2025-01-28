@@ -43,6 +43,7 @@
       gluc = "git pull upstream $\{git_current_branch\}";
       glgg = "git log --graph --stat";
       glo = "git log --online -graph";
+      abcd = "";
     };
 
     history.size = 10000;
