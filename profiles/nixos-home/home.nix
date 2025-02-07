@@ -29,6 +29,7 @@ in
     ../../user/environment/wm/hyprland.nix
     ../../user/environment/waybar/waybar.nix
     ../../user/environment/launchers/rofi.nix
+    ../../user/environment/notifications/swaync.nix
   ];
 
   home.packages = [
