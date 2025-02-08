@@ -31,12 +31,12 @@ in
     ../../user/environment/launchers/rofi.nix
   ];
 
-  home.packages = [
-    pkgs.hello
-    pkgs.zsh-fzf-tab
-    pkgs.atuin
+  home.packages = with pkgs; [
+    hello
+    zsh-fzf-tab
+    atuin
     # pkgs.blesh
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')

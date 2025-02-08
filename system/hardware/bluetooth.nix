@@ -1,11 +1,13 @@
 { pkgs, ... }:
 {
   hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
       General = {
+        # Enable = "Source,Sink,Media,Socket";
         Name = "Hello";
         ControllerMode = "dual";
         FastConnectable = "true";

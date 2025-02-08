@@ -14,7 +14,7 @@ in
     ../../system/hardware/usb.nix
     ../../system/services/misc.nix
     ../../system/services/dbus.nix
-    # ../../system/services/transmission.nix
+    ../../system/apps/steam.nix
     ../../system/services/gnome-keyring.nix
     ../../system/services/ssh.nix
     ../../system/services/tailscale.nix
@@ -86,11 +86,21 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # nix stuff
+
+    # hardware related
+    pciutils # for things like lspci
+    usbutils
+    ncdu
+    bluez
+    bluez-tools
+    # bluez-alsa
+
     # essential system packages
+    # applications
     vim
     wget
     git
-    pciutils # for things like lspci
     # autorandr
     ripgrep
     zsh
@@ -101,7 +111,6 @@ in
     inkscape
     gimp
     mplayer
-    transmission
     trash-cli
     # xclip
     nurl
@@ -122,11 +131,11 @@ in
     btop
     # fzf
     # atuin
+    lazygit
 
     # languages
     # required for neovim
     # neovide
-    lazygit
     gcc
     clang
     go
