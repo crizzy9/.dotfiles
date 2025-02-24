@@ -12,6 +12,7 @@
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   # boot.initrd.kernelModules = [ "nvidia" ];
+  # boot.kernelPackages = pkgs.linuxPackages_6_11;
   boot.kernelModules = [ "kvm-intel" "btintel" "btusb" ];
   boot.extraModulePackages = [ ];
   # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];

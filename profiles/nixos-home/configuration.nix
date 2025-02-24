@@ -86,6 +86,9 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # nerd fonts
+    nerd-fonts.jetbrains-mono
+
     # nix stuff
 
     # hardware related
