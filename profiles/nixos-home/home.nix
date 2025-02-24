@@ -42,6 +42,10 @@ in
     # '')
   ];
 
+  # fonts.packages = [
+  #   pkgs.nerd-fonts.jetbrains-mono
+  # ];
+
   xdg = {
     userDirs = {
       enable = true;
