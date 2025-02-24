@@ -104,6 +104,7 @@ zle -N fzf-tmux-sesh-widget
 # Ctrl-g overriden by the tmux version when in tmux
 bindkey '^g' fzf-tmux-sesh-widget
 
+
 # ============= #
 # Git Functions #
 # ============= #
@@ -143,7 +144,6 @@ bindkey '^y' autosuggest-accept # binds Ctrl+y
 # TODO: pomodoro timer
 # TODO: fzf tab
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
 
 # export secret keys
 source ~/.config/variables.env

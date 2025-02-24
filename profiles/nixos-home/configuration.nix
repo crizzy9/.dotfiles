@@ -96,6 +96,10 @@ in
     bluez-tools
     # bluez-alsa
 
+    # monitoring
+    powertop
+    btop
+
     # essential system packages
     # applications
     vim
@@ -128,7 +132,6 @@ in
     nh
     fd
     glow
-    btop
     # fzf
     # atuin
     lazygit
