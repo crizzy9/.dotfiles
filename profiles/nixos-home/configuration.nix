@@ -16,6 +16,7 @@ in
     ../../system/services/dbus.nix
     ../../system/apps/steam.nix
     ../../system/services/gnome-keyring.nix
+    ../../system/services/ratbagd.nix
     ../../system/services/ssh.nix
     ../../system/services/tailscale.nix
     ../../system/styling/stylix.nix
@@ -91,10 +92,15 @@ in
     # hardware related
     pciutils # for things like lspci
     usbutils
+    lshw
     ncdu
     bluez
     bluez-tools
     # bluez-alsa
+
+    # mouse tools
+    # evhz
+    piper
 
     # monitoring
     powertop
@@ -105,6 +111,7 @@ in
     vim
     wget
     git
+    tree
     # autorandr
     ripgrep
     zsh
