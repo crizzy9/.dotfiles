@@ -102,6 +102,9 @@ in
     # evhz
     piper
 
+    # gaming
+    lutris
+
     # monitoring
     powertop
     btop
