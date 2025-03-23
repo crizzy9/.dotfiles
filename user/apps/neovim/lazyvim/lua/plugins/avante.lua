@@ -5,6 +5,15 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
+    rag_service = {
+      enabled = false, -- Enables the RAG service
+      host_mount = os.getenv("HOME"), -- Host mount path for the rag service
+      runner = "nix";
+      provider = "openai", -- The provider to use for RAG service (e.g. openai or ollama)
+      llm_model = "gpt-4o", -- The LLM model to use for RAG service
+      embed_model = "text-embedding-3-large", -- The embedding model to use for RAG service
+      endpoint = "https://api.openai.com/v1", -- The API endpoint for RAG service
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",

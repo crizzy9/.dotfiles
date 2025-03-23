@@ -43,5 +43,6 @@
       pyright
       marksman
     ];
+    plugins = [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
   };
 }

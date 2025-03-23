@@ -18,6 +18,8 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "williamboman/mason-lspconfig.nvim", enabled = false },
+    { "williamboman/mason.nvim", enabled = false },
     -- Extras
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.editor.harpoon2" },
