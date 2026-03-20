@@ -25,6 +25,7 @@ tap 'zegervdv/zathura' || true
 brew 'neovim'
 brew 'neofetch'
 brew 'fastfetch'
+brew install --cask nikitabobko/tap/aerospace
 brew 'wget'
 brew 'ranger'
 brew 'cmake'

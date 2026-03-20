@@ -10,6 +10,9 @@ set relativenumber
 set number
 
 " mappings
+" Get actions from intellij by doing x
 nmap gi :action GotoImplementation<CR>
 nmap <Space>sf :action GotoFile<CR>
 nmap <Space><Space> :action Switcher<CR>
+nmap L :action  NextTab<CR>
+nmap H :action  PreviousTab<CR>

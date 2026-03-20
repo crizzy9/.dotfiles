@@ -36,10 +36,10 @@ set-option -g renumber-windows on
 set-window-option -g mode-keys vi
 
 # resize panes using Alt-arrow without prefix
-bind -n M-h resize-pane -L 5
-bind -n M-l resize-pane -R 5
-bind -n M-k resize-pane -U 5
-bind -n M-j resize-pane -D 5
+bind -n C-S-M-h resize-pane -L 5
+bind -n C-S-M-l resize-pane -R 5
+bind -n C-S-M-k resize-pane -U 5
+bind -n C-S-M-j resize-pane -D 5
 
 # switch pane layouts with numbers
 # bind -n M-1 select-layout even-horizontal
@@ -49,14 +49,14 @@ bind -n M-j resize-pane -D 5
 # bind -n M-5 select-layout tiled
 
 # cycle through pane layouts
-bind -n M-Tab next-layout
+# bind -n M-Tab next-layout
 
 # jump to tab
-bind -n M-1 select-window -t :=1
-bind -n M-2 select-window -t :=2
-bind -n M-3 select-window -t :=3
-bind -n M-4 select-window -t :=4
-bind -n M-5 select-window -t :=5
+# bind -n M-1 select-window -t :=1
+# bind -n M-2 select-window -t :=2
+# bind -n M-3 select-window -t :=3
+# bind -n M-4 select-window -t :=4
+# bind -n M-5 select-window -t :=5
 
 # cycle through tabs with Ctrl+Tab and Ctrl+Shift+Tab
 # bind-key -n C-S-Right next-window
@@ -231,6 +231,9 @@ set -g @fzf-url-history-limit '2000'
 # tmux thumbs
 # default key is <prefix> + Space
 # set -g @thumbs-key 'C-t'
+
+# tmux-yank
+set -g @yank_action "copy-pipe"
 
 # =========
 # run tpm

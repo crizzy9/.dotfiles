@@ -1,0 +1,10 @@
+unbind H
+unbind J
+unbind K
+unbind L
+
+bind H tabprev
+bind J back
+bind K forward
+bind L tabnext
+

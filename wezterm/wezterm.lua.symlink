@@ -27,6 +27,9 @@ config.window_padding = {
 -- set window background opacity
 config.window_background_opacity = 0.95
 
+-- setup kitty image protocol
+config.enable_kitty_graphics = true
+
 -- remove title bar but allow resizing - options: NONE, FULL, TITLE, default TITLE | RESIZE
 config.window_decorations = 'RESIZE'
 -- hide tab bar if only one tab

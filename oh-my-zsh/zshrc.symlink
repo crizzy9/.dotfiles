@@ -212,7 +212,7 @@ compctl -K    _fzf fzf
 # additional path setup - modify per user
 export PATH="/Users/spadia/.local/bin:/Users/spadia/go/bin:$PATH"
 # get java home version /usr/libexec/java_home -v
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 
 # additional exports
 export LANG=en_US.UTF-8
@@ -250,6 +250,9 @@ alias jj='pbpaste | jq . | pbcopy'
 ## copy formatted json to clipboard and paste in neovim
 alias jjn='pbpaste | jq . | nvim - +"set syntax=json"'
 alias jjj='pbpaste | jq .'
+
+# find unique values for a thing from a set of files
+alias uniqueTemplateFieldTypes='jq -s "[.[]?.[]?.fields.[]?.[]?.type] | unique | sort" src/js/widgets/offer-trowser/meta/*/*.json'
 
 # lazygit
 alias lg='lazygit'
@@ -514,13 +517,13 @@ znap eval atuin 'atuin init zsh'
 
 
 # NVIM Switcher
-# export NVIM_APPNAME="nvim-custom"
 alias v="nvim"
 alias vc="NVIM_APPNAME=nvim-custom nvim"
 alias vz="NVIM_APPNAME=nvim-lazyvim nvim"
 alias va="NVIM_APPNAME=nvim-astrovim nvim"
 alias vn="NVIM_APPNAME=nvim-nvchad nvim"
 alias vl="NVIM_APPNAME=nvim-lunarvim nvim"
+export NVIM_APPNAME="nvim-lazyvim"
 
 
 vv() {
@@ -557,11 +560,45 @@ export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$HOME/.jenv/bin:$PATH"
 # znap eval jenv 'jenv init -'
 
-alias sdkinstalled='sdk list java | grep installed'
+# alias sdkinstalled='sdk list java | grep installed'
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # TODO: Update to use znap
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+
+# Additional git aliases
+alias gorub='git pull upstream $(git_main_branch) --rebase --autostash'
+alias gorob='git pull origin $(git_main_branch) --rebase --autostash'
+
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+
+export PATH="/Users/spadia/Library/Application Support/Coursier/bin:$PATH"
+
+# bun completions
+[ -s "/Users/spadia/.bun/_bun" ] && source "/Users/spadia/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias psql="/Applications/Postgres.app/Contents/Versions/15/bin/psql"
+
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+. ~/.asdf/plugins/java/set-java-home.zsh
+
+
+# alias start_server="cd ~/Work/Intuit/dev/campaign-agent/; \
+#   poetry shell; uvicorn app.service.server:app --reload --port 8090 & 2>&1; \
+#   cd ~/Work/Intuit/dev/marketing-workforce-agent/; \
+#   poetry shell; uvicorn app.service.server:app --reload --port 8000; \
+#   cd ~/Work/Intuit/dev/dev-proxy; dev-proxy run"

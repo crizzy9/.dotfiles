@@ -4,19 +4,21 @@
 " let mapleader=,
 " can't set leaders in Obsidian vim, so the key just has to be used consistently.
 " However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
-unmap ,
+" unmap ,
 
 " map ; to : in normal mode, so that I don’t rely on the shift key
 " nmap ; :
 
 " no modifier key for jumping to next word
-nmap + *
+" nmap + *
 " Have j and k navigate visual lines rather than logical ones
 " nmap j gj
 " nmap k gk
-" I like using H and L for beginning/end of line
-nmap H ^
-nmap L $
+" I like using H and L for beginning/end of lines
+exmap tabPrev obcommand pane-relief:go-prev
+exmap tabNext obcommand pane-relief:go-next
+nmap H :tabPrev<CR>
+nmap L :tabNext<CR>
 " nmap J 5j
 " nmap K 5k
 " Moving to next/prev paragraph
@@ -43,7 +45,7 @@ map s( :surround_brackets
 map s) :surround_brackets
 map s[ :surround_square_brackets
 map s{ :surround_curly_brackets
-map s} :surround_curly_brackets
+map s} :surround_curly_bracket
 " Surround 中文双引号
 map s] :surround_chinese_brackets
 map s\ :surround_chinese_brackets
@@ -128,10 +130,10 @@ exmap focusLeft obcommand editor:focus-left
 exmap focusRight obcommand editor:focus-right
 exmap focusBottom obcommand editor:focus-bottom
 exmap focusTop obcommand editor:focus-top
-nmap <C-w>h :focusLeft
-nmap <C-w>l :focusRight
-nmap <C-w>j :focusBottom
-nmap <C-w>k :focusTop
+nmap <C-h> :focusLeft
+nmap <C-l> :focusRight
+nmap <C-j> :focusBottom
+nmap <C-k> :focusTop
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nmap ,< :toggleBlockquote
